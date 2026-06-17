@@ -28,7 +28,7 @@ apps/
 golden-sets-public/  # PUBLIC dev splits only (canary-marked). Held-out answers NEVER here.
 ```
 
-## The gate
+## The Gate
 
 `bench-schemas` is frozen at `v0.1.0`. Every package imports types **only** from
 it and writes **only** files it owns — no shared mutable state. That boundary is
