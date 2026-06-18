@@ -1,0 +1,18 @@
+# Code owners — GitHub auto-requests these teams for review on matching paths.
+# Teams live under the @primitive-bench org; see MAINTAINERS.md. Last match wins.
+
+# Default owner for anything not matched below.
+*                            @primitive-bench/maintainers
+
+# The frozen contract, decision log, and CI/automation get maintainer scrutiny.
+/packages/bench-schemas/     @primitive-bench/maintainers
+/apps/docs/                  @primitive-bench/maintainers
+/.github/                    @primitive-bench/maintainers
+
+# Per-lane ownership (mirrors INTERPACKAGE.md).
+/packages/bench-core/        @primitive-bench/core
+/packages/bench-stats/       @primitive-bench/stats
+/packages/bench-adapters/    @primitive-bench/adapters
+/packages/eval-websearch/    @primitive-bench/websearch
+/packages/eval-extraction/   @primitive-bench/extraction
+/golden-sets-public/         @primitive-bench/golden

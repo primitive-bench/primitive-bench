@@ -1,0 +1,27 @@
+name: Slice proposal
+description: Propose a slice (a constraint) you believe separates adapters.
+labels: ["eval-vertical"]
+body:
+  - type: input
+    id: slice
+    attributes:
+      label: Slice name
+      placeholder: e.g. government_registry
+    validations:
+      required: true
+  - type: textarea
+    id: hypothesis
+    attributes:
+      label: Separation hypothesis
+      description: Which adapters do you expect this slice to separate, and why?
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence
+      description: >
+        Numbers showing separability (McNemar p / non-overlapping Wilson CIs at n).
+        A slice that can't separate adapters isn't worth adding (D-10).
+    validations:
+      required: true

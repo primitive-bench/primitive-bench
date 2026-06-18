@@ -1,0 +1,22 @@
+name: labels
+
+# Keep the repo's labels in sync with .github/labels.yml.
+on:
+  push:
+    branches: [main]
+    paths: [".github/labels.yml"]
+  workflow_dispatch:
+
+permissions:
+  issues: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: EndBug/label-sync@v2
+        with:
+          config-file: .github/labels.yml
+          # Leave labels not listed here alone (don't delete existing ones).
+          delete-other-labels: false

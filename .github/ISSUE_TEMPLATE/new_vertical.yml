@@ -1,0 +1,41 @@
+name: New / extend a primitive vertical
+description: Propose filling a stub eval-<primitive> (scoring + slices + dev set).
+labels: ["eval-vertical"]
+body:
+  - type: dropdown
+    id: primitive
+    attributes:
+      label: Primitive vertical
+      options:
+        - eval-ocr
+        - eval-vectordb
+        - eval-reranker
+        - eval-retrieval
+        - eval-chunking
+        - eval-crawl
+        - other
+    validations:
+      required: true
+  - type: textarea
+    id: scoring
+    attributes:
+      label: Scoring approach
+      description: What does the Scorer measure, and how are misses decomposed (`miss_reason`) rather than just pass/fail?
+    validations:
+      required: true
+  - type: textarea
+    id: slices
+    attributes:
+      label: Proposed slices
+      description: Each slice must be a constraint that can *separate* adapters (D-10). List them.
+    validations:
+      required: true
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Plan (mirrors CONTRIBUTING §4)
+      options:
+        - label: Task + Scorer subclass `bench_core`, emitting `bench_schemas.ItemResult` / `ScorerOutput`.
+        - label: "`slices.yaml` defines separating slices."
+        - label: A public dev set under `golden-sets-public/<primitive>/` (canary-marked).
+        - label: Tests added, with methodology comments preserved.
