@@ -1,0 +1,44 @@
+name: Public golden data
+description: Propose adding/expanding a PUBLIC dev split (never held-out answers).
+labels: ["golden-data"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **Public dev splits only.** Held-out test answers never live in this repo (D-07).
+        If you're unsure whether data is held out — it is. Don't attach it.
+  - type: dropdown
+    id: primitive
+    attributes:
+      label: Primitive
+      options:
+        - web_search
+        - web_extraction
+        - ocr
+        - vectordb
+        - reranker
+        - retrieval
+        - chunking
+        - crawl
+    validations:
+      required: true
+  - type: textarea
+    id: rows
+    attributes:
+      label: What rows, how many, and their source
+      description: Small, honest, human-verifiable samples beat synthetic bulk.
+    validations:
+      required: true
+  - type: checkboxes
+    id: rules
+    attributes:
+      label: Golden data rules (all required)
+      options:
+        - label: Canary GUID embedded in the dev file (D-08).
+          required: true
+        - label: Every row tagged with a ground-truth tier — verified_external / authoritative_registry / sentinel_planted (D-09).
+          required: true
+        - label: Data is CC-BY-4.0 compatible (golden-sets-public/LICENSE-DATA).
+          required: true
+        - label: This is a PUBLIC dev split, not held-out test data (D-07).
+          required: true

@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Question / discussion
+    url: https://github.com/primitive-bench/primitive-bench/discussions
+    about: Ask questions and discuss methodology in Discussions, not issues.
+  - name: Report a security vulnerability
+    url: https://github.com/primitive-bench/primitive-bench/security/advisories/new
+    about: Please report vulnerabilities privately here, never in a public issue.

@@ -1,0 +1,56 @@
+name: Bug report
+description: A scorer, adapter, harness, or stats result is wrong or crashes.
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for filing a bug. Give us the exact command + output so we can reproduce it.
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      description: Which package / primitive is affected?
+      options:
+        - bench-schemas (the frozen contract)
+        - bench-core (harness engine)
+        - bench-stats (statistics)
+        - bench-adapters (vendor adapters)
+        - eval-websearch
+        - eval-extraction
+        - eval-ocr / vectordb / reranker / retrieval / chunking / crawl
+        - CLI / docs / CI
+        - Not sure
+    validations:
+      required: true
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: What did you expect, and what happened instead?
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Reproduction
+      description: Exact commands (e.g. `uv run pytest ...`, `uv run bench ...`) and any config.
+      render: shell
+    validations:
+      required: true
+  - type: textarea
+    id: env
+    attributes:
+      label: Environment
+      description: Output of `uv run python -V`, your OS, and `uv --version`.
+      render: shell
+    validations:
+      required: true
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Before submitting
+      options:
+        - label: I searched existing issues for a duplicate.
+          required: true
+        - label: This reproduces on the latest `main`.
