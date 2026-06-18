@@ -1,6 +1,6 @@
-# Contributing to Primitive Bench (`benchpublic`)
+# Contributing to Primitive Bench (`primitive-bench`)
 
-Welcome. `benchpublic` is the public, MIT-licensed, reproducible eval harness for
+Welcome. `primitive-bench` is the public, MIT-licensed, reproducible eval harness for
 AI **infrastructure primitives** — OCR, web search, vector DBs, rerankers,
 retrieval, extraction, chunking, crawling, memory. This guide gets a new
 contributor from zero to a merged PR.
@@ -40,8 +40,8 @@ usually a way to carry it in `metrics`, `slices`, or an optional field instead.
 We use **[uv](https://docs.astral.sh/uv/)** (workspace) + **Turborepo**. Python ≥ 3.11.
 
 ```bash
-git clone https://github.com/Primitive-Bench/benchpublic.git
-cd benchpublic
+git clone https://github.com/Primitive-Bench/primitive-bench.git
+cd primitive-bench
 uv sync --all-packages        # install every workspace package (editable)
 uv run pytest -q              # run the test suite
 uv run ruff check .           # lint

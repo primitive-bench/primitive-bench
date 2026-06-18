@@ -1,5 +1,5 @@
 [project]
-name = "benchpublic"
+name = "primitive-bench"
 version = "0.1.0"
 description = "Vendor-neutral, reproducible eval harness for AI infrastructure primitives."
 readme = "README.md"

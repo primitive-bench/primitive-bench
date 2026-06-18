@@ -54,6 +54,6 @@ than charged as a genuine extraction failure against the accuracy denominator.
 ## Provenance
 
 Ported from arlenk2021/GoldenEvalsWebSearch (Apache-2.0 code, CC-BY-4.0 data; the
-extract probe and token-survival report). Relicensed to MIT within benchpublic by
+extract probe and token-survival report). Relicensed to MIT within primitive-bench by
 the author. The intended companion source repo `arlenk2021/FindingsWebExtract` is
 currently empty — nothing was pulled from it (see workspace TODO).

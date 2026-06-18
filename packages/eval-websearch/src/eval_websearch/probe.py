@@ -1,7 +1,7 @@
 """web_search probe/scoring harness.
 
 Ported from arlenk2021/GoldenEvalsWebSearch `src/probe/main.py`, adapted to the
-benchpublic layout:
+primitive-bench layout:
 
   * vendors are bench-adapters search adapters (`bench_adapters.get('exa')(spec)`),
     invoked through the uniform `adapter.invoke(item) -> {returned_urls, ...}`
