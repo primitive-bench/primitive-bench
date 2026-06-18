@@ -10,9 +10,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/primitive-bench/primitive-bench/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/primitive-bench/primitive-bench/actions/workflows/ci.yml/badge.svg"></a>
   <a href="LICENSE"><img alt="License: Apache 2.0" src="https://img.shields.io/badge/License-Apache_2.0-blue.svg"></a>
-  <a href="https://github.com/primitive-bench/primitive-bench/graphs/contributors"><img alt="Contributors" src="https://img.shields.io/github/contributors/primitive-bench/primitive-bench"></a>
   <a href="CONTRIBUTING.md"><img alt="PRs welcome" src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg"></a>
   <img alt="Python 3.11+" src="https://img.shields.io/badge/python-3.11%2B-blue.svg">
 </p>
