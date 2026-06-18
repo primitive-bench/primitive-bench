@@ -1,9 +1,9 @@
-"""The `benchpublic` CLI (promptfoo / lm-eval ergonomics).
+"""The `bench` CLI (promptfoo / lm-eval ergonomics).
 
-    benchpublic init <primitive>     scaffold a config for a primitive
-    benchpublic run --config ...      run an eval, write runs/<run_id>/
-    benchpublic view <run_dir>        summarize slices + separability
-    benchpublic submit <run_dir>      submit to the held-out eval server (scores only)
+    bench init <primitive>     scaffold a config for a primitive
+    bench run --config ...      run an eval, write runs/<run_id>/
+    bench view <run_dir>        summarize slices + separability
+    bench submit <run_dir>      submit to the held-out eval server (scores only)
 
 Stub — commands print intent for v0.1.0 so downstream lanes can wire against the surface.
 """

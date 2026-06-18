@@ -16,5 +16,5 @@ COPY pyproject.toml uv.lock* ./
 COPY packages ./packages
 RUN uv sync --all-packages --frozen || uv sync --all-packages
 
-ENTRYPOINT ["uv", "run", "benchpublic"]
+ENTRYPOINT ["uv", "run", "bench"]
 CMD ["--help"]

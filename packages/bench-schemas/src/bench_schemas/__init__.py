@@ -1,6 +1,6 @@
 """bench-schemas — the frozen contract for Primitive Bench.
 
-THIS IS THE GATE. Everything in benchpublic and primitivebench-platform codes
+THIS IS THE GATE. Everything in primitive-bench and primitivebench-platform codes
 against the types defined here. Breaking changes require a new MAJOR version and
 a coordinated migration across all lanes. See DECISIONS.md (D-03).
 

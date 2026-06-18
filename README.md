@@ -1,4 +1,4 @@
-# benchpublic
+# primitive-bench
 
 > Vendor-neutral, MIT-licensed, reproducible eval harness for **AI infrastructure
 > primitives** — OCR, web search, vector DBs, rerankers, retrieval, extraction,
@@ -23,7 +23,7 @@ packages/
   bench-adapters/  # provider/primitive adapter SDK (lm-eval registry pattern)
   eval-*/          # one package per primitive: public golden dev set + scorer + slice defs
 apps/
-  cli/             # `benchpublic` CLI: init / run / view / submit
+  cli/             # `bench` CLI: init / run / view / submit
   docs/            # methodology v3 + DECISIONS.md
 golden-sets-public/  # PUBLIC dev splits only (canary-marked). Held-out answers NEVER here.
 ```
@@ -39,8 +39,8 @@ what lets the build lanes run in parallel without colliding. See
 
 ```bash
 uv sync
-uv run benchpublic run --primitive ocr --config configs/ocr.yaml
-uv run benchpublic view ./runs/<run_id>
+uv run bench run --primitive ocr --config configs/ocr.yaml
+uv run bench view ./runs/<run_id>
 ```
 
 ## License

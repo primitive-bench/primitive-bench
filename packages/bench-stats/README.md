@@ -10,4 +10,4 @@ The `proportions`, `resampling`, and `retrieval` modules are dependency-light
 
 Provenance: the reporting helpers are ported from
 [arlenk2021/GoldenEvalsWebSearch](https://github.com/arlenk2021/GoldenEvalsWebSearch)
-(Apache-2.0 code), relicensed to MIT within benchpublic.
+(Apache-2.0 code), relicensed to MIT within primitive-bench.

@@ -38,5 +38,5 @@ alternates. `bench-schemas` is FROZEN — import types from it, never modify it.
 
 Provenance: ported from arlenk2021/GoldenEvalsWebSearch (Apache-2.0 code, CC-BY-4.0 data).
 The companion repo arlenk2021/FindingsWebExtract is currently empty (nothing pulled).
-Relicensed to MIT within benchpublic by the author; keep a one-line provenance note in
+Relicensed to MIT within primitive-bench by the author; keep a one-line provenance note in
 each package README.

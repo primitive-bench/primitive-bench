@@ -16,8 +16,6 @@ members = [
     "bench-core",
     "bench-schemas",
     "bench-stats",
-    "benchpublic",
-    "benchpublic-cli",
     "eval-chunking",
     "eval-crawl",
     "eval-extraction",
@@ -26,6 +24,8 @@ members = [
     "eval-retrieval",
     "eval-vectordb",
     "eval-websearch",
+    "primitive-bench",
+    "primitive-bench-cli",
 ]
 
 [[package]]
@@ -127,46 +127,6 @@ requires-dist = [
     { name = "bench-schemas", editable = "packages/bench-schemas" },
     { name = "scipy" },
     { name = "statsmodels" },
-]
-
-[[package]]
-name = "benchpublic"
-version = "0.1.0"
-source = { virtual = "." }
-
-[package.dev-dependencies]
-dev = [
-    { name = "pytest" },
-    { name = "ruff" },
-]
-
-[package.metadata]
-
-[package.metadata.requires-dev]
-dev = [
-    { name = "pytest", specifier = ">=9.1.0" },
-    { name = "ruff", specifier = ">=0.15.17" },
-]
-
-[[package]]
-name = "benchpublic-cli"
-version = "0.1.0"
-source = { editable = "apps/cli" }
-dependencies = [
-    { name = "bench-adapters" },
-    { name = "bench-core" },
-    { name = "bench-schemas" },
-    { name = "bench-stats" },
-    { name = "typer" },
-]
-
-[package.metadata]
-requires-dist = [
-    { name = "bench-adapters", editable = "packages/bench-adapters" },
-    { name = "bench-core", editable = "packages/bench-core" },
-    { name = "bench-schemas", editable = "packages/bench-schemas" },
-    { name = "bench-stats", editable = "packages/bench-stats" },
-    { name = "typer", specifier = ">=0.12" },
 ]
 
 [[package]]
@@ -718,6 +678,46 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/f9/e2/3e91f31a7d2b083fe6ef3fa267035b518369d9511ffab804f839851d2779/pluggy-1.6.0.tar.gz", hash = "sha256:7dcc130b76258d33b90f61b658791dede3486c3e6bfb003ee5c9bfb396dd22f3", size = 69412, upload-time = "2025-05-15T12:30:07.975Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/54/20/4d324d65cc6d9205fabedc306948156824eb9f0ee1633355a8f7ec5c66bf/pluggy-1.6.0-py3-none-any.whl", hash = "sha256:e920276dd6813095e9377c0bc5566d94c932c33b27a3e3945d8389c374dd4746", size = 20538, upload-time = "2025-05-15T12:30:06.134Z" },
+]
+
+[[package]]
+name = "primitive-bench"
+version = "0.1.0"
+source = { virtual = "." }
+
+[package.dev-dependencies]
+dev = [
+    { name = "pytest" },
+    { name = "ruff" },
+]
+
+[package.metadata]
+
+[package.metadata.requires-dev]
+dev = [
+    { name = "pytest", specifier = ">=9.1.0" },
+    { name = "ruff", specifier = ">=0.15.17" },
+]
+
+[[package]]
+name = "primitive-bench-cli"
+version = "0.1.0"
+source = { editable = "apps/cli" }
+dependencies = [
+    { name = "bench-adapters" },
+    { name = "bench-core" },
+    { name = "bench-schemas" },
+    { name = "bench-stats" },
+    { name = "typer" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "bench-adapters", editable = "packages/bench-adapters" },
+    { name = "bench-core", editable = "packages/bench-core" },
+    { name = "bench-schemas", editable = "packages/bench-schemas" },
+    { name = "bench-stats", editable = "packages/bench-stats" },
+    { name = "typer", specifier = ">=0.12" },
 ]
 
 [[package]]
