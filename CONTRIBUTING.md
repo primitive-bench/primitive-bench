@@ -160,10 +160,16 @@ deterministic (bootstrap takes a required `seed`). Don't break existing signatur
 3. Write a description that states **what slice/metric/adapter** changed and how you
    verified it. Include sample output for scoring/stat changes.
 4. CI must be green (tests, lint, and the `SCHEMA_VERSION` guard).
-5. A maintainer reviews; squash or merge once approved.
+5. A CODEOWNER reviews; we **squash-merge** once approved (and the branch is deleted).
 
 ### Commit/PR conventions
-- Imperative subject lines (`Add Cohere reranker adapter`), body explains *why*.
+- **Conventional Commits** for PR titles and commit subjects: `type: imperative
+  summary`, where `type` is one of `feat`, `fix`, `docs`, `chore`, `ci`, `build`,
+  `refactor`, `perf`, `test`, `style`, `revert`. The body explains *why*. The
+  `pr-title` CI check validates the title.
+- Because we **squash-merge**, the **PR title becomes the single commit on `main`**
+  and the **PR description becomes its body** — write both as the permanent
+  changelog entry for the change.
 - One logical change per PR. Schema changes ride alone, never bundled.
 
 ---

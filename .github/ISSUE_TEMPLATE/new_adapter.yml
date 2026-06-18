@@ -1,0 +1,46 @@
+name: New vendor adapter
+description: Propose adding a system-under-test (a vendor adapter) to a primitive.
+labels: ["adapter"]
+body:
+  - type: input
+    id: vendor
+    attributes:
+      label: Vendor / system
+      placeholder: e.g. Cohere Rerank, Voyage, Qdrant
+    validations:
+      required: true
+  - type: dropdown
+    id: primitive
+    attributes:
+      label: Primitive
+      options:
+        - web_search
+        - web_extraction
+        - ocr
+        - vectordb
+        - reranker
+        - retrieval
+        - chunking
+        - crawl
+    validations:
+      required: true
+  - type: textarea
+    id: env
+    attributes:
+      label: Required environment variable(s)
+      description: The API key / config env var(s) the adapter reads. Never paste secret values.
+      placeholder: e.g. COHERE_API_KEY
+    validations:
+      required: true
+  - type: textarea
+    id: api
+    attributes:
+      label: API shape
+      description: Endpoint(s) + how a query/url maps to the adapter's `invoke(item) -> dict` output.
+  - type: checkboxes
+    id: legal
+    attributes:
+      label: Licensing / publishing
+      options:
+        - label: The vendor's terms permit publishing benchmark results, OR I've flagged it as publish-restricted (D-12).
+        - label: No GPL/commercial-dual code will be vendored into the repo (D-16) — we benchmark via API, not embed.
