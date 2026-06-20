@@ -38,11 +38,9 @@ _MAX_BACKOFF = 30.0
 def _post_json_with_retry(client: httpx.Client, url: str, headers: dict[str, str],
                           payload: dict[str, Any]) -> dict[str, Any]:
     """POST with exponential backoff on 429/5xx, honoring Retry-After when present."""
-    last: httpx.Response | None = None
     for attempt in range(RERANK_MAX_ATTEMPTS):
         r = client.post(url, headers=headers, json=payload)
         if r.status_code in _RETRY_STATUS and attempt < RERANK_MAX_ATTEMPTS - 1:
-            last = r
             ra = r.headers.get("retry-after")
             try:
                 wait = float(ra) if ra else 0.0
@@ -54,9 +52,7 @@ def _post_json_with_retry(client: httpx.Client, url: str, headers: dict[str, str
             continue
         r.raise_for_status()
         return r.json()
-    assert last is not None
-    last.raise_for_status()
-    return {}
+    raise RuntimeError("unreachable: retry loop exhausted")  # pragma: no cover
 
 
 class VendorUnavailable(Exception):

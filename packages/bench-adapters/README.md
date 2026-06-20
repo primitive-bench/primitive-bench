@@ -81,3 +81,6 @@ price even inside a vendor's free tier.
 | `voyage-rerank` | Voyage | `rerank-2` | `VOYAGE_API_KEY` (first 200M tok free) |
 | `jina-rerank` | Jina | `jina-reranker-v2-base-multilingual` | `JINA_API_KEY` (first 10M tok free) |
 | `cohere-rerank` | Cohere | `rerank-v3.5` | `COHERE_API_KEY` (pay-as-you-go) |
+
+`bge-reranker` is **opt-in** — its weights are ~2.3 GB and slow on CPU, so it is not in
+`eval-reranker`'s default vendor set (nor the published board); pass it explicitly to include it.

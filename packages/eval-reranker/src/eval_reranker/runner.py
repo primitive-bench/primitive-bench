@@ -27,9 +27,10 @@ from eval_reranker.task import Task
 
 MAX_RAW_OUTPUT_CHARS = 2000
 
-# Free locals first (always runnable), then the hosted APIs (skipped if no key).
+# The free local sentinel + the hosted APIs (skipped if no key). `bge-reranker` is
+# registered but opt-in (2.3GB weights, slow on CPU) — pass it explicitly to include it.
 DEFAULT_VENDORS = (
-    "ce-minilm", "bge-reranker", "voyage-rerank", "jina-rerank", "cohere-rerank",
+    "ce-minilm", "voyage-rerank", "jina-rerank", "cohere-rerank",
 )
 
 

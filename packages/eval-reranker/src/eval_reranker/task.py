@@ -33,7 +33,7 @@ class Scorer(_Scorer):
 class Task(_Task):
     primitive = Primitive.RERANKER
     task_version = "reranker@1"
-    dataset_version = "reranker-2026.06.scidocs+askubuntu.n600.seed0"
+    dataset_version = "reranker-2026.06.scidocs+askubuntu.n100.seed0"
 
     def __init__(self, rows: Iterable[dict[str, Any]] | None = None) -> None:
         """`rows` are golden rows (query + candidates + relevance + domain/slices).

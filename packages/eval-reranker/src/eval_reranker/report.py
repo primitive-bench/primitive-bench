@@ -148,6 +148,11 @@ def collect_counts(items: Iterable[ItemResult]) -> dict[str, list[tuple[str, int
     return out
 
 
+def _toml_str(s: str) -> str:
+    """A TOML basic string: quote and escape backslash then double-quote."""
+    return '"' + s.replace("\\", "\\\\").replace('"', '\\"') + '"'
+
+
 def write_counts_toml(
     items: Iterable[ItemResult],
     path: str | Path,
@@ -175,8 +180,8 @@ def write_counts_toml(
         lines.append(f'citation = "{citation}"')
     lines += ["", "[slices]"]
     for slice_key in sorted(counts):
-        rows = ", ".join(f'["{a}", {k}, {n}]' for a, k, n in counts[slice_key])
-        lines.append(f'"{slice_key}" = [{rows}]')
+        rows = ", ".join(f'[{_toml_str(a)}, {k}, {n}]' for a, k, n in counts[slice_key])
+        lines.append(f'{_toml_str(slice_key)} = [{rows}]')
     text = "\n".join(lines) + "\n"
     p.write_text(text, encoding="utf-8")
     return p

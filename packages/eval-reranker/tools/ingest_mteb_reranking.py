@@ -18,7 +18,7 @@ order never leaks relevance. The chosen row ids + seed are written to
 recipe is pinned in `Task.dataset_version`.
 
 Run (downloads a few hundred MB the first time):
-    uv run python packages/eval-reranker/tools/ingest_mteb_reranking.py --per-source 300 --seed 0
+    uv run python packages/eval-reranker/tools/ingest_mteb_reranking.py --per-source 50 --seed 0
 """
 from __future__ import annotations
 
@@ -126,8 +126,8 @@ def _build_row(src_row: dict[str, Any], domain: str, source: str, seed: int) -> 
 def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--per-source", type=int, default=300,
-                    help="rows sampled per source (default 300 -> ~600 total)")
+    ap.add_argument("--per-source", type=int, default=50,
+                    help="rows sampled per source (default 50 -> ~100 total)")
     ap.add_argument("--seed", type=int, default=0)
     ap.add_argument("--out", default=str(GOLDEN_RERANK_DIR / "dev.jsonl"))
     args = ap.parse_args()
@@ -162,7 +162,7 @@ def main() -> None:
             f.write(json.dumps(row, ensure_ascii=False, sort_keys=True) + "\n")
 
     MANIFEST.write_text(json.dumps({
-        "dataset_version": "reranker-2026.06.scidocs+askubuntu.n600.seed0",
+        "dataset_version": f"reranker-2026.06.scidocs+askubuntu.n{len(out_rows)}.seed{args.seed}",
         "per_source": args.per_source,
         "seed": args.seed,
         "total_rows": len(out_rows),
