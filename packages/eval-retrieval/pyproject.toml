@@ -1,10 +1,25 @@
 [project]
 name = "eval-retrieval"
 version = "0.1.0"
-description = "Primitive Bench eval vertical: Embeddings/retrieval — BEIR/MTEB-style per-domain slices"
+description = "Primitive Bench eval vertical: Retrieval — nDCG@10/recall@10/MAP/MRR + success@10 separability over BEIR per-query pools"
 requires-python = ">=3.11"
 license = "Apache-2.0"
-dependencies = ["bench-schemas", "bench-core", "bench-stats", "bench-adapters"]
+dependencies = [
+    "bench-schemas",
+    "bench-core",
+    "bench-stats",
+    "bench-adapters",
+    # Free local bi-encoder adapters (bge-small, e5-small) run out of the box.
+    "sentence-transformers>=3.0",
+    # The BEIR ingest tool pulls corpus/queries/qrels from HuggingFace and mines
+    # BM25 hard negatives for the per-query candidate pools.
+    "datasets>=2.0",
+    "huggingface-hub>=0.24",
+    "rank-bm25>=0.2.2",
+]
+
+[project.scripts]
+eval-retrieval = "eval_retrieval.__main__:main"
 
 [build-system]
 requires = ["hatchling"]

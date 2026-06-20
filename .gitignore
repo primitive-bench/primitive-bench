@@ -22,6 +22,11 @@ golden-sets-heldout/
 *.heldout.jsonl
 *.hmac.key
 
+# Retrieval: the full dev split is generated locally from BEIR sets (SciFact /
+# NFCorpus / FiQA, BM25-pooled) and is NOT redistributed — only dev.example.jsonl
+# is committed.
+golden-sets-public/retrieval/dev.jsonl
+
 # Secrets / env
 .env
 .env.*

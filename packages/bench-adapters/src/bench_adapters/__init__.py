@@ -25,5 +25,6 @@ from bench_adapters.registry import Adapter, get, register, registry
 # registry. Done here so that `import bench_adapters` auto-registers everything.
 from bench_adapters import extract as extract  # noqa: E402,F401
 from bench_adapters import search as search  # noqa: E402,F401
+from bench_adapters import retrieval as retrieval  # noqa: E402,F401
 
-__all__ = ["Adapter", "register", "get", "registry", "search", "extract"]
+__all__ = ["Adapter", "register", "get", "registry", "search", "extract", "retrieval"]

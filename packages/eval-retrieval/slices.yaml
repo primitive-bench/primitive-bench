@@ -1,5 +1,28 @@
 # Slice / constraint definitions for the retrieval primitive.
-# Each slice becomes a SliceResult per adapter. ~45 slices total across primitives.
-# Trust rule: a slice only publishes a winner if adapters are statistically separable.
+# Each slice becomes a SliceResult per adapter. Assigned deterministically from row
+# facts (see src/eval_retrieval/slicing.py) — no model. Trust rule: a slice only
+# publishes a winner when adapters are statistically separable (Wilson-clear AND
+# McNemar-separable on success@10), otherwise a TIE band ("one winner is a lie").
 primitive: retrieval
-slices: []   # TODO: define per-constraint slices (the "one winner is a lie" surface)
+
+# success@10 (any relevant doc in the top-10 of the ranked candidate pool) is the
+# paired-binary separability surface the leaderboard's McNemar/Wilson gate consumes.
+# nDCG@10/recall@10/MAP/MRR are reported alongside (per-item metrics + an nDCG
+# summary) but are not the published gate.
+scoring:
+  metric: success_at_10
+  match: graded_relevance       # BEIR qrels relevance grades (0/1/2); rel>0 counts as relevant
+  reported: [ndcg@10, recall@10, map, mrr]
+  miss_reasons: [relevant_outside_top10, no_relevant_in_pool, empty_ranking, failed]
+
+# Cross-cutting slices. A row carries one key per axis (domain / relevant_set),
+# assigned from the candidate pool — never a model.
+slices:
+  - key: domain
+    values: [scientific, medical, financial]
+    description: "Source corpus: scientific claim verification (SciFact), biomedical (NFCorpus), financial QA (FiQA)."
+    separates: "THE primary axis — embedding models tuned on web/QA text vs. scientific or biomedical text trade places across domains; the reason we pull several sources."
+  - key: relevant_set
+    values: [single, multi]
+    description: "Number of relevant docs for the query: single (exactly one) vs. multi (several)."
+    separates: "a single-answer query is an all-or-nothing needle-in-haystack; a multi-answer query rewards broad recall — the two reward different retrievers."
