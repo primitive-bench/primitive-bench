@@ -14,6 +14,10 @@ export type Primitive =
   | "crawl"
   | "memory";
 export type RunId = string;
+/**
+ * Snapshot freshness, so a consumer knows how old the numbers are.
+ */
+export type AsOf = string | null;
 export type Status = "published" | "no_published_results";
 export type Slice = string;
 export type MetricName = string;
@@ -72,6 +76,7 @@ export type Slices = SliceReport[];
 export interface PrimitiveReport {
   primitive: Primitive;
   run_id: RunId;
+  as_of?: AsOf;
   status?: Status;
   slices?: Slices;
 }

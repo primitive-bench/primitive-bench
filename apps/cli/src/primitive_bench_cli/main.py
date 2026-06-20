@@ -97,6 +97,7 @@ def results_emit(
             slices_raw=slices_raw,
             metric_name=spec["metric_name"],
             citation=spec.get("citation"),
+            as_of=spec.get("as_of"),
         )
         payload = json.dumps(report.model_dump(mode="json"), indent=2) + "\n"
         for out_dir in (canonical, bundled):

@@ -8,6 +8,7 @@
 
 primitive = "websearch"
 run_id = "websearch-public-snapshot-v2"
+as_of = "2026-06"
 metric_name = "hit_rate"
 citation = "packages/eval-websearch/reports/slices-search.md"
 

@@ -8,6 +8,7 @@
 
 primitive = "extraction"
 run_id = "extraction-public-snapshot-v2"
+as_of = "2026-06"
 metric_name = "token_survival"
 citation = "packages/eval-websearch/reports/snapshot-v2-analysis.md"
 

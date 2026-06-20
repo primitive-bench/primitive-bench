@@ -33,3 +33,39 @@ jobs:
 
       - name: Test
         run: uv run pytest -q
+
+      - name: MCP data + schema drift guard
+        run: |
+          uv run bench results emit
+          uv run bench results schema
+          git diff --exit-code -- data/results apps/mcp/data apps/mcp/types/bench-report.schema.json
+
+  mcp:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: apps/mcp
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+          cache-dependency-path: apps/mcp/pnpm-lock.yaml
+
+      - name: Install
+        run: pnpm install --frozen-lockfile
+
+      - name: Type drift guard (JSON Schema -> TS types)
+        run: pnpm run check:types
+
+      - name: Typecheck
+        run: pnpm run typecheck
+
+      - name: Test
+        run: pnpm test

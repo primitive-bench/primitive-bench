@@ -9,9 +9,19 @@
  * serverless function.
  */
 import type { PrimitiveReport, SliceReport, SliceResult } from "../types/bench-report";
+import { PrimitiveReportSchema } from "./schema";
 
 import websearchJson from "../data/websearch.json";
 import extractionJson from "../data/extraction.json";
+
+/** Validate a seed at load; a malformed file fails fast rather than silently. */
+function loadSeed(raw: unknown, name: string): PrimitiveReport {
+  const parsed = PrimitiveReportSchema.safeParse(raw);
+  if (!parsed.success) {
+    throw new Error(`Invalid seed '${name}': ${parsed.error.message}`);
+  }
+  return raw as PrimitiveReport;
+}
 
 /** All nine primitives Primitive Bench certifies (frozen enum order). */
 export const ALL_PRIMITIVES = [
@@ -22,8 +32,8 @@ export type Primitive = (typeof ALL_PRIMITIVES)[number];
 
 /** Primitives with a published snapshot today; the rest answer "coming soon". */
 const REPORTS: Partial<Record<Primitive, PrimitiveReport>> = {
-  websearch: websearchJson as unknown as PrimitiveReport,
-  extraction: extractionJson as unknown as PrimitiveReport,
+  websearch: loadSeed(websearchJson, "websearch.json"),
+  extraction: loadSeed(extractionJson, "extraction.json"),
 };
 
 function findSlice(report: PrimitiveReport, slice: string): SliceReport | undefined {
@@ -96,6 +106,7 @@ export function recommend(primitive: Primitive, slice: string) {
   }
   const base = {
     primitive, slice, metric: s.metric_name, n: s.n,
+    as_of: report.as_of ?? null,
     citation: s.citation ?? null, leaders: (s.results ?? []).map(row),
   };
   if (s.thin) {
@@ -136,17 +147,22 @@ export function compare(primitive: Primitive, adapterA: string, adapterB: string
   }
   const aHi = ra.ci?.ci_high ?? 1, aLo = ra.ci?.ci_low ?? 0;
   const bHi = rb.ci?.ci_high ?? 1, bLo = rb.ci?.ci_low ?? 0;
-  const separable = aHi < bLo || bHi < aLo; // no overlap
+  const separable = aHi < bLo || bHi < aLo; // non-overlapping Wilson intervals
   const leader = ra.point_estimate >= rb.point_estimate ? adapterA : adapterB;
   return {
     primitive, slice, status: "published" as const,
-    method: "wilson_interval_overlap",
+    method: "wilson_interval_overlap" as const,
     separable,
     a: row(ra), b: row(rb),
     citation: s.citation ?? null,
+    // Be explicit: this is the weaker, *unpaired* check — not the project's canonical test.
+    caveat:
+      "Conservative, unpaired check (non-overlapping 95% Wilson intervals). The project's canonical " +
+      "separability test is paired McNemar (DECISIONS D-04/D-10), which needs item-level data not " +
+      "carried in the public snapshot. Treat recommend()'s winner/TIE band as the authoritative call.",
     message: separable
-      ? `${leader} is statistically separable from the other on '${slice}'.`
-      : `${adapterA} and ${adapterB} are NOT separable on '${slice}' (Wilson intervals overlap).`,
+      ? `${leader}'s Wilson interval clears the other's on '${slice}' (separable by this unpaired check).`
+      : `${adapterA} and ${adapterB} have overlapping Wilson intervals on '${slice}' — not separable by this check.`,
   };
 }
 

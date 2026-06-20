@@ -12,6 +12,12 @@ uv.lock.bak
 .turbo/
 node_modules/
 
+# Node / Next (apps/mcp)
+.next/
+.vercel/
+*.tsbuildinfo
+next-env.d.ts
+
 # Run outputs (per-run result dirs are local; ingested into DuckDB, not committed)
 runs/
 *.duckdb

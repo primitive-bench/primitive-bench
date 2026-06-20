@@ -55,6 +55,9 @@ class PrimitiveReport(BaseModel):
 
     primitive: Primitive
     run_id: str
+    as_of: Optional[str] = Field(
+        default=None, description="Snapshot freshness, so a consumer knows how old the numbers are."
+    )
     status: Literal["published", "no_published_results"] = "published"
     slices: list[SliceReport] = Field(default_factory=list)
 
@@ -128,6 +131,7 @@ def build_primitive_report(
     *,
     metric_name: str,
     citation: Optional[str] = None,
+    as_of: Optional[str] = None,
     thin_threshold: int = 10,
     saturated_at: float = 0.9,
 ) -> PrimitiveReport:
@@ -140,4 +144,6 @@ def build_primitive_report(
         )
         for slice_key, counts in slices_raw.items()
     ]
-    return PrimitiveReport(primitive=primitive, run_id=run_id, status="published", slices=slices)
+    return PrimitiveReport(
+        primitive=primitive, run_id=run_id, as_of=as_of, status="published", slices=slices
+    )

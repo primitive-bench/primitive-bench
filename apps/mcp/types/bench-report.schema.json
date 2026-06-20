@@ -287,6 +287,19 @@
       "title": "Run Id",
       "type": "string"
     },
+    "as_of": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "description": "Snapshot freshness, so a consumer knows how old the numbers are.",
+      "title": "As Of"
+    },
     "status": {
       "default": "published",
       "enum": [
