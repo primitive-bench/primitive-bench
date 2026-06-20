@@ -6,6 +6,12 @@ requires-python = ">=3.11"
 license = "Apache-2.0"
 dependencies = ["bench-schemas", "httpx>=0.27"]
 
+# Local cross-encoder rerank adapters (ce-minilm, bge-reranker) need
+# sentence-transformers. Optional so the hosted-API adapters stay lightweight;
+# eval-reranker pulls this in for a ready-to-run local baseline.
+[project.optional-dependencies]
+local-rerank = ["sentence-transformers>=3.0"]
+
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"

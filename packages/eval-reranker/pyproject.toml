@@ -1,10 +1,23 @@
 [project]
 name = "eval-reranker"
 version = "0.1.0"
-description = "Primitive Bench eval vertical: Reranker — MRR/MAP/nDCG + latency-vs-quality slices"
+description = "Primitive Bench eval vertical: Reranker — nDCG@10/MAP/MRR + hit@1 separability over MTEB reranking sets"
 requires-python = ">=3.11"
 license = "Apache-2.0"
-dependencies = ["bench-schemas", "bench-core", "bench-stats", "bench-adapters"]
+dependencies = [
+    "bench-schemas",
+    "bench-core",
+    "bench-stats",
+    "bench-adapters",
+    # Free local cross-encoder adapters (ce-minilm, bge-reranker) run out of the box.
+    "sentence-transformers>=3.0",
+    # The MTEB ingest tool pulls the reranking sets from HuggingFace.
+    "datasets>=2.0",
+    "huggingface-hub>=0.24",
+]
+
+[project.scripts]
+eval-reranker = "eval_reranker.__main__:main"
 
 [build-system]
 requires = ["hatchling"]

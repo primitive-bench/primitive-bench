@@ -61,3 +61,26 @@ adapted to the synchronous bench-adapters `Adapter.invoke(item)` contract.
 `BrightData` is ported but **not registered** (Web Unlocker zone is
 account-specific and the endpoint 400s without it); kept in the module for
 future use.
+
+## Registered RERANK adapters (query + candidate list -> reordered ids)
+
+`invoke(item)` reads `item["query"]` and `item["candidates"]` (a list of
+`{"id", "text"}`). Returns `reordered_ids: list[str]` (candidate ids, best first).
+A reranker is a pure function over a fixed candidate list — no corpus or index.
+
+The two local cross-encoders are keyless (free, run on CPU) and need the
+`local-rerank` extra (`sentence-transformers`); install with
+`uv sync --extra local-rerank` or via `eval-reranker`, which depends on it. The
+hosted APIs read a bare `<VENDOR>_API_KEY`. `cost_usd` records the call's list
+price even inside a vendor's free tier.
+
+| name | vendor | model | env var / requirement |
+|------|--------|-------|-----------------------|
+| `ce-minilm` | local (sentinel) | `cross-encoder/ms-marco-MiniLM-L-6-v2` | none — `local-rerank` extra |
+| `bge-reranker` | local | `BAAI/bge-reranker-v2-m3` | none — `local-rerank` extra |
+| `voyage-rerank` | Voyage | `rerank-2` | `VOYAGE_API_KEY` (first 200M tok free) |
+| `jina-rerank` | Jina | `jina-reranker-v2-base-multilingual` | `JINA_API_KEY` (first 10M tok free) |
+| `cohere-rerank` | Cohere | `rerank-v3.5` | `COHERE_API_KEY` (pay-as-you-go) |
+
+`bge-reranker` is **opt-in** — its weights are ~2.3 GB and slow on CPU, so it is not in
+`eval-reranker`'s default vendor set (nor the published board); pass it explicitly to include it.

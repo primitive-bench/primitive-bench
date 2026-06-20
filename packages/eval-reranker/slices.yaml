@@ -1,5 +1,27 @@
 # Slice / constraint definitions for the reranker primitive.
-# Each slice becomes a SliceResult per adapter. ~45 slices total across primitives.
-# Trust rule: a slice only publishes a winner if adapters are statistically separable.
+# Each slice becomes a SliceResult per adapter. Assigned deterministically from row
+# facts (see src/eval_reranker/slicing.py) — no model. Trust rule: a slice only
+# publishes a winner when adapters are statistically separable (Wilson-clear AND
+# McNemar-separable on hit@1), otherwise a TIE band ("one winner is a lie").
 primitive: reranker
-slices: []   # TODO: define per-constraint slices (the "one winner is a lie" surface)
+
+# hit@1 (top-ranked candidate is relevant) is the paired-binary separability surface
+# the leaderboard's McNemar/Wilson gate consumes. nDCG@10/MAP/MRR are reported
+# alongside (per-item metrics + an nDCG summary) but are not the published gate.
+scoring:
+  metric: hit_at_1
+  match: binary_relevance      # MTEB positive/negative -> relevance 1/0
+  reported: [ndcg@10, map, mrr]
+  miss_reasons: [top_relevant_demoted, no_relevant_in_candidates, empty_ranking, failed]
+
+# Cross-cutting slices. A row carries one key per axis (domain /
+# hard_negative_density), assigned from the candidate pool — never a model.
+slices:
+  - key: domain
+    values: [scientific, tech_qa]
+    description: "Source corpus: scientific paper recommendation (SciDocs) vs. technical duplicate-question retrieval (AskUbuntu)."
+    separates: "THE primary axis — rerankers tuned on web/QA text vs. scientific text trade places across domains; the reason we pull two sources."
+  - key: hard_negative_density
+    values: [high, low]
+    description: "Fraction of the pool that is a (hard) negative: high (>=0.8) vs. low."
+    separates: "a pool that is almost all hard negatives is a sharper discrimination test — separates strong cross-encoders from shallow ones."

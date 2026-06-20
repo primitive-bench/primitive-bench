@@ -1,0 +1,498 @@
+{
+  "primitive": "reranker",
+  "run_id": "reranker-public-snapshot",
+  "as_of": "2026-06",
+  "status": "published",
+  "slices": [
+    {
+      "slice": "all",
+      "metric_name": "hit_at_1",
+      "n": 100,
+      "status": "published",
+      "winner": null,
+      "band": [
+        "cohere-rerank",
+        "jina-rerank",
+        "voyage-rerank",
+        "ce-minilm"
+      ],
+      "thin": false,
+      "saturated": false,
+      "citation": "packages/eval-reranker/README.md",
+      "results": [
+        {
+          "run_id": "reranker-public-snapshot",
+          "primitive": "reranker",
+          "slice": "all",
+          "adapter": "cohere-rerank",
+          "n": 100,
+          "point_estimate": 0.76,
+          "metric_name": "hit_at_1",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.76,
+            "p_value": null,
+            "ci_low": 0.6676748127670786,
+            "ci_high": 0.8330878873454004,
+            "n": 100,
+            "seed": null
+          },
+          "separable": false,
+          "rank": 1
+        },
+        {
+          "run_id": "reranker-public-snapshot",
+          "primitive": "reranker",
+          "slice": "all",
+          "adapter": "jina-rerank",
+          "n": 100,
+          "point_estimate": 0.76,
+          "metric_name": "hit_at_1",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.76,
+            "p_value": null,
+            "ci_low": 0.6676748127670786,
+            "ci_high": 0.8330878873454004,
+            "n": 100,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 2
+        },
+        {
+          "run_id": "reranker-public-snapshot",
+          "primitive": "reranker",
+          "slice": "all",
+          "adapter": "voyage-rerank",
+          "n": 100,
+          "point_estimate": 0.71,
+          "metric_name": "hit_at_1",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.71,
+            "p_value": null,
+            "ci_low": 0.6146092505999207,
+            "ci_high": 0.7898529302601586,
+            "n": 100,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 3
+        },
+        {
+          "run_id": "reranker-public-snapshot",
+          "primitive": "reranker",
+          "slice": "all",
+          "adapter": "ce-minilm",
+          "n": 100,
+          "point_estimate": 0.7,
+          "metric_name": "hit_at_1",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.7,
+            "p_value": null,
+            "ci_low": 0.6041496156718804,
+            "ci_high": 0.7810524613377188,
+            "n": 100,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 4
+        }
+      ]
+    },
+    {
+      "slice": "domain:scientific",
+      "metric_name": "hit_at_1",
+      "n": 50,
+      "status": "published",
+      "winner": null,
+      "band": [
+        "jina-rerank",
+        "cohere-rerank",
+        "ce-minilm",
+        "voyage-rerank"
+      ],
+      "thin": false,
+      "saturated": false,
+      "citation": "packages/eval-reranker/README.md",
+      "results": [
+        {
+          "run_id": "reranker-public-snapshot",
+          "primitive": "reranker",
+          "slice": "domain:scientific",
+          "adapter": "jina-rerank",
+          "n": 50,
+          "point_estimate": 0.94,
+          "metric_name": "hit_at_1",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.94,
+            "p_value": null,
+            "ci_low": 0.8378265662912299,
+            "ci_high": 0.9793854036353695,
+            "n": 50,
+            "seed": null
+          },
+          "separable": false,
+          "rank": 1
+        },
+        {
+          "run_id": "reranker-public-snapshot",
+          "primitive": "reranker",
+          "slice": "domain:scientific",
+          "adapter": "cohere-rerank",
+          "n": 50,
+          "point_estimate": 0.92,
+          "metric_name": "hit_at_1",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.92,
+            "p_value": null,
+            "ci_low": 0.8116149745493629,
+            "ci_high": 0.9684509967442093,
+            "n": 50,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 2
+        },
+        {
+          "run_id": "reranker-public-snapshot",
+          "primitive": "reranker",
+          "slice": "domain:scientific",
+          "adapter": "ce-minilm",
+          "n": 50,
+          "point_estimate": 0.9,
+          "metric_name": "hit_at_1",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.9,
+            "p_value": null,
+            "ci_low": 0.7863950966521162,
+            "ci_high": 0.956524876008429,
+            "n": 50,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 3
+        },
+        {
+          "run_id": "reranker-public-snapshot",
+          "primitive": "reranker",
+          "slice": "domain:scientific",
+          "adapter": "voyage-rerank",
+          "n": 50,
+          "point_estimate": 0.84,
+          "metric_name": "hit_at_1",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.84,
+            "p_value": null,
+            "ci_low": 0.7148551903823402,
+            "ci_high": 0.916626786379123,
+            "n": 50,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 4
+        }
+      ]
+    },
+    {
+      "slice": "domain:tech_qa",
+      "metric_name": "hit_at_1",
+      "n": 50,
+      "status": "published",
+      "winner": null,
+      "band": [
+        "cohere-rerank",
+        "jina-rerank",
+        "voyage-rerank",
+        "ce-minilm"
+      ],
+      "thin": false,
+      "saturated": false,
+      "citation": "packages/eval-reranker/README.md",
+      "results": [
+        {
+          "run_id": "reranker-public-snapshot",
+          "primitive": "reranker",
+          "slice": "domain:tech_qa",
+          "adapter": "cohere-rerank",
+          "n": 50,
+          "point_estimate": 0.6,
+          "metric_name": "hit_at_1",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.6,
+            "p_value": null,
+            "ci_low": 0.4618118910275937,
+            "ci_high": 0.7239181021375425,
+            "n": 50,
+            "seed": null
+          },
+          "separable": false,
+          "rank": 1
+        },
+        {
+          "run_id": "reranker-public-snapshot",
+          "primitive": "reranker",
+          "slice": "domain:tech_qa",
+          "adapter": "jina-rerank",
+          "n": 50,
+          "point_estimate": 0.58,
+          "metric_name": "hit_at_1",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.58,
+            "p_value": null,
+            "ci_low": 0.4423319668777783,
+            "ci_high": 0.7062520276543307,
+            "n": 50,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 2
+        },
+        {
+          "run_id": "reranker-public-snapshot",
+          "primitive": "reranker",
+          "slice": "domain:tech_qa",
+          "adapter": "voyage-rerank",
+          "n": 50,
+          "point_estimate": 0.58,
+          "metric_name": "hit_at_1",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.58,
+            "p_value": null,
+            "ci_low": 0.4423319668777783,
+            "ci_high": 0.7062520276543307,
+            "n": 50,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 3
+        },
+        {
+          "run_id": "reranker-public-snapshot",
+          "primitive": "reranker",
+          "slice": "domain:tech_qa",
+          "adapter": "ce-minilm",
+          "n": 50,
+          "point_estimate": 0.5,
+          "metric_name": "hit_at_1",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.5,
+            "p_value": null,
+            "ci_low": 0.36644286412332855,
+            "ci_high": 0.6335571358766714,
+            "n": 50,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 4
+        }
+      ]
+    },
+    {
+      "slice": "hard_negative_density:high",
+      "metric_name": "hit_at_1",
+      "n": 75,
+      "status": "published",
+      "winner": null,
+      "band": [
+        "jina-rerank",
+        "cohere-rerank",
+        "ce-minilm",
+        "voyage-rerank"
+      ],
+      "thin": false,
+      "saturated": false,
+      "citation": "packages/eval-reranker/README.md",
+      "results": [
+        {
+          "run_id": "reranker-public-snapshot",
+          "primitive": "reranker",
+          "slice": "hard_negative_density:high",
+          "adapter": "jina-rerank",
+          "n": 75,
+          "point_estimate": 0.76,
+          "metric_name": "hit_at_1",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.76,
+            "p_value": null,
+            "ci_low": 0.6522102034171385,
+            "ci_high": 0.8424525127124175,
+            "n": 75,
+            "seed": null
+          },
+          "separable": false,
+          "rank": 1
+        },
+        {
+          "run_id": "reranker-public-snapshot",
+          "primitive": "reranker",
+          "slice": "hard_negative_density:high",
+          "adapter": "cohere-rerank",
+          "n": 75,
+          "point_estimate": 0.7466666666666667,
+          "metric_name": "hit_at_1",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.7466666666666667,
+            "p_value": null,
+            "ci_low": 0.6378945938331628,
+            "ci_high": 0.8314008035205185,
+            "n": 75,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 2
+        },
+        {
+          "run_id": "reranker-public-snapshot",
+          "primitive": "reranker",
+          "slice": "hard_negative_density:high",
+          "adapter": "ce-minilm",
+          "n": 75,
+          "point_estimate": 0.7066666666666667,
+          "metric_name": "hit_at_1",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.7066666666666667,
+            "p_value": null,
+            "ci_low": 0.5955934132076389,
+            "ci_high": 0.7976000278184184,
+            "n": 75,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 3
+        },
+        {
+          "run_id": "reranker-public-snapshot",
+          "primitive": "reranker",
+          "slice": "hard_negative_density:high",
+          "adapter": "voyage-rerank",
+          "n": 75,
+          "point_estimate": 0.68,
+          "metric_name": "hit_at_1",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.68,
+            "p_value": null,
+            "ci_low": 0.5678872410148672,
+            "ci_high": 0.7745715624594409,
+            "n": 75,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 4
+        }
+      ]
+    },
+    {
+      "slice": "hard_negative_density:low",
+      "metric_name": "hit_at_1",
+      "n": 25,
+      "status": "published",
+      "winner": null,
+      "band": [
+        "cohere-rerank",
+        "voyage-rerank",
+        "jina-rerank",
+        "ce-minilm"
+      ],
+      "thin": false,
+      "saturated": false,
+      "citation": "packages/eval-reranker/README.md",
+      "results": [
+        {
+          "run_id": "reranker-public-snapshot",
+          "primitive": "reranker",
+          "slice": "hard_negative_density:low",
+          "adapter": "cohere-rerank",
+          "n": 25,
+          "point_estimate": 0.8,
+          "metric_name": "hit_at_1",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.8,
+            "p_value": null,
+            "ci_low": 0.6086866446346176,
+            "ci_high": 0.9113954589934753,
+            "n": 25,
+            "seed": null
+          },
+          "separable": false,
+          "rank": 1
+        },
+        {
+          "run_id": "reranker-public-snapshot",
+          "primitive": "reranker",
+          "slice": "hard_negative_density:low",
+          "adapter": "voyage-rerank",
+          "n": 25,
+          "point_estimate": 0.8,
+          "metric_name": "hit_at_1",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.8,
+            "p_value": null,
+            "ci_low": 0.6086866446346176,
+            "ci_high": 0.9113954589934753,
+            "n": 25,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 2
+        },
+        {
+          "run_id": "reranker-public-snapshot",
+          "primitive": "reranker",
+          "slice": "hard_negative_density:low",
+          "adapter": "jina-rerank",
+          "n": 25,
+          "point_estimate": 0.76,
+          "metric_name": "hit_at_1",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.76,
+            "p_value": null,
+            "ci_low": 0.5656994004476144,
+            "ci_high": 0.8850384226967327,
+            "n": 25,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 3
+        },
+        {
+          "run_id": "reranker-public-snapshot",
+          "primitive": "reranker",
+          "slice": "hard_negative_density:low",
+          "adapter": "ce-minilm",
+          "n": 25,
+          "point_estimate": 0.68,
+          "metric_name": "hit_at_1",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.68,
+            "p_value": null,
+            "ci_low": 0.48409913734576715,
+            "ci_high": 0.8279501248310887,
+            "n": 25,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 4
+        }
+      ]
+    }
+  ]
+}

@@ -28,6 +28,10 @@ golden-sets-heldout/
 *.heldout.jsonl
 *.hmac.key
 
+# Reranker: the full dev split is generated locally from MTEB reranking sets
+# (SciDocs / AskUbuntu) and is NOT redistributed — only dev.example.jsonl is committed.
+golden-sets-public/reranker/dev.jsonl
+
 # Secrets / env
 .env
 .env.*

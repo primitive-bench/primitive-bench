@@ -13,6 +13,13 @@ incorporated under their original permissive licenses:
     golden-sets-public/ remains licensed CC-BY-4.0 (see golden-sets-public/
     LICENSE-DATA).
 
+  * MTEB reranking datasets — the reranker DEV split is generated locally from
+    mteb/scidocs-reranking (SciDocs, AllenAI; CC-BY) and
+    mteb/askubuntudupquestions-reranking (derived from StackExchange; CC-BY-SA).
+    These are ingested to the user's machine and are NOT redistributed from this
+    repo; only the small self-authored golden-sets-public/reranker/dev.example.jsonl
+    (CC-BY-4.0) is committed. See packages/eval-reranker for the ingest tool.
+
 Per-package provenance notes are kept in each package's README.md. The public
 datasets under golden-sets-public/ are licensed separately under CC-BY-4.0 and
 are not covered by the Apache-2.0 license that applies to the code.
