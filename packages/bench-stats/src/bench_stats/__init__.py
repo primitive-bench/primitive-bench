@@ -35,6 +35,12 @@ from bench_stats.reporting import (
     cusum,
     tied_rank_band,
 )
+from bench_stats.leaderboard import (
+    SliceReport,
+    PrimitiveReport,
+    build_slice_report,
+    build_primitive_report,
+)
 
 __all__ = [
     "mcnemar",
@@ -51,4 +57,8 @@ __all__ = [
     "cmh_global",
     "cusum",
     "tied_rank_band",
+    "SliceReport",
+    "PrimitiveReport",
+    "build_slice_report",
+    "build_primitive_report",
 ]

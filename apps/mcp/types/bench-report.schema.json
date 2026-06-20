@@ -1,0 +1,313 @@
+{
+  "$defs": {
+    "Primitive": {
+      "description": "The infrastructure primitives Primitive Bench certifies, one vertical each.",
+      "enum": [
+        "ocr",
+        "websearch",
+        "vectordb",
+        "reranker",
+        "retrieval",
+        "extraction",
+        "chunking",
+        "crawl",
+        "memory"
+      ],
+      "title": "Primitive",
+      "type": "string"
+    },
+    "SliceReport": {
+      "description": "Slice-level view: the frozen per-adapter rows plus the derived call.\n\n`winner` is set only when the leader's Wilson interval clears the runner-up's\n(D-10 separability gate). Otherwise `band` is the TIE group and `winner` is None.\n`thin`/`saturated` are honesty flags the recommender uses to refuse a call.",
+      "properties": {
+        "slice": {
+          "title": "Slice",
+          "type": "string"
+        },
+        "metric_name": {
+          "title": "Metric Name",
+          "type": "string"
+        },
+        "n": {
+          "description": "Slice size (max n across adapters).",
+          "title": "N",
+          "type": "integer"
+        },
+        "status": {
+          "default": "published",
+          "enum": [
+            "published",
+            "thin_data",
+            "saturated"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "winner": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Winner"
+        },
+        "band": {
+          "description": "TIE group, leader first.",
+          "items": {
+            "type": "string"
+          },
+          "title": "Band",
+          "type": "array"
+        },
+        "thin": {
+          "default": false,
+          "title": "Thin",
+          "type": "boolean"
+        },
+        "saturated": {
+          "default": false,
+          "title": "Saturated",
+          "type": "boolean"
+        },
+        "citation": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Citation"
+        },
+        "results": {
+          "description": "Per-adapter, ranked.",
+          "items": {
+            "$ref": "#/$defs/SliceResult"
+          },
+          "title": "Results",
+          "type": "array"
+        }
+      },
+      "required": [
+        "slice",
+        "metric_name",
+        "n"
+      ],
+      "title": "SliceReport",
+      "type": "object"
+    },
+    "SliceResult": {
+      "description": "Per-slice aggregate for one adapter. The unit the leaderboard ranks.\n\n`separable` is the trust gate: if False (overlapping CIs / high McNemar p at\nthis n), the leaderboard MUST NOT publish a single winner for the slice.",
+      "properties": {
+        "run_id": {
+          "title": "Run Id",
+          "type": "string"
+        },
+        "primitive": {
+          "$ref": "#/$defs/Primitive"
+        },
+        "slice": {
+          "description": "Slice/constraint key, e.g. 'doc_type:invoice'",
+          "title": "Slice",
+          "type": "string"
+        },
+        "adapter": {
+          "title": "Adapter",
+          "type": "string"
+        },
+        "n": {
+          "description": "Number of items in this slice for this adapter.",
+          "title": "N",
+          "type": "integer"
+        },
+        "point_estimate": {
+          "description": "Primary metric value (accuracy, nDCG, ...).",
+          "title": "Point Estimate",
+          "type": "number"
+        },
+        "metric_name": {
+          "default": "accuracy",
+          "title": "Metric Name",
+          "type": "string"
+        },
+        "ci": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/StatTest"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Wilson/bootstrap CI for the estimate."
+        },
+        "separable": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Whether this adapter is statistically separable from the runner-up on this slice.",
+          "title": "Separable"
+        },
+        "rank": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Rank"
+        }
+      },
+      "required": [
+        "run_id",
+        "primitive",
+        "slice",
+        "adapter",
+        "n",
+        "point_estimate"
+      ],
+      "title": "SliceResult",
+      "type": "object"
+    },
+    "StatTest": {
+      "description": "Output of a bench-stats test, carried on SliceResult for separability badges.",
+      "properties": {
+        "method": {
+          "enum": [
+            "mcnemar",
+            "wilson",
+            "bootstrap",
+            "bradley_terry"
+          ],
+          "title": "Method",
+          "type": "string"
+        },
+        "statistic": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Statistic"
+        },
+        "p_value": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "P Value"
+        },
+        "ci_low": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Ci Low"
+        },
+        "ci_high": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Ci High"
+        },
+        "n": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "N"
+        },
+        "seed": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "description": "Fixed seed for bootstrap reproducibility.",
+          "title": "Seed"
+        }
+      },
+      "required": [
+        "method"
+      ],
+      "title": "StatTest",
+      "type": "object"
+    }
+  },
+  "description": "All published slices for one primitive \u2014 the unit a seed file holds.",
+  "properties": {
+    "primitive": {
+      "$ref": "#/$defs/Primitive"
+    },
+    "run_id": {
+      "title": "Run Id",
+      "type": "string"
+    },
+    "status": {
+      "default": "published",
+      "enum": [
+        "published",
+        "no_published_results"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "slices": {
+      "items": {
+        "$ref": "#/$defs/SliceReport"
+      },
+      "title": "Slices",
+      "type": "array"
+    }
+  },
+  "required": [
+    "primitive",
+    "run_id"
+  ],
+  "title": "PrimitiveReport",
+  "type": "object"
+}

@@ -1,0 +1,300 @@
+{
+  "primitive": "extraction",
+  "run_id": "extraction-public-snapshot-v2",
+  "status": "published",
+  "slices": [
+    {
+      "slice": "fed_register",
+      "metric_name": "token_survival",
+      "n": 100,
+      "status": "published",
+      "winner": null,
+      "band": [
+        "firecrawl",
+        "jina",
+        "tavily"
+      ],
+      "thin": false,
+      "saturated": false,
+      "citation": "packages/eval-websearch/reports/snapshot-v2-analysis.md",
+      "results": [
+        {
+          "run_id": "extraction-public-snapshot-v2",
+          "primitive": "extraction",
+          "slice": "fed_register",
+          "adapter": "firecrawl",
+          "n": 100,
+          "point_estimate": 1.0,
+          "metric_name": "token_survival",
+          "ci": {
+            "method": "wilson",
+            "statistic": 1.0,
+            "p_value": null,
+            "ci_low": 0.9630051925239981,
+            "ci_high": 0.9999999999999999,
+            "n": 100,
+            "seed": null
+          },
+          "separable": false,
+          "rank": 1
+        },
+        {
+          "run_id": "extraction-public-snapshot-v2",
+          "primitive": "extraction",
+          "slice": "fed_register",
+          "adapter": "jina",
+          "n": 99,
+          "point_estimate": 1.0,
+          "metric_name": "token_survival",
+          "ci": {
+            "method": "wilson",
+            "statistic": 1.0,
+            "p_value": null,
+            "ci_low": 0.9626454664260378,
+            "ci_high": 1.0,
+            "n": 99,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 2
+        },
+        {
+          "run_id": "extraction-public-snapshot-v2",
+          "primitive": "extraction",
+          "slice": "fed_register",
+          "adapter": "tavily",
+          "n": 100,
+          "point_estimate": 1.0,
+          "metric_name": "token_survival",
+          "ci": {
+            "method": "wilson",
+            "statistic": 1.0,
+            "p_value": null,
+            "ci_low": 0.9630051925239981,
+            "ci_high": 0.9999999999999999,
+            "n": 100,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 3
+        },
+        {
+          "run_id": "extraction-public-snapshot-v2",
+          "primitive": "extraction",
+          "slice": "fed_register",
+          "adapter": "exa_live",
+          "n": 100,
+          "point_estimate": 0.0,
+          "metric_name": "token_survival",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.0,
+            "p_value": null,
+            "ci_low": 0.0,
+            "ci_high": 0.03699480747600191,
+            "n": 100,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 4
+        }
+      ]
+    },
+    {
+      "slice": "nvd_cve",
+      "metric_name": "token_survival",
+      "n": 25,
+      "status": "saturated",
+      "winner": null,
+      "band": [
+        "firecrawl",
+        "jina",
+        "exa_live",
+        "tavily"
+      ],
+      "thin": false,
+      "saturated": true,
+      "citation": "packages/eval-websearch/reports/snapshot-v2-analysis.md",
+      "results": [
+        {
+          "run_id": "extraction-public-snapshot-v2",
+          "primitive": "extraction",
+          "slice": "nvd_cve",
+          "adapter": "firecrawl",
+          "n": 25,
+          "point_estimate": 1.0,
+          "metric_name": "token_survival",
+          "ci": {
+            "method": "wilson",
+            "statistic": 1.0,
+            "p_value": null,
+            "ci_low": 0.8668035060468213,
+            "ci_high": 1.0,
+            "n": 25,
+            "seed": null
+          },
+          "separable": false,
+          "rank": 1
+        },
+        {
+          "run_id": "extraction-public-snapshot-v2",
+          "primitive": "extraction",
+          "slice": "nvd_cve",
+          "adapter": "jina",
+          "n": 25,
+          "point_estimate": 1.0,
+          "metric_name": "token_survival",
+          "ci": {
+            "method": "wilson",
+            "statistic": 1.0,
+            "p_value": null,
+            "ci_low": 0.8668035060468213,
+            "ci_high": 1.0,
+            "n": 25,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 2
+        },
+        {
+          "run_id": "extraction-public-snapshot-v2",
+          "primitive": "extraction",
+          "slice": "nvd_cve",
+          "adapter": "exa_live",
+          "n": 25,
+          "point_estimate": 1.0,
+          "metric_name": "token_survival",
+          "ci": {
+            "method": "wilson",
+            "statistic": 1.0,
+            "p_value": null,
+            "ci_low": 0.8668035060468213,
+            "ci_high": 1.0,
+            "n": 25,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 3
+        },
+        {
+          "run_id": "extraction-public-snapshot-v2",
+          "primitive": "extraction",
+          "slice": "nvd_cve",
+          "adapter": "tavily",
+          "n": 25,
+          "point_estimate": 0.96,
+          "metric_name": "token_survival",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.96,
+            "p_value": null,
+            "ci_low": 0.8045552759497747,
+            "ci_high": 0.9929039496133008,
+            "n": 25,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 4
+        }
+      ]
+    },
+    {
+      "slice": "sec_edgar",
+      "metric_name": "token_survival",
+      "n": 25,
+      "status": "saturated",
+      "winner": null,
+      "band": [
+        "firecrawl",
+        "jina",
+        "tavily",
+        "exa_live"
+      ],
+      "thin": false,
+      "saturated": true,
+      "citation": "packages/eval-websearch/reports/snapshot-v2-analysis.md",
+      "results": [
+        {
+          "run_id": "extraction-public-snapshot-v2",
+          "primitive": "extraction",
+          "slice": "sec_edgar",
+          "adapter": "firecrawl",
+          "n": 25,
+          "point_estimate": 1.0,
+          "metric_name": "token_survival",
+          "ci": {
+            "method": "wilson",
+            "statistic": 1.0,
+            "p_value": null,
+            "ci_low": 0.8668035060468213,
+            "ci_high": 1.0,
+            "n": 25,
+            "seed": null
+          },
+          "separable": false,
+          "rank": 1
+        },
+        {
+          "run_id": "extraction-public-snapshot-v2",
+          "primitive": "extraction",
+          "slice": "sec_edgar",
+          "adapter": "jina",
+          "n": 25,
+          "point_estimate": 1.0,
+          "metric_name": "token_survival",
+          "ci": {
+            "method": "wilson",
+            "statistic": 1.0,
+            "p_value": null,
+            "ci_low": 0.8668035060468213,
+            "ci_high": 1.0,
+            "n": 25,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 2
+        },
+        {
+          "run_id": "extraction-public-snapshot-v2",
+          "primitive": "extraction",
+          "slice": "sec_edgar",
+          "adapter": "tavily",
+          "n": 25,
+          "point_estimate": 1.0,
+          "metric_name": "token_survival",
+          "ci": {
+            "method": "wilson",
+            "statistic": 1.0,
+            "p_value": null,
+            "ci_low": 0.8668035060468213,
+            "ci_high": 1.0,
+            "n": 25,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 3
+        },
+        {
+          "run_id": "extraction-public-snapshot-v2",
+          "primitive": "extraction",
+          "slice": "sec_edgar",
+          "adapter": "exa_live",
+          "n": 25,
+          "point_estimate": 1.0,
+          "metric_name": "token_survival",
+          "ci": {
+            "method": "wilson",
+            "statistic": 1.0,
+            "p_value": null,
+            "ci_low": 0.8668035060468213,
+            "ci_high": 1.0,
+            "n": 25,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 4
+        }
+      ]
+    }
+  ]
+}

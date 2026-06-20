@@ -1,0 +1,21 @@
+# Curated raw (adapter, successes, n) counts for the extraction primitive.
+#
+# Transcribed from the published "web_extraction" snapshot in
+#   packages/eval-websearch/reports/snapshot-v2-analysis.md  (section 6, per-source)
+# Metric is token survival. NOTE: the source report physically lives under
+# eval-websearch/reports but describes the `extraction` primitive; counts are owned
+# here by eval-extraction. INTERIM until the pipeline emits SliceResult directly (D-13).
+
+primitive = "extraction"
+run_id = "extraction-public-snapshot-v2"
+metric_name = "token_survival"
+citation = "packages/eval-websearch/reports/snapshot-v2-analysis.md"
+
+[slices]
+# Deep-body discriminator: firecrawl/jina/tavily ~100%, exa_live 0/100 (anti-bot blocked)
+# -> TIE: firecrawl, jina, tavily ; exa_live separated out below the band
+fed_register = [["firecrawl", 100, 100], ["jina", 99, 99], ["tavily", 100, 100], ["exa_live", 0, 100]]
+# all ~100% at n=25 -> saturated (rotation candidate, D-11)
+nvd_cve = [["firecrawl", 25, 25], ["jina", 25, 25], ["tavily", 24, 25], ["exa_live", 25, 25]]
+# all 100% -> saturated (rotation candidate, D-11)
+sec_edgar = [["firecrawl", 25, 25], ["jina", 25, 25], ["tavily", 25, 25], ["exa_live", 25, 25]]

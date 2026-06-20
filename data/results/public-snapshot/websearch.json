@@ -1,0 +1,587 @@
+{
+  "primitive": "websearch",
+  "run_id": "websearch-public-snapshot-v2",
+  "status": "published",
+  "slices": [
+    {
+      "slice": "government_registry",
+      "metric_name": "hit_rate",
+      "n": 90,
+      "status": "published",
+      "winner": null,
+      "band": [
+        "exa",
+        "serpapi"
+      ],
+      "thin": false,
+      "saturated": false,
+      "citation": "packages/eval-websearch/reports/slices-search.md",
+      "results": [
+        {
+          "run_id": "websearch-public-snapshot-v2",
+          "primitive": "websearch",
+          "slice": "government_registry",
+          "adapter": "exa",
+          "n": 90,
+          "point_estimate": 0.7666666666666667,
+          "metric_name": "hit_rate",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.7666666666666667,
+            "p_value": null,
+            "ci_low": 0.6694810141144782,
+            "ci_high": 0.8420192160606255,
+            "n": 90,
+            "seed": null
+          },
+          "separable": false,
+          "rank": 1
+        },
+        {
+          "run_id": "websearch-public-snapshot-v2",
+          "primitive": "websearch",
+          "slice": "government_registry",
+          "adapter": "serpapi",
+          "n": 90,
+          "point_estimate": 0.6666666666666666,
+          "metric_name": "hit_rate",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.6666666666666666,
+            "p_value": null,
+            "ci_low": 0.5642212433918371,
+            "ci_high": 0.7554664004676025,
+            "n": 90,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 2
+        },
+        {
+          "run_id": "websearch-public-snapshot-v2",
+          "primitive": "websearch",
+          "slice": "government_registry",
+          "adapter": "brave",
+          "n": 90,
+          "point_estimate": 0.4888888888888889,
+          "metric_name": "hit_rate",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.4888888888888889,
+            "p_value": null,
+            "ci_low": 0.3882031497910542,
+            "ci_high": 0.5904843406183163,
+            "n": 90,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 3
+        },
+        {
+          "run_id": "websearch-public-snapshot-v2",
+          "primitive": "websearch",
+          "slice": "government_registry",
+          "adapter": "tavily",
+          "n": 90,
+          "point_estimate": 0.4,
+          "metric_name": "hit_rate",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.4,
+            "p_value": null,
+            "ci_low": 0.30488859176782823,
+            "ci_high": 0.5032988219165079,
+            "n": 90,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 4
+        }
+      ]
+    },
+    {
+      "slice": "company_lookup",
+      "metric_name": "hit_rate",
+      "n": 25,
+      "status": "published",
+      "winner": "exa",
+      "band": [
+        "exa"
+      ],
+      "thin": false,
+      "saturated": false,
+      "citation": "packages/eval-websearch/reports/slices-search.md",
+      "results": [
+        {
+          "run_id": "websearch-public-snapshot-v2",
+          "primitive": "websearch",
+          "slice": "company_lookup",
+          "adapter": "exa",
+          "n": 25,
+          "point_estimate": 0.88,
+          "metric_name": "hit_rate",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.88,
+            "p_value": null,
+            "ci_low": 0.7004380781662651,
+            "ci_high": 0.9583325864293191,
+            "n": 25,
+            "seed": null
+          },
+          "separable": true,
+          "rank": 1
+        },
+        {
+          "run_id": "websearch-public-snapshot-v2",
+          "primitive": "websearch",
+          "slice": "company_lookup",
+          "adapter": "serpapi",
+          "n": 25,
+          "point_estimate": 0.0,
+          "metric_name": "hit_rate",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.0,
+            "p_value": null,
+            "ci_low": 0.0,
+            "ci_high": 0.13319649395317873,
+            "n": 25,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 2
+        },
+        {
+          "run_id": "websearch-public-snapshot-v2",
+          "primitive": "websearch",
+          "slice": "company_lookup",
+          "adapter": "brave",
+          "n": 25,
+          "point_estimate": 0.0,
+          "metric_name": "hit_rate",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.0,
+            "p_value": null,
+            "ci_low": 0.0,
+            "ci_high": 0.13319649395317873,
+            "n": 25,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 3
+        },
+        {
+          "run_id": "websearch-public-snapshot-v2",
+          "primitive": "websearch",
+          "slice": "company_lookup",
+          "adapter": "tavily",
+          "n": 25,
+          "point_estimate": 0.0,
+          "metric_name": "hit_rate",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.0,
+            "p_value": null,
+            "ci_low": 0.0,
+            "ci_high": 0.13319649395317873,
+            "n": 25,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 4
+        }
+      ]
+    },
+    {
+      "slice": "technical_docs",
+      "metric_name": "hit_rate",
+      "n": 25,
+      "status": "published",
+      "winner": null,
+      "band": [
+        "exa",
+        "serpapi",
+        "tavily"
+      ],
+      "thin": false,
+      "saturated": false,
+      "citation": "packages/eval-websearch/reports/slices-search.md",
+      "results": [
+        {
+          "run_id": "websearch-public-snapshot-v2",
+          "primitive": "websearch",
+          "slice": "technical_docs",
+          "adapter": "exa",
+          "n": 25,
+          "point_estimate": 1.0,
+          "metric_name": "hit_rate",
+          "ci": {
+            "method": "wilson",
+            "statistic": 1.0,
+            "p_value": null,
+            "ci_low": 0.8668035060468213,
+            "ci_high": 1.0,
+            "n": 25,
+            "seed": null
+          },
+          "separable": false,
+          "rank": 1
+        },
+        {
+          "run_id": "websearch-public-snapshot-v2",
+          "primitive": "websearch",
+          "slice": "technical_docs",
+          "adapter": "serpapi",
+          "n": 25,
+          "point_estimate": 0.92,
+          "metric_name": "hit_rate",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.92,
+            "p_value": null,
+            "ci_low": 0.7503348787704218,
+            "ci_high": 0.977780066308908,
+            "n": 25,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 2
+        },
+        {
+          "run_id": "websearch-public-snapshot-v2",
+          "primitive": "websearch",
+          "slice": "technical_docs",
+          "adapter": "tavily",
+          "n": 25,
+          "point_estimate": 0.92,
+          "metric_name": "hit_rate",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.92,
+            "p_value": null,
+            "ci_low": 0.7503348787704218,
+            "ci_high": 0.977780066308908,
+            "n": 25,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 3
+        },
+        {
+          "run_id": "websearch-public-snapshot-v2",
+          "primitive": "websearch",
+          "slice": "technical_docs",
+          "adapter": "brave",
+          "n": 25,
+          "point_estimate": 0.72,
+          "metric_name": "hit_rate",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.72,
+            "p_value": null,
+            "ci_low": 0.524230281034417,
+            "ci_high": 0.8571632616261842,
+            "n": 25,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 4
+        }
+      ]
+    },
+    {
+      "slice": "b2b_tools",
+      "metric_name": "hit_rate",
+      "n": 1,
+      "status": "thin_data",
+      "winner": null,
+      "band": [
+        "brave",
+        "exa",
+        "serpapi",
+        "tavily"
+      ],
+      "thin": true,
+      "saturated": false,
+      "citation": "packages/eval-websearch/reports/slices-search.md",
+      "results": [
+        {
+          "run_id": "websearch-public-snapshot-v2",
+          "primitive": "websearch",
+          "slice": "b2b_tools",
+          "adapter": "brave",
+          "n": 1,
+          "point_estimate": 1.0,
+          "metric_name": "hit_rate",
+          "ci": {
+            "method": "wilson",
+            "statistic": 1.0,
+            "p_value": null,
+            "ci_low": 0.2065432914738929,
+            "ci_high": 1.0,
+            "n": 1,
+            "seed": null
+          },
+          "separable": false,
+          "rank": 1
+        },
+        {
+          "run_id": "websearch-public-snapshot-v2",
+          "primitive": "websearch",
+          "slice": "b2b_tools",
+          "adapter": "exa",
+          "n": 1,
+          "point_estimate": 1.0,
+          "metric_name": "hit_rate",
+          "ci": {
+            "method": "wilson",
+            "statistic": 1.0,
+            "p_value": null,
+            "ci_low": 0.2065432914738929,
+            "ci_high": 1.0,
+            "n": 1,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 2
+        },
+        {
+          "run_id": "websearch-public-snapshot-v2",
+          "primitive": "websearch",
+          "slice": "b2b_tools",
+          "adapter": "serpapi",
+          "n": 1,
+          "point_estimate": 1.0,
+          "metric_name": "hit_rate",
+          "ci": {
+            "method": "wilson",
+            "statistic": 1.0,
+            "p_value": null,
+            "ci_low": 0.2065432914738929,
+            "ci_high": 1.0,
+            "n": 1,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 3
+        },
+        {
+          "run_id": "websearch-public-snapshot-v2",
+          "primitive": "websearch",
+          "slice": "b2b_tools",
+          "adapter": "tavily",
+          "n": 1,
+          "point_estimate": 1.0,
+          "metric_name": "hit_rate",
+          "ci": {
+            "method": "wilson",
+            "statistic": 1.0,
+            "p_value": null,
+            "ci_low": 0.2065432914738929,
+            "ci_high": 1.0,
+            "n": 1,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 4
+        }
+      ]
+    },
+    {
+      "slice": "pricing_pages",
+      "metric_name": "hit_rate",
+      "n": 1,
+      "status": "thin_data",
+      "winner": null,
+      "band": [
+        "brave",
+        "serpapi",
+        "exa",
+        "tavily"
+      ],
+      "thin": true,
+      "saturated": false,
+      "citation": "packages/eval-websearch/reports/slices-search.md",
+      "results": [
+        {
+          "run_id": "websearch-public-snapshot-v2",
+          "primitive": "websearch",
+          "slice": "pricing_pages",
+          "adapter": "brave",
+          "n": 1,
+          "point_estimate": 1.0,
+          "metric_name": "hit_rate",
+          "ci": {
+            "method": "wilson",
+            "statistic": 1.0,
+            "p_value": null,
+            "ci_low": 0.2065432914738929,
+            "ci_high": 1.0,
+            "n": 1,
+            "seed": null
+          },
+          "separable": false,
+          "rank": 1
+        },
+        {
+          "run_id": "websearch-public-snapshot-v2",
+          "primitive": "websearch",
+          "slice": "pricing_pages",
+          "adapter": "serpapi",
+          "n": 1,
+          "point_estimate": 1.0,
+          "metric_name": "hit_rate",
+          "ci": {
+            "method": "wilson",
+            "statistic": 1.0,
+            "p_value": null,
+            "ci_low": 0.2065432914738929,
+            "ci_high": 1.0,
+            "n": 1,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 2
+        },
+        {
+          "run_id": "websearch-public-snapshot-v2",
+          "primitive": "websearch",
+          "slice": "pricing_pages",
+          "adapter": "exa",
+          "n": 1,
+          "point_estimate": 0.0,
+          "metric_name": "hit_rate",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.0,
+            "p_value": null,
+            "ci_low": 0.0,
+            "ci_high": 0.7934567085261071,
+            "n": 1,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 3
+        },
+        {
+          "run_id": "websearch-public-snapshot-v2",
+          "primitive": "websearch",
+          "slice": "pricing_pages",
+          "adapter": "tavily",
+          "n": 1,
+          "point_estimate": 0.0,
+          "metric_name": "hit_rate",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.0,
+            "p_value": null,
+            "ci_low": 0.0,
+            "ci_high": 0.7934567085261071,
+            "n": 1,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 4
+        }
+      ]
+    },
+    {
+      "slice": "citation_needed",
+      "metric_name": "hit_rate",
+      "n": 90,
+      "status": "published",
+      "winner": null,
+      "band": [
+        "exa",
+        "serpapi"
+      ],
+      "thin": false,
+      "saturated": false,
+      "citation": "packages/eval-websearch/reports/slices-search.md",
+      "results": [
+        {
+          "run_id": "websearch-public-snapshot-v2",
+          "primitive": "websearch",
+          "slice": "citation_needed",
+          "adapter": "exa",
+          "n": 90,
+          "point_estimate": 0.7666666666666667,
+          "metric_name": "hit_rate",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.7666666666666667,
+            "p_value": null,
+            "ci_low": 0.6694810141144782,
+            "ci_high": 0.8420192160606255,
+            "n": 90,
+            "seed": null
+          },
+          "separable": false,
+          "rank": 1
+        },
+        {
+          "run_id": "websearch-public-snapshot-v2",
+          "primitive": "websearch",
+          "slice": "citation_needed",
+          "adapter": "serpapi",
+          "n": 90,
+          "point_estimate": 0.6666666666666666,
+          "metric_name": "hit_rate",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.6666666666666666,
+            "p_value": null,
+            "ci_low": 0.5642212433918371,
+            "ci_high": 0.7554664004676025,
+            "n": 90,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 2
+        },
+        {
+          "run_id": "websearch-public-snapshot-v2",
+          "primitive": "websearch",
+          "slice": "citation_needed",
+          "adapter": "brave",
+          "n": 90,
+          "point_estimate": 0.4888888888888889,
+          "metric_name": "hit_rate",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.4888888888888889,
+            "p_value": null,
+            "ci_low": 0.3882031497910542,
+            "ci_high": 0.5904843406183163,
+            "n": 90,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 3
+        },
+        {
+          "run_id": "websearch-public-snapshot-v2",
+          "primitive": "websearch",
+          "slice": "citation_needed",
+          "adapter": "tavily",
+          "n": 90,
+          "point_estimate": 0.4,
+          "metric_name": "hit_rate",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.4,
+            "p_value": null,
+            "ci_low": 0.30488859176782823,
+            "ci_high": 0.5032988219165079,
+            "n": 90,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 4
+        }
+      ]
+    }
+  ]
+}
