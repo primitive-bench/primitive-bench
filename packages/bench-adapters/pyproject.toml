@@ -4,7 +4,13 @@ version = "0.1.0"
 description = "Provider/primitive adapter SDK for Primitive Bench"
 requires-python = ">=3.11"
 license = "Apache-2.0"
-dependencies = ["bench-schemas", "httpx>=0.27"]
+dependencies = [
+    "bench-schemas",
+    "httpx>=0.27",
+    "pytesseract>=0.3.10",
+    "Pillow>=10.0",
+    "anthropic>=0.49",
+]
 
 [build-system]
 requires = ["hatchling"]

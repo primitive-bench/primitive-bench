@@ -1,5 +1,44 @@
-# Slice / constraint definitions for the ocr primitive.
-# Each slice becomes a SliceResult per adapter. ~45 slices total across primitives.
-# Trust rule: a slice only publishes a winner if adapters are statistically separable.
+# OCR slices — the "one winner is a lie" surface for document transcription.
+#
+# Slices are assigned deterministically per test case (no model, no fetch):
+#   doc_type:<type>   from the olmOCR-bench page's source/layout attribute
+#   test_type:<type>  from the olmOCR-bench rule kind (present/absent/order/...)
+# plus the synthetic "all" slice the report always computes. A slice earns a
+# published winner only when the leader is Wilson-clear AND McNemar-separable
+# from the runner-up; otherwise it reports a TIE band.
+#
+# COVERAGE CAVEAT: olmOCR-bench is largely English arXiv papers + scanned/old
+# documents + tables + multi-column. The README's `handwritten` and `non_latin`
+# slices are NOT populated by this corpus — fill them later from another
+# permissively-licensed source.
 primitive: ocr
-slices: []   # TODO: define per-constraint slices (the "one winner is a lie" surface)
+slices:
+  # --- document type (from olmOCR-bench page attributes) ---
+  - key: doc_type:arxiv
+    description: Born-digital academic papers (dense prose + math). Tesseract competitive.
+  - key: doc_type:old_scan
+    description: Scanned / historical documents. Garbling and dropped-region risk spike.
+  - key: doc_type:table
+    description: Pages whose tests target tabular structure. Layout models separate here.
+  - key: doc_type:multi_column
+    description: Multi-column layouts. Reading-order failures show up as order misses.
+  - key: doc_type:math
+    description: Math-heavy pages (formula tests). Equation presence via exact-match.
+
+  # --- test type (the olmOCR-bench rule kind) ---
+  - key: test_type:present
+    description: A 1-3 sentence fragment must appear in the transcription (fuzzy).
+  - key: test_type:absent
+    description: Specified text (headers/footers/page numbers) must NOT appear.
+  - key: test_type:order
+    description: Natural reading order — fragment A must precede fragment B.
+  - key: test_type:baseline
+    description: Page sanity — non-blank, no degenerate repetition.
+  - key: test_type:table
+    description: A cell value appears with the correct neighbours / headings.
+  - key: test_type:format
+    description: Text is rendered with the expected heading/bold/italic formatting.
+  - key: test_type:footnote
+    description: A footnote marker (and its referenced text) is present.
+  - key: test_type:math
+    description: A target equation is present (exact-match; rendered-equality fallback omitted).

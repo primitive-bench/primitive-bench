@@ -28,6 +28,12 @@ golden-sets-heldout/
 *.heldout.jsonl
 *.hmac.key
 
+# OCR: the full dev split is generated locally from olmOCR-bench; its page images
+# are third-party content we do not redistribute. Only dev.example.jsonl ships.
+golden-sets-public/ocr/dev.jsonl
+golden-sets-public/ocr/dev.manifest.json
+golden-sets-public/ocr/images/olmocr/
+
 # Secrets / env
 .env
 .env.*

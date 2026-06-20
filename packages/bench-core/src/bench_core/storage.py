@@ -33,14 +33,17 @@ def write_jsonl(path: Path, rows: Iterable[dict], *, append: bool = False) -> in
     return n
 
 
-def read_jsonl(path: Path) -> Iterator[dict]:
+def read_jsonl(path: Path, *, skip_comments: bool = False) -> Iterator[dict]:
+    """Yield one dict per JSONL line. With `skip_comments`, `#` lines are skipped
+    (public golden splits carry the BIG-bench canary as a leading `#` header)."""
     if not path.exists():
         return
     with path.open(encoding="utf-8") as f:
         for line in f:
             line = line.strip()
-            if line:
-                yield json.loads(line)
+            if not line or (skip_comments and line.startswith("#")):
+                continue
+            yield json.loads(line)
 
 
 def log_rejection(row_id: str, reason: str, detail: str = "", *, ts: str = "") -> None:

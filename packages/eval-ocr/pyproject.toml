@@ -1,10 +1,24 @@
 [project]
 name = "eval-ocr"
 version = "0.1.0"
-description = "Primitive Bench eval vertical: OCR — six-model adapters, three-loop change-detection, per-doc-type slices"
+description = "Primitive Bench eval vertical: OCR — pass@test over olmOCR-bench across six adapters, sliced by document and test type"
 requires-python = ">=3.11"
 license = "Apache-2.0"
-dependencies = ["bench-schemas", "bench-core", "bench-stats", "bench-adapters"]
+dependencies = [
+    "bench-schemas",
+    "bench-core",
+    "bench-stats",
+    "bench-adapters",
+    "pyyaml>=6.0",
+    "rapidfuzz>=3.0",
+    "fuzzysearch>=0.7",
+    "Pillow>=10.0",
+    "pymupdf>=1.24",
+    "huggingface-hub>=0.24",
+]
+
+[project.scripts]
+eval-ocr = "eval_ocr.__main__:main"
 
 [build-system]
 requires = ["hatchling"]
