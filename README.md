@@ -80,6 +80,25 @@ The `bench` CLI scaffolds a config (`bench init`), runs an eval (`bench run`), s
 separability badges (`bench view`), and submits to the held-out eval server for scores only
 (`bench submit`).
 
+## Query it from your agent (MCP)
+
+The benchmark isn't just a site to read — it's a tool your **AI agent can query while it
+reasons**. The [Primitive Bench MCP server](apps/mcp) exposes the per-slice leaderboards over the
+Model Context Protocol, so a coding agent can ask *"which web search API wins for government
+registry lookups?"* and get back the slice-specific winner — or an honest **TIE band** — with
+Wilson CIs and a citation. That's "one winner is a lie," embodied: the agent supplies the
+constraints, the benchmark supplies the statistically honest answer. No server-side LLM, so
+queries are free.
+
+**🟢 Live now** at `https://benchpublic.vercel.app/mcp` — add it to Claude Code:
+
+```bash
+claude mcp add --transport http primitive-bench https://benchpublic.vercel.app/mcp
+```
+
+Live for **websearch** and **extraction** today — see [`apps/mcp`](apps/mcp) to run it locally or
+deploy your own.
+
 ## How it works
 
 Primitive Bench uses the proven harness shape — **dataset → Task → Adapter → Scorer → result schema**

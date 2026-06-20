@@ -1,0 +1,30 @@
+{
+  "name": "@primitive-bench/mcp",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "MCP server for Primitive Bench — query per-slice, CI-backed infra-primitive leaderboards.",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "gen:types": "json2ts -i types/bench-report.schema.json -o types/bench-report.d.ts --additionalProperties false --bannerComment \"/* GENERATED from bench-report.schema.json by 'bench results schema' + json2ts. Do not edit. */\"",
+    "check:types": "npm run gen:types && git diff --exit-code types/bench-report.d.ts",
+    "test": "tsx --test test/*.test.ts",
+    "smoke": "node test/smoke.mjs",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "mcp-handler": "^1.1.0",
+    "next": "^16.2.9",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@modelcontextprotocol/sdk": "^1.26.0",
+    "@types/node": "^26.0.0",
+    "@types/react": "19.2.17",
+    "json-schema-to-typescript": "^15.0.4",
+    "tsx": "^4.22.4",
+    "typescript": "^6.0.3"
+  }
+}

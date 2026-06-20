@@ -17,9 +17,8 @@ out = adapter.invoke({"query": "who is the CEO of Acme", "k": 10})
 
 API keys are read from the environment — never hardcoded. Each adapter raises
 `VendorUnavailable` if its key is unset, so the harness can skip it cleanly
-rather than scoring a miss it never had a chance at. The wrodium-bench
-`WRODIUM_<VENDOR>_API_KEY` convention is the primary env name, falling back to
-the bare name.
+rather than scoring a miss it never had a chance at. Each key is read from its
+bare `<VENDOR>_API_KEY` environment variable (e.g. `EXA_API_KEY`).
 
 ## Provenance
 
@@ -35,29 +34,29 @@ adapted to the synchronous bench-adapters `Adapter.invoke(item)` contract.
 `invoke(item)` reads `item["query"]` (or `q`) and optional `item["k"]`
 (or `count`, default 10). Returns `returned_urls: list[str]`.
 
-| name | vendor | env var(s) required (first match wins) |
+| name | vendor | env var(s) required |
 |------|--------|-----------------------------------------|
-| `exa` | Exa | `WRODIUM_EXA_API_KEY` / `EXA_API_KEY` |
-| `brave` | Brave Search | `WRODIUM_BRAVE_API_KEY` / `BRAVE_SEARCH_API_KEY` |
-| `tavily` | Tavily | `WRODIUM_TAVILY_API_KEY` / `TAVILY_API_KEY` |
+| `exa` | Exa | `EXA_API_KEY` |
+| `brave` | Brave Search | `BRAVE_SEARCH_API_KEY` |
+| `tavily` | Tavily | `TAVILY_API_KEY` |
 | `google_cse` | Google Custom Search | `GOOGLE_CSE_KEY` **and** `GOOGLE_CSE_ENGINE_ID` |
 | `bing` | Bing Web Search | `BING_SEARCH_KEY` |
-| `serpapi` | SerpAPI | `WRODIUM_SERP_API_KEY` / `SERPAPI_KEY` |
-| `perplexity` | Perplexity | `WRODIUM_PERPLEXITY_API_KEY` / `PERPLEXITY_API_KEY` |
+| `serpapi` | SerpAPI | `SERPAPI_KEY` |
+| `perplexity` | Perplexity | `PERPLEXITY_API_KEY` |
 | `you` | You.com | `YOU_API_KEY` |
 
 ## Registered EXTRACTION adapters (URL -> clean content)
 
 `invoke(item)` reads `item["url"]`. Returns `main_text: str`.
 
-| name | vendor | env var(s) required (first match wins) |
+| name | vendor | env var(s) required |
 |------|--------|-----------------------------------------|
-| `firecrawl` | Firecrawl | `WRODIUM_FIRECRAWL_API_KEY` / `FIRECRAWL_API_KEY` |
-| `jina` | Jina Reader | `WRODIUM_JINA_API_KEY` / `JINA_API_KEY` |
-| `exa_live` | Exa /contents (livecrawl=always) | `WRODIUM_EXA_API_KEY` / `EXA_API_KEY` |
-| `exa_cached` | Exa /contents (livecrawl=never) | `WRODIUM_EXA_API_KEY` / `EXA_API_KEY` |
-| `tavily_extract` | Tavily /extract | `WRODIUM_TAVILY_API_KEY` / `TAVILY_API_KEY` |
-| `apify` | Apify content crawler | `WRODIUM_APIFY_API_KEY` / `APIFY_API_KEY` (optional actor: `WRODIUM_APIFY_ACTOR` / `APIFY_ACTOR`, default `apify/website-content-crawler`) |
+| `firecrawl` | Firecrawl | `FIRECRAWL_API_KEY` |
+| `jina` | Jina Reader | `JINA_API_KEY` |
+| `exa_live` | Exa /contents (livecrawl=always) | `EXA_API_KEY` |
+| `exa_cached` | Exa /contents (livecrawl=never) | `EXA_API_KEY` |
+| `tavily_extract` | Tavily /extract | `TAVILY_API_KEY` |
+| `apify` | Apify content crawler | `APIFY_API_KEY` (optional actor: `APIFY_ACTOR`, default `apify/website-content-crawler`) |
 
 `BrightData` is ported but **not registered** (Web Unlocker zone is
 account-specific and the endpoint 400s without it); kept in the module for

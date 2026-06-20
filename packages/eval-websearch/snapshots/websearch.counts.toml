@@ -1,0 +1,27 @@
+# Curated raw (adapter, successes, n) counts for the websearch primitive.
+#
+# Transcribed from the published public snapshot in
+#   packages/eval-websearch/reports/slices-search.md
+# successes are recovered as round(rate * n) from the published per-slice hit rates.
+# INTERIM: hand-curated from the report; replaced when the pipeline emits SliceResult
+# directly (DECISIONS.md D-13). Owned by eval-websearch (D-03: writes only its files).
+
+primitive = "websearch"
+run_id = "websearch-public-snapshot-v2"
+as_of = "2026-06"
+metric_name = "hit_rate"
+citation = "packages/eval-websearch/reports/slices-search.md"
+
+[slices]
+# exa 76.7% / serpapi 66.7% / brave 48.9% / tavily 40.0%  -> TIE: exa, serpapi
+government_registry = [["exa", 69, 90], ["serpapi", 60, 90], ["brave", 44, 90], ["tavily", 36, 90]]
+# exa 88.0%, everyone else 0%  -> Winner: exa
+company_lookup = [["exa", 22, 25], ["serpapi", 0, 25], ["brave", 0, 25], ["tavily", 0, 25]]
+# exa 100% / serpapi 92% / tavily 92% / brave 72%  -> TIE: exa, serpapi, tavily
+technical_docs = [["exa", 25, 25], ["serpapi", 23, 25], ["tavily", 23, 25], ["brave", 18, 25]]
+# n=1 -> thin, no call
+b2b_tools = [["brave", 1, 1], ["exa", 1, 1], ["serpapi", 1, 1], ["tavily", 1, 1]]
+# n=1 -> thin, no call
+pricing_pages = [["brave", 1, 1], ["serpapi", 1, 1], ["exa", 0, 1], ["tavily", 0, 1]]
+# same cohort as government_registry  -> TIE: exa, serpapi
+citation_needed = [["exa", 69, 90], ["serpapi", 60, 90], ["brave", 44, 90], ["tavily", 36, 90]]
