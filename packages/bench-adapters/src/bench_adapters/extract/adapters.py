@@ -39,11 +39,7 @@ def _need(value: str | None, name: str) -> str:
 
 
 def _env(*names: str) -> str:
-    """First non-empty value among the given env var names.
-
-    Mirrors the source's AliasChoices: the wrodium-bench WRODIUM_<VENDOR>_API_KEY
-    convention is accepted as the primary name, falling back to the bare name.
-    """
+    """First non-empty value among the given env var names (vendor key lookup)."""
     for n in names:
         v = os.environ.get(n)
         if v:
@@ -83,7 +79,7 @@ class Firecrawl(_ExtractAdapter):
     name = "firecrawl"
 
     def extract(self, url: str) -> str:
-        key = _need(_env("WRODIUM_FIRECRAWL_API_KEY", "FIRECRAWL_API_KEY"), self.name)
+        key = _need(_env("FIRECRAWL_API_KEY"), self.name)
         with httpx.Client(timeout=EXTRACT_TIMEOUT, follow_redirects=True,
                           headers={"Authorization": f"Bearer {key}"}) as c:
             r = c.post(
@@ -100,7 +96,7 @@ class Jina(_ExtractAdapter):
     name = "jina"
 
     def extract(self, url: str) -> str:
-        key = _need(_env("WRODIUM_JINA_API_KEY", "JINA_API_KEY"), self.name)
+        key = _need(_env("JINA_API_KEY"), self.name)
         # Jina Reader proxies the URL and returns cleaned markdown in the body.
         with httpx.Client(timeout=EXTRACT_TIMEOUT, follow_redirects=True,
                           headers={"Authorization": f"Bearer {key}"}) as c:
@@ -119,7 +115,7 @@ class _ExaContents(_ExtractAdapter):
     livecrawl = "always"
 
     def extract(self, url: str) -> str:
-        key = _need(_env("WRODIUM_EXA_API_KEY", "EXA_API_KEY"), self.name)
+        key = _need(_env("EXA_API_KEY"), self.name)
         with httpx.Client(timeout=EXTRACT_TIMEOUT, follow_redirects=True,
                           headers={"x-api-key": key}) as c:
             r = c.post(
@@ -151,7 +147,7 @@ class TavilyExtract(_ExtractAdapter):
     name = "tavily_extract"
 
     def extract(self, url: str) -> str:
-        key = _need(_env("WRODIUM_TAVILY_API_KEY", "TAVILY_API_KEY"), self.name)
+        key = _need(_env("TAVILY_API_KEY"), self.name)
         with httpx.Client(timeout=EXTRACT_TIMEOUT, follow_redirects=True) as c:
             r = c.post(
                 "https://api.tavily.com/extract",
@@ -167,8 +163,8 @@ class Apify(_ExtractAdapter):
     name = "apify"
 
     def extract(self, url: str) -> str:
-        key = _need(_env("WRODIUM_APIFY_API_KEY", "APIFY_API_KEY"), self.name)
-        actor = _env("WRODIUM_APIFY_ACTOR", "APIFY_ACTOR") or "apify/website-content-crawler"
+        key = _need(_env("APIFY_API_KEY"), self.name)
+        actor = _env("APIFY_ACTOR") or "apify/website-content-crawler"
         actor_path = actor.replace("/", "~")
         endpoint = (
             f"https://api.apify.com/v2/acts/{actor_path}/run-sync-get-dataset-items"
@@ -191,7 +187,7 @@ class BrightData(_ExtractAdapter):
     name = "brightdata"
 
     def extract(self, url: str) -> str:
-        key = _need(_env("WRODIUM_BRIGHTDATA_API_KEY", "BRIGHTDATA_API_KEY"), self.name)
+        key = _need(_env("BRIGHTDATA_API_KEY"), self.name)
         # Web Unlocker request API. Zone name is account-specific; default "web_unlocker".
         with httpx.Client(timeout=EXTRACT_TIMEOUT, follow_redirects=True,
                           headers={"Authorization": f"Bearer {key}"}) as c:

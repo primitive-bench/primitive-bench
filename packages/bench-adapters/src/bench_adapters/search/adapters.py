@@ -43,11 +43,7 @@ def _need(value: str | None, name: str) -> str:
 
 
 def _env(*names: str) -> str:
-    """First non-empty value among the given env var names.
-
-    Mirrors the source's AliasChoices: the wrodium-bench WRODIUM_<VENDOR>_API_KEY
-    convention is accepted as the primary name, falling back to the bare name.
-    """
+    """First non-empty value among the given env var names (vendor key lookup)."""
     for n in names:
         v = os.environ.get(n)
         if v:
@@ -90,7 +86,7 @@ class Exa(_SearchAdapter):
     name = "exa"
 
     def search(self, query: str, k: int) -> list[str]:
-        key = _need(_env("WRODIUM_EXA_API_KEY", "EXA_API_KEY"), self.name)
+        key = _need(_env("EXA_API_KEY"), self.name)
         with httpx.Client(timeout=SEARCH_TIMEOUT, follow_redirects=True,
                           headers={"x-api-key": key}) as c:
             r = c.post(
@@ -106,7 +102,7 @@ class Brave(_SearchAdapter):
     name = "brave"
 
     def search(self, query: str, k: int) -> list[str]:
-        key = _need(_env("WRODIUM_BRAVE_API_KEY", "BRAVE_SEARCH_API_KEY"), self.name)
+        key = _need(_env("BRAVE_SEARCH_API_KEY"), self.name)
         with httpx.Client(timeout=SEARCH_TIMEOUT, follow_redirects=True,
                           headers={"X-Subscription-Token": key,
                                    "Accept": "application/json"}) as c:
@@ -124,7 +120,7 @@ class Tavily(_SearchAdapter):
     name = "tavily"
 
     def search(self, query: str, k: int) -> list[str]:
-        key = _need(_env("WRODIUM_TAVILY_API_KEY", "TAVILY_API_KEY"), self.name)
+        key = _need(_env("TAVILY_API_KEY"), self.name)
         with httpx.Client(timeout=SEARCH_TIMEOUT, follow_redirects=True) as c:
             r = c.post(
                 "https://api.tavily.com/search",
@@ -172,7 +168,7 @@ class SerpAPI(_SearchAdapter):
     name = "serpapi"
 
     def search(self, query: str, k: int) -> list[str]:
-        key = _need(_env("WRODIUM_SERP_API_KEY", "SERPAPI_KEY"), self.name)
+        key = _need(_env("SERPAPI_KEY"), self.name)
         with httpx.Client(timeout=SEARCH_TIMEOUT, follow_redirects=True) as c:
             r = c.get(
                 "https://serpapi.com/search",
@@ -187,7 +183,7 @@ class Perplexity(_SearchAdapter):
     name = "perplexity"
 
     def search(self, query: str, k: int) -> list[str]:
-        key = _need(_env("WRODIUM_PERPLEXITY_API_KEY", "PERPLEXITY_API_KEY"), self.name)
+        key = _need(_env("PERPLEXITY_API_KEY"), self.name)
         with httpx.Client(timeout=SEARCH_TIMEOUT, follow_redirects=True,
                           headers={"Authorization": f"Bearer {key}"}) as c:
             r = c.post(
