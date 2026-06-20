@@ -23,7 +23,7 @@ slices:
   - key: doc_type:multi_column
     description: Multi-column layouts. Reading-order failures show up as order misses.
   - key: doc_type:math
-    description: Math-heavy pages (formula tests). Deferred until the math evaluator lands.
+    description: Math-heavy pages (formula tests). Equation presence via exact-match.
 
   # --- test type (the olmOCR-bench rule kind) ---
   - key: test_type:present
@@ -34,3 +34,11 @@ slices:
     description: Natural reading order — fragment A must precede fragment B.
   - key: test_type:baseline
     description: Page sanity — non-blank, no degenerate repetition.
+  - key: test_type:table
+    description: A cell value appears with the correct neighbours / headings.
+  - key: test_type:format
+    description: Text is rendered with the expected heading/bold/italic formatting.
+  - key: test_type:footnote
+    description: A footnote marker (and its referenced text) is present.
+  - key: test_type:math
+    description: A target equation is present (exact-match; rendered-equality fallback omitted).

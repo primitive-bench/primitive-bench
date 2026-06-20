@@ -92,9 +92,64 @@ def test_baseline_repetition_loop():
 
 
 # --- deferred / unknown --------------------------------------------------
-def test_deferred_type_is_uncharged():
-    out = score_test({"type": "math", "math": "x^2"}, PAGE)
-    assert out.correct is None and out.miss_reason == "deferred_test_type"
+# --- table -------------------------------------------------------------------
+TABLE_MD = "| Region | Sales |\n| --- | --- |\n| North | 100 |\n| South | 200 |"
+TABLE_HTML = "<table><tr><th>Region</th><th>Sales</th></tr><tr><td>North</td><td>100</td></tr></table>"
+
+
+def test_table_cell_with_neighbor_and_heading():
+    out = score_test({"type": "table", "cell": "100", "left": "North", "top_heading": "Sales"},
+                     TABLE_MD)
+    assert out.correct is True
+
+
+def test_table_wrong_neighbor_fails():
+    out = score_test({"type": "table", "cell": "100", "left": "South"}, TABLE_MD)
+    assert out.correct is False and out.miss_reason == "table_mismatch"
+
+
+def test_table_html_parsed():
+    assert score_test({"type": "table", "cell": "North", "right": "100"}, TABLE_HTML).correct is True
+
+
+# --- format ------------------------------------------------------------------
+def test_format_bold_hit():
+    assert score_test({"type": "format", "format": "bold", "text": "Important"},
+                      "Some **Important** note").correct is True
+
+
+def test_format_heading_miss_when_plain():
+    out = score_test({"type": "format", "format": "heading", "text": "Introduction"},
+                     "Introduction without a heading marker")
+    assert out.correct is False and out.miss_reason == "format_absent"
+
+
+# --- footnote ----------------------------------------------------------------
+def test_footnote_marker_with_context():
+    text = "See the prior work[^3] for details.\n\n[^3]: Smith et al. 2020"
+    assert score_test({"type": "footnote", "marker": "3", "appears_after_marker": "Smith"},
+                      text).correct is True
+
+
+def test_footnote_absent():
+    out = score_test({"type": "footnote", "marker": "9"}, "no footnotes here")
+    assert out.correct is False and out.miss_reason == "footnote_absent"
+
+
+# --- math (exact-match) ------------------------------------------------------
+def test_math_exact_match_hit():
+    assert score_test({"type": "math", "math": "E = mc^2"},
+                      r"the equation \(E = mc^2\) is famous").correct is True
+
+
+def test_math_mismatch():
+    out = score_test({"type": "math", "math": "E = mc^2"}, r"unrelated \(a + b\) here")
+    assert out.correct is False and out.miss_reason == "math_mismatch"
+
+
+def test_math_absent():
+    out = score_test({"type": "math", "math": "x^2"}, "no equations at all")
+    assert out.correct is False and out.miss_reason == "math_absent"
 
 
 def test_unknown_type_is_uncharged():

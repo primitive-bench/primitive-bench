@@ -1,16 +1,20 @@
 """Concrete OCR vendor adapters (page image -> transcription text).
 
 `invoke(item)` reads `item['image']` (an absolute path to a page image) and
-returns the bench-adapters result dict: at least `raw_output`/`text`,
-`latency_ms`, `cost_usd`, and `mode` (prompted_vlm | native_ocr).
+returns the bench-adapters result dict: `raw_output`/`text`, `latency_ms`,
+`cost_usd`, and `mode` (`prompted_vlm` | `native_ocr`); or `{"non_attempt": ...}`
+for an uncharged refusal/truncation. API keys are read from the environment via
+`_env` (never hardcoded); a vendor whose key/binary is unset raises
+`VendorUnavailable` so the harness skips it cleanly.
 
-Keys are read straight from the environment (never hardcoded) via `_env`, with
-the repo's `WRODIUM_<VENDOR>_API_KEY` primary name and the bare name as a
-fallback. A vendor whose key/binary is unset raises `VendorUnavailable`.
+Two shapes:
+  * prompted VLMs (claude/gpt/gemini) subclass `_VisionOCRAdapter` — they share
+    image encoding, the truncation-retry loop, refusal mapping, cost, and result
+    assembly, implementing only `_transcribe(...)` per vendor;
+  * native OCR engines (tesseract/mistral/deepseek) are small standalone invokes.
 
-Heavy SDKs (pytesseract, anthropic, …) are imported lazily inside `invoke` so
-importing this module never hard-fails when an optional engine is absent — the
-keyless `tesseract` lane and the test suite import cleanly regardless.
+Heavy SDKs (pytesseract, anthropic) are imported lazily inside `invoke`/`_transcribe`
+so importing this module never hard-fails when an optional engine is absent.
 """
 from __future__ import annotations
 
@@ -18,6 +22,7 @@ import base64
 import io
 import os
 import time
+from dataclasses import dataclass
 from typing import Any
 
 import httpx
@@ -26,16 +31,16 @@ from bench_adapters.ocr import pricing
 from bench_adapters.registry import Adapter, register
 
 # The single, version-pinned transcription instruction shared by every PROMPTED
-# vision-LLM adapter. Pinning one prompt across vendors removes prompt phrasing
-# as a confound; it is recorded in the run manifest. Native-OCR engines ignore it.
+# vision-LLM adapter. Pinning one prompt across vendors removes prompt phrasing as
+# a confound; it is recorded in the run manifest. Native-OCR engines ignore it.
 OCR_PROMPT = (
     "Transcribe all text in this image exactly as it appears, preserving reading "
     "order and line breaks. Output only the transcription — no commentary, no "
     "preamble, and no markdown code fences."
 )
 
-# Downscale long edge before sending to a hosted model (Sonnet 4.6 caps ~1568px).
-DEFAULT_MAX_EDGE = 1568
+DEFAULT_MAX_EDGE = 1568  # downscale long edge before sending (Sonnet 4.6 caps ~1568px)
+_MAX_TOKEN_TRIES = (8192, 16384)  # truncation guard: retry larger once, then non_attempt
 
 
 class VendorUnavailable(Exception):
@@ -45,9 +50,9 @@ class VendorUnavailable(Exception):
 class RateLimited(Exception):
     """Transient failure (429 / 5xx / timeout) that persisted past retries.
 
-    The runner must NOT checkpoint a page that raised this — it stays *undone* so
-    a later resume retries it (rather than being permanently skipped). Distinct
-    from a terminal miss (refused / truncated / empty), which IS recorded.
+    The runner must NOT checkpoint a page that raised this — it stays *undone* so a
+    later resume retries it, rather than being permanently skipped. Distinct from a
+    terminal miss (refused / truncated / empty), which IS recorded.
     """
 
 
@@ -80,55 +85,6 @@ def _load_image(path: str, *, max_edge: int | None = None):
         if scale < 1.0:
             img = img.resize((max(1, int(w * scale)), max(1, int(h * scale))))
     return img
-
-
-def _tesseract_version() -> str:
-    try:
-        import pytesseract
-        return f"tesseract-{pytesseract.get_tesseract_version()}"
-    except Exception:
-        return "tesseract"
-
-
-@register("tesseract")
-class TesseractAdapter(Adapter):
-    """Local Tesseract — the deterministic, free regression sentinel (no API key).
-
-    Expected to be stable and to LOSE most slices; a drift in its anchor-set
-    pass-rate (CUSUM) flags harness drift vs vendor drift. Requires the system
-    `tesseract` binary (`brew install tesseract`) + `pytesseract`.
-    """
-
-    vendor = "tesseract"
-    model_version = _tesseract_version()
-    is_sentinel = True
-    mode = "native_ocr"
-
-    def invoke(self, item: dict[str, Any]) -> dict[str, Any]:
-        try:
-            import pytesseract
-        except Exception as exc:
-            raise VendorUnavailable(f"pytesseract unavailable: {exc}") from exc
-        img = _load_image(str(item.get("image", "")))  # full res for tesseract
-        t0 = time.monotonic()
-        try:
-            text = pytesseract.image_to_string(img)
-        except pytesseract.TesseractNotFoundError as exc:
-            raise VendorUnavailable(f"tesseract binary not found: {exc}") from exc
-        latency_ms = (time.monotonic() - t0) * 1000.0
-        return {
-            "raw_output": text,
-            "text": text,
-            "latency_ms": latency_ms,
-            "cost_usd": 0.0,
-            "mode": self.mode,
-        }
-
-
-# --- hosted vision / OCR adapters ----------------------------------------
-# Model ids are env-overridable so model drift never needs a code change; the
-# resolved id is recorded in the run manifest (AdapterSpec.version).
-_MAX_TOKEN_TRIES = (8192, 16384)  # truncation guard: retry larger once, then non_attempt
 
 
 def _image_b64(path: str, *, max_edge: int = DEFAULT_MAX_EDGE) -> tuple[str, str]:
@@ -174,117 +130,170 @@ def _ok(text: str, latency_ms: float, cost: float, mode: str) -> dict[str, Any]:
             "cost_usd": cost, "mode": mode}
 
 
+def _tesseract_version() -> str:
+    try:
+        import pytesseract
+        return f"tesseract-{pytesseract.get_tesseract_version()}"
+    except Exception:
+        return "tesseract"
+
+
+@register("tesseract")
+class TesseractAdapter(Adapter):
+    """Local Tesseract — the deterministic, free regression sentinel (no API key).
+
+    Expected to be stable and to LOSE most slices; a drift in its anchor-set
+    pass-rate (CUSUM) flags harness drift vs vendor drift. Requires the system
+    `tesseract` binary (`brew install tesseract`) + `pytesseract`.
+    """
+
+    vendor = "tesseract"
+    model_version = _tesseract_version()
+    is_sentinel = True
+    mode = "native_ocr"
+
+    def invoke(self, item: dict[str, Any]) -> dict[str, Any]:
+        try:
+            import pytesseract
+        except Exception as exc:
+            raise VendorUnavailable(f"pytesseract unavailable: {exc}") from exc
+        img = _load_image(str(item.get("image", "")))  # full res for tesseract
+        t0 = time.monotonic()
+        try:
+            text = pytesseract.image_to_string(img)
+        except pytesseract.TesseractNotFoundError as exc:
+            raise VendorUnavailable(f"tesseract binary not found: {exc}") from exc
+        return _ok(text, (time.monotonic() - t0) * 1000.0, 0.0, self.mode)
+
+
+# --- prompted vision-LLM adapters ----------------------------------------------
+# Model ids are env-overridable so model drift never needs a code change; the
+# resolved id is recorded in the run manifest (AdapterSpec.version).
+@dataclass
+class _VLM:
+    """One vision-LLM transcription attempt."""
+
+    text: str
+    in_tok: int
+    out_tok: int
+    truncated: bool = False
+    refused: bool = False
+
+
+class _VisionOCRAdapter(Adapter):
+    """Base for prompted vision-LLM OCR adapters.
+
+    Subclasses set `vendor`, `model_version`, `env_names`, and implement
+    `_transcribe(key, b64, mime, max_tokens) -> _VLM` (raising `RateLimited` on
+    transient errors). This base owns the shared flow: validate key, encode image,
+    run the truncation-retry loop, map refusals, price, and assemble the result.
+    """
+
+    is_sentinel = False
+    mode = "prompted_vlm"
+    env_names: tuple[str, ...] = ()
+
+    def _transcribe(self, key: str, b64: str, mime: str, max_tokens: int) -> _VLM:
+        raise NotImplementedError
+
+    def invoke(self, item: dict[str, Any]) -> dict[str, Any]:
+        key = _need(_env(*self.env_names), self.spec.name)
+        b64, mime = _image_b64(str(item.get("image", "")))
+        for max_tok in _MAX_TOKEN_TRIES:
+            t0 = time.monotonic()
+            r = self._transcribe(key, b64, mime, max_tok)
+            latency = (time.monotonic() - t0) * 1000.0
+            if r.refused:
+                return {"non_attempt": "refused", "latency_ms": latency}
+            if r.truncated:
+                continue  # retry once with a larger cap
+            cost = pricing.token_cost(self.model_version, r.in_tok, r.out_tok)
+            return _ok(r.text, latency, cost, self.mode)
+        return {"non_attempt": "truncated"}
+
+
 @register("claude-sonnet-ocr")
-class ClaudeOCR(Adapter):
-    """Anthropic Claude (vision) via the official `anthropic` SDK — prompted VLM."""
+class ClaudeOCR(_VisionOCRAdapter):
+    """Anthropic Claude (vision) via the official `anthropic` SDK."""
 
     vendor = "anthropic"
     model_version = os.environ.get("CLAUDE_OCR_MODEL", "claude-sonnet-4-6")
-    is_sentinel = False
-    mode = "prompted_vlm"
+    env_names = ("ANTHROPIC_API_KEY",)
 
-    def invoke(self, item: dict[str, Any]) -> dict[str, Any]:
+    def _transcribe(self, key: str, b64: str, mime: str, max_tokens: int) -> _VLM:
         try:
             import anthropic
         except Exception as exc:
             raise VendorUnavailable(f"anthropic SDK unavailable: {exc}") from exc
-        key = _need(_env("WRODIUM_ANTHROPIC_API_KEY", "ANTHROPIC_API_KEY"), "claude-sonnet-ocr")
-        b64, mime = _image_b64(str(item.get("image", "")))
         client = anthropic.Anthropic(api_key=key, max_retries=4)  # SDK backs off on 429/5xx
         transient = (anthropic.RateLimitError, anthropic.APITimeoutError,
                      anthropic.APIConnectionError, anthropic.InternalServerError)
-        content = [
-            {"type": "image", "source": {"type": "base64", "media_type": mime, "data": b64}},
-            {"type": "text", "text": OCR_PROMPT},
-        ]
-        for max_tok in _MAX_TOKEN_TRIES:
-            t0 = time.monotonic()
-            try:
-                resp = client.messages.create(
-                    model=self.model_version, max_tokens=max_tok,
-                    thinking={"type": "disabled"},
-                    messages=[{"role": "user", "content": content}],
-                )
-            except transient as exc:  # leave page undone for resume
-                raise RateLimited(f"anthropic transient: {exc!r}"[:200]) from exc
-            latency = (time.monotonic() - t0) * 1000.0
-            if resp.stop_reason == "refusal":
-                return {"non_attempt": "refused", "latency_ms": latency}
-            text = "".join(b.text for b in resp.content if getattr(b, "type", "") == "text")
-            cost = pricing.token_cost(self.model_version, resp.usage.input_tokens,
-                                      resp.usage.output_tokens)
-            if resp.stop_reason == "max_tokens":
-                continue
-            return _ok(text, latency, cost, self.mode)
-        return {"non_attempt": "truncated"}
+        try:
+            resp = client.messages.create(
+                model=self.model_version, max_tokens=max_tokens,
+                thinking={"type": "disabled"},
+                messages=[{"role": "user", "content": [
+                    {"type": "image", "source": {"type": "base64", "media_type": mime, "data": b64}},
+                    {"type": "text", "text": OCR_PROMPT},
+                ]}],
+            )
+        except transient as exc:  # leave page undone for resume
+            raise RateLimited(f"anthropic transient: {exc!r}"[:200]) from exc
+        text = "".join(b.text for b in resp.content if getattr(b, "type", "") == "text")
+        return _VLM(text, resp.usage.input_tokens, resp.usage.output_tokens,
+                    truncated=resp.stop_reason == "max_tokens",
+                    refused=resp.stop_reason == "refusal")
 
 
 @register("gpt-ocr")
-class GptOCR(Adapter):
-    """OpenAI GPT-4o vision via the chat-completions REST API — prompted VLM."""
+class GptOCR(_VisionOCRAdapter):
+    """OpenAI GPT-4o vision via the chat-completions REST API."""
 
     vendor = "openai"
     model_version = os.environ.get("GPT_OCR_MODEL", "gpt-4o")
-    is_sentinel = False
-    mode = "prompted_vlm"
+    env_names = ("OPENAI_API_KEY",)
 
-    def invoke(self, item: dict[str, Any]) -> dict[str, Any]:
-        key = _need(_env("WRODIUM_OPENAI_API_KEY", "OPENAI_API_KEY"), "gpt-ocr")
-        b64, mime = _image_b64(str(item.get("image", "")))
-        url = "https://api.openai.com/v1/chat/completions"
-        content = [
-            {"type": "text", "text": OCR_PROMPT},
-            {"type": "image_url", "image_url": {"url": f"data:{mime};base64,{b64}"}},
-        ]
-        for max_tok in _MAX_TOKEN_TRIES:
-            body = {"model": self.model_version, "max_tokens": max_tok, "temperature": 0,
-                    "messages": [{"role": "user", "content": content}]}
-            t0 = time.monotonic()
-            d = _post(url, body, {"Authorization": f"Bearer {key}"})
-            latency = (time.monotonic() - t0) * 1000.0
-            ch = d["choices"][0]
-            text = ch["message"].get("content") or ""
-            u = d.get("usage", {})
-            cost = pricing.token_cost(self.model_version, u.get("prompt_tokens", 0),
-                                      u.get("completion_tokens", 0))
-            if ch.get("finish_reason") == "length":
-                continue
-            return _ok(text, latency, cost, self.mode)
-        return {"non_attempt": "truncated"}
+    def _transcribe(self, key: str, b64: str, mime: str, max_tokens: int) -> _VLM:
+        body = {"model": self.model_version, "max_tokens": max_tokens, "temperature": 0,
+                "messages": [{"role": "user", "content": [
+                    {"type": "text", "text": OCR_PROMPT},
+                    {"type": "image_url", "image_url": {"url": f"data:{mime};base64,{b64}"}},
+                ]}]}
+        d = _post("https://api.openai.com/v1/chat/completions", body,
+                  {"Authorization": f"Bearer {key}"})
+        ch = d["choices"][0]
+        u = d.get("usage", {})
+        return _VLM(ch["message"].get("content") or "",
+                    u.get("prompt_tokens", 0), u.get("completion_tokens", 0),
+                    truncated=ch.get("finish_reason") == "length")
 
 
 @register("gemini-ocr")
-class GeminiOCR(Adapter):
-    """Google Gemini vision via the generateContent REST API — prompted VLM."""
+class GeminiOCR(_VisionOCRAdapter):
+    """Google Gemini vision via the generateContent REST API."""
 
     vendor = "google"
     model_version = os.environ.get("GEMINI_OCR_MODEL", "gemini-2.5-pro")
-    is_sentinel = False
-    mode = "prompted_vlm"
+    env_names = ("GEMINI_API_KEY", "GOOGLE_API_KEY")
 
-    def invoke(self, item: dict[str, Any]) -> dict[str, Any]:
-        key = _need(_env("WRODIUM_GEMINI_API_KEY", "GEMINI_API_KEY", "GOOGLE_API_KEY"), "gemini-ocr")
-        b64, mime = _image_b64(str(item.get("image", "")))
+    def _transcribe(self, key: str, b64: str, mime: str, max_tokens: int) -> _VLM:
         url = (f"https://generativelanguage.googleapis.com/v1beta/models/"
                f"{self.model_version}:generateContent")
-        parts = [{"text": OCR_PROMPT}, {"inline_data": {"mime_type": mime, "data": b64}}]
-        for max_tok in _MAX_TOKEN_TRIES:
-            body = {"contents": [{"parts": parts}],
-                    "generationConfig": {"maxOutputTokens": max_tok, "temperature": 0}}
-            t0 = time.monotonic()
-            d = _post(url, body, {"x-goog-api-key": key})
-            latency = (time.monotonic() - t0) * 1000.0
-            cand = (d.get("candidates") or [{}])[0]
-            text = "".join(p.get("text", "") for p in cand.get("content", {}).get("parts", []))
-            um = d.get("usageMetadata", {})
-            cost = pricing.token_cost(self.model_version, um.get("promptTokenCount", 0),
-                                      um.get("candidatesTokenCount", 0))
-            if cand.get("finishReason") == "MAX_TOKENS":
-                continue
-            return _ok(text, latency, cost, self.mode)
-        return {"non_attempt": "truncated"}
+        body = {"contents": [{"parts": [
+                    {"text": OCR_PROMPT},
+                    {"inline_data": {"mime_type": mime, "data": b64}}]}],
+                "generationConfig": {"maxOutputTokens": max_tokens, "temperature": 0}}
+        d = _post(url, body, {"x-goog-api-key": key})
+        cand = (d.get("candidates") or [{}])[0]
+        text = "".join(p.get("text", "") for p in cand.get("content", {}).get("parts", []))
+        um = d.get("usageMetadata", {})
+        finish = cand.get("finishReason")
+        return _VLM(text, um.get("promptTokenCount", 0), um.get("candidatesTokenCount", 0),
+                    truncated=finish == "MAX_TOKENS",
+                    refused=finish in ("SAFETY", "PROHIBITED_CONTENT", "BLOCKLIST"))
 
 
+# --- native dedicated-OCR adapters ---------------------------------------------
 @register("mistral-ocr")
 class MistralOCR(Adapter):
     """Mistral dedicated OCR API (document -> markdown) — native OCR, no prompt."""
@@ -295,17 +304,16 @@ class MistralOCR(Adapter):
     mode = "native_ocr"
 
     def invoke(self, item: dict[str, Any]) -> dict[str, Any]:
-        key = _need(_env("WRODIUM_MISTRAL_API_KEY", "MISTRAL_API_KEY"), "mistral-ocr")
+        key = _need(_env("MISTRAL_API_KEY"), "mistral-ocr")
         b64, mime = _image_b64(str(item.get("image", "")))
         body = {"model": self.model_version,
                 "document": {"type": "image_url", "image_url": f"data:{mime};base64,{b64}"}}
         t0 = time.monotonic()
         d = _post("https://api.mistral.ai/v1/ocr", body, {"Authorization": f"Bearer {key}"})
-        latency = (time.monotonic() - t0) * 1000.0
         pages = d.get("pages", [])
         text = "\n\n".join(p.get("markdown", "") for p in pages)
         cost = pricing.page_cost(self.model_version, max(1, len(pages)))
-        return _ok(text, latency, cost, self.mode)
+        return _ok(text, (time.monotonic() - t0) * 1000.0, cost, self.mode)
 
 
 @register("deepseek-ocr")
@@ -328,17 +336,15 @@ class DeepSeekOCR(Adapter):
                 "deepseek-ocr is self-host only; set DEEPSEEK_OCR_BASE_URL to a vLLM/Ollama "
                 "OpenAI-compatible endpoint"
             )
-        key = _env("WRODIUM_DEEPSEEK_API_KEY", "DEEPSEEK_API_KEY") or "EMPTY"
+        key = _env("DEEPSEEK_API_KEY") or "EMPTY"
         b64, mime = _image_b64(str(item.get("image", "")))
-        url = base.rstrip("/") + "/chat/completions"
-        content = [
-            {"type": "text", "text": OCR_PROMPT},
-            {"type": "image_url", "image_url": {"url": f"data:{mime};base64,{b64}"}},
-        ]
         body = {"model": self.model_version, "temperature": 0,
-                "messages": [{"role": "user", "content": content}]}
+                "messages": [{"role": "user", "content": [
+                    {"type": "text", "text": OCR_PROMPT},
+                    {"type": "image_url", "image_url": {"url": f"data:{mime};base64,{b64}"}},
+                ]}]}
         t0 = time.monotonic()
-        d = _post(url, body, {"Authorization": f"Bearer {key}"}, timeout=180.0)
-        latency = (time.monotonic() - t0) * 1000.0
+        d = _post(base.rstrip("/") + "/chat/completions", body,
+                  {"Authorization": f"Bearer {key}"}, timeout=180.0)
         text = d["choices"][0]["message"].get("content") or ""
-        return _ok(text, latency, 0.0, self.mode)
+        return _ok(text, (time.monotonic() - t0) * 1000.0, 0.0, self.mode)

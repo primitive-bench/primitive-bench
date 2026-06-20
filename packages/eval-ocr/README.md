@@ -4,10 +4,9 @@ Primitive Bench vertical for **OCR**: hand a vendor a document-page image, get b
 the transcription, and score it by **pass@test** against the
 [olmOCR-bench](https://huggingface.co/datasets/allenai/olmOCR-bench) unit tests.
 
-> Status: **live**. Six adapters (tesseract + five hosted), the full pass@test
-> scorer/runner/report, and a self-owned example dev set. The `table`/`format`/
-> `footnote`/`math` test evaluators are a deferred second pass (scored as uncharged
-> non-attempts until they land).
+> Status: **live**. Six adapters (tesseract + five hosted); the full pass@test
+> scorer (all olmOCR-bench test types — present/absent, order, baseline, table,
+> format, footnote, math), a resumable runner, and a self-owned example dev set.
 
 ## Why pass@test, not a single CER number
 
@@ -19,10 +18,14 @@ with Wilson CIs, and a winner is named only when it is Wilson-clear **and**
 McNemar-separable from the runner-up — otherwise a TIE band. (A continuous CER/WER
 lane can be added later for sources that ship a full reference transcription.)
 
-Pass rules are ported from `allenai/olmocr` (`olmocr/bench/tests.py`, Apache-2.0)
-using the same libraries the benchmark uses — `rapidfuzz.partial_ratio` for
-presence (threshold `1 - max_diffs/len`) and `fuzzysearch` for reading order — so
-our numbers stay comparable to the published olmOCR-bench leaderboard.
+Pass rules for all eight test types — present/absent, order, baseline, table,
+format, footnote, math — are ported from `allenai/olmocr` (`olmocr/bench/tests.py`,
+Apache-2.0) using the same libraries (`rapidfuzz`, `fuzzysearch`), so our numbers
+stay comparable to the published leaderboard. One deliberate deviation for an
+elegant pure-Python package: olmOCR-bench's `math` test renders LaTeX via KaTeX
+(JS) and compares images; we implement the exact-match pass and omit the
+rendered-equality fallback, so math passes are a strict subset (documented in
+`scoring.py`).
 
 ## The methodology highlight: the OCR miss taxonomy
 
@@ -57,8 +60,9 @@ Keys + model overrides: see `packages/bench-adapters/README.md`.
 ## Slices
 
 `doc_type:*` (arxiv / old_scan / table / multi_column / math) × `test_type:*`
-(present / absent / order / baseline), assigned deterministically — see
-`slices.yaml`. **Coverage caveat:** olmOCR-bench is English arXiv + scans + tables,
+(present / absent / order / baseline / table / format / footnote / math), assigned
+deterministically — see `slices.yaml`. **Coverage caveat:** olmOCR-bench is English
+arXiv + scans + tables,
 so the README-era `handwritten` / `non_latin` slices aren't populated by this
 corpus; fill them later from another permissively-licensed source.
 
@@ -70,26 +74,23 @@ corpus; fill them later from another permissively-licensed source.
 - `runner.py` — page-grouped OCR (one call per adapter/page), truncation/refusal
   guard, reps majority vote, `RunManifest` + `RunDir` (D-13/D-14).
 - `report.py` — per-slice pass@test board, Wilson/McNemar separability, `SliceResult`.
+- `__main__.py` — the `python -m eval_ocr` / `eval-ocr` CLI over `run_sync`.
 - `tools/` — `make_example_devset.py` (self-owned example) and
-  `ingest_olmocr_bench.py` (full split, generated locally).
+  `ingest_olmocr_bench.py` (full split, generated locally, `--per-file` for balanced subsets).
 
 ## Run it
 
 ```bash
 # keyless (local tesseract only) — proves the loop, no API spend:
-uv run python - <<'PY'
-import bench_core.config  # loads .env
-from eval_ocr.loader import load_rows
-from eval_ocr.runner import run_sync
-rows = load_rows("golden-sets-public/ocr/dev.example.jsonl")
-run_sync(rows, "demo", vendors=["tesseract"])
-PY
+uv run python -m eval_ocr golden-sets-public/ocr/dev.example.jsonl --vendors tesseract
 
-# full six-adapter run on the real corpus (needs keys in .env; costs API budget):
-uv run python packages/eval-ocr/tools/ingest_olmocr_bench.py --limit 150
-# then run_sync(load_rows("golden-sets-public/ocr/dev.jsonl"), "run1")  # all vendors
+# build the real corpus locally (downloads olmOCR-bench; not redistributed), then
+# run all six adapters with a spend cap (needs keys in .env):
+uv run python packages/eval-ocr/tools/ingest_olmocr_bench.py --per-file 25
+uv run python -m eval_ocr golden-sets-public/ocr/dev.jsonl --run-id run1 --max-cost 40
 ```
 
+Re-running with the same `--run-id` resumes (finished work skipped, never re-paid).
 Outputs land in `runs/<run_id>/{manifest.json, items.jsonl, slices.jsonl}`.
 
 ## Provenance

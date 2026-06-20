@@ -79,9 +79,7 @@ def _slices_for(row: dict[str, Any]) -> list[str]:
     ttype = row.get("type")
     if ttype:
         out.append(f"test_type:{ttype}")
-    # de-dupe, preserve order
-    seen: set[str] = set()
-    return [s for s in out if not (s in seen or seen.add(s))]
+    return list(dict.fromkeys(out))  # de-dupe, preserve order
 
 
 def load_slices() -> list[dict[str, Any]]:

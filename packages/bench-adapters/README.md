@@ -74,10 +74,10 @@ needs a code change; the resolved ID is recorded in the run manifest.
 | name | vendor | key / requirement (first match wins) | model env override (default) |
 |------|--------|--------------------------------------|------------------------------|
 | `tesseract` | Tesseract (local, sentinel) | system `tesseract` binary (`brew install tesseract`) | — |
-| `claude-sonnet-ocr` | Anthropic (SDK) | `WRODIUM_ANTHROPIC_API_KEY` / `ANTHROPIC_API_KEY` | `CLAUDE_OCR_MODEL` (`claude-sonnet-4-6`) |
-| `gpt-ocr` | OpenAI | `WRODIUM_OPENAI_API_KEY` / `OPENAI_API_KEY` | `GPT_OCR_MODEL` (`gpt-4o`) |
-| `gemini-ocr` | Google | `WRODIUM_GEMINI_API_KEY` / `GEMINI_API_KEY` / `GOOGLE_API_KEY` | `GEMINI_OCR_MODEL` (`gemini-2.5-pro`) |
-| `mistral-ocr` | Mistral (dedicated OCR API) | `WRODIUM_MISTRAL_API_KEY` / `MISTRAL_API_KEY` | `MISTRAL_OCR_MODEL` (`mistral-ocr-latest`) |
+| `claude-sonnet-ocr` | Anthropic (SDK) | `ANTHROPIC_API_KEY` | `CLAUDE_OCR_MODEL` (`claude-sonnet-4-6`) |
+| `gpt-ocr` | OpenAI | `OPENAI_API_KEY` | `GPT_OCR_MODEL` (`gpt-4o`) |
+| `gemini-ocr` | Google | `GEMINI_API_KEY` / `GOOGLE_API_KEY` | `GEMINI_OCR_MODEL` (`gemini-2.5-pro`) |
+| `mistral-ocr` | Mistral (dedicated OCR API) | `MISTRAL_API_KEY` | `MISTRAL_OCR_MODEL` (`mistral-ocr-latest`) |
 | `deepseek-ocr` | DeepSeek-OCR (self-host) | `DEEPSEEK_OCR_BASE_URL` (vLLM/Ollama OpenAI-compatible endpoint) | `DEEPSEEK_OCR_MODEL` (`deepseek-ocr`) |
 
 DeepSeek-OCR has **no hosted vision API** (as of 2026-06) — it is weights-only, so
