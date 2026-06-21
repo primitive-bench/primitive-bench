@@ -1,0 +1,43 @@
+# Seed sites for the LIVE crawl golden set (build_crawl_goldenset.py -> dev.jsonl).
+#
+# Chosen to be reproducible AND ethical to crawl: two are purpose-built public
+# scraping sandboxes (toscrape.com), the rest are documentation sites that publish
+# a sitemap and welcome crawling. `render` is the seed's known rendering mode — the
+# single most accurate way to label the render slice (the maintainer knows whether
+# a seed serves content statically or via JS). Crawl budgets are kept modest: a
+# benchmark should sample a site, not hammer it.
+#
+# The maintainer extends this list before the live run; every emitted target is
+# re-verified by the liveness gate (its truth_token must appear in the fetched main
+# content) so a seed that changed shape is dropped rather than scored wrong.
+
+[[seed]]
+seed_url   = "https://books.toscrape.com/"
+site_type  = "commerce"
+render     = "static_html"
+max_pages  = 80
+max_depth  = 6
+# Catalogue with deep pagination + per-book pages: exercises the depth slice.
+
+[[seed]]
+seed_url   = "https://quotes.toscrape.com/"
+site_type  = "blog"
+render     = "static_html"
+max_pages  = 60
+max_depth  = 5
+
+[[seed]]
+seed_url   = "https://quotes.toscrape.com/js/"
+site_type  = "blog"
+render     = "js_rendered"
+max_pages  = 60
+max_depth  = 5
+# The JS-rendered twin of quotes.toscrape: links/content appear only after JS runs,
+# so a plain HTTP crawl reaches nothing past the seed — THE live render-slice probe.
+
+[[seed]]
+seed_url   = "https://www.scrapethissite.com/pages/"
+site_type  = "docs"
+render     = "static_html"
+max_pages  = 50
+max_depth  = 5

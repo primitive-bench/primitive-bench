@@ -1,0 +1,1066 @@
+{
+  "primitive": "crawl",
+  "run_id": "crawl-public-snapshot",
+  "as_of": "2026-06",
+  "status": "published",
+  "slices": [
+    {
+      "slice": "all",
+      "metric_name": "page_coverage",
+      "n": 56,
+      "status": "published",
+      "winner": "render-crawl",
+      "band": [
+        "render-crawl"
+      ],
+      "thin": false,
+      "saturated": false,
+      "citation": "packages/eval-crawl/README.md",
+      "results": [
+        {
+          "run_id": "crawl-public-snapshot",
+          "primitive": "crawl",
+          "slice": "all",
+          "adapter": "render-crawl",
+          "n": 56,
+          "point_estimate": 1.0,
+          "metric_name": "page_coverage",
+          "ci": {
+            "method": "wilson",
+            "statistic": 1.0,
+            "p_value": null,
+            "ci_low": 0.9358038555118846,
+            "ci_high": 1.0,
+            "n": 56,
+            "seed": null
+          },
+          "separable": true,
+          "rank": 1
+        },
+        {
+          "run_id": "crawl-public-snapshot",
+          "primitive": "crawl",
+          "slice": "all",
+          "adapter": "sitemap-crawl",
+          "n": 56,
+          "point_estimate": 0.7857142857142857,
+          "metric_name": "page_coverage",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.7857142857142857,
+            "p_value": null,
+            "ci_low": 0.6618028634399505,
+            "ci_high": 0.8729421968525549,
+            "n": 56,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 2
+        },
+        {
+          "run_id": "crawl-public-snapshot",
+          "primitive": "crawl",
+          "slice": "all",
+          "adapter": "bfs-deep",
+          "n": 56,
+          "point_estimate": 0.6428571428571429,
+          "metric_name": "page_coverage",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.6428571428571429,
+            "p_value": null,
+            "ci_low": 0.5119364571733127,
+            "ci_high": 0.7554360729729401,
+            "n": 56,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 3
+        },
+        {
+          "run_id": "crawl-public-snapshot",
+          "primitive": "crawl",
+          "slice": "all",
+          "adapter": "bfs-shallow",
+          "n": 56,
+          "point_estimate": 0.2857142857142857,
+          "metric_name": "page_coverage",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.2857142857142857,
+            "p_value": null,
+            "ci_low": 0.18418621391703333,
+            "ci_high": 0.4147549908635875,
+            "n": 56,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 4
+        }
+      ]
+    },
+    {
+      "slice": "depth:deep",
+      "metric_name": "page_coverage",
+      "n": 12,
+      "status": "published",
+      "winner": null,
+      "band": [
+        "bfs-deep",
+        "render-crawl",
+        "sitemap-crawl"
+      ],
+      "thin": false,
+      "saturated": false,
+      "citation": "packages/eval-crawl/README.md",
+      "results": [
+        {
+          "run_id": "crawl-public-snapshot",
+          "primitive": "crawl",
+          "slice": "depth:deep",
+          "adapter": "bfs-deep",
+          "n": 12,
+          "point_estimate": 1.0,
+          "metric_name": "page_coverage",
+          "ci": {
+            "method": "wilson",
+            "statistic": 1.0,
+            "p_value": null,
+            "ci_low": 0.7574992425007574,
+            "ci_high": 1.0,
+            "n": 12,
+            "seed": null
+          },
+          "separable": false,
+          "rank": 1
+        },
+        {
+          "run_id": "crawl-public-snapshot",
+          "primitive": "crawl",
+          "slice": "depth:deep",
+          "adapter": "render-crawl",
+          "n": 12,
+          "point_estimate": 1.0,
+          "metric_name": "page_coverage",
+          "ci": {
+            "method": "wilson",
+            "statistic": 1.0,
+            "p_value": null,
+            "ci_low": 0.7574992425007574,
+            "ci_high": 1.0,
+            "n": 12,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 2
+        },
+        {
+          "run_id": "crawl-public-snapshot",
+          "primitive": "crawl",
+          "slice": "depth:deep",
+          "adapter": "sitemap-crawl",
+          "n": 12,
+          "point_estimate": 1.0,
+          "metric_name": "page_coverage",
+          "ci": {
+            "method": "wilson",
+            "statistic": 1.0,
+            "p_value": null,
+            "ci_low": 0.7574992425007574,
+            "ci_high": 1.0,
+            "n": 12,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 3
+        },
+        {
+          "run_id": "crawl-public-snapshot",
+          "primitive": "crawl",
+          "slice": "depth:deep",
+          "adapter": "bfs-shallow",
+          "n": 12,
+          "point_estimate": 0.0,
+          "metric_name": "page_coverage",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.0,
+            "p_value": null,
+            "ci_low": 0.0,
+            "ci_high": 0.2425007574992425,
+            "n": 12,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 4
+        }
+      ]
+    },
+    {
+      "slice": "depth:shallow",
+      "metric_name": "page_coverage",
+      "n": 44,
+      "status": "published",
+      "winner": "render-crawl",
+      "band": [
+        "render-crawl"
+      ],
+      "thin": false,
+      "saturated": false,
+      "citation": "packages/eval-crawl/README.md",
+      "results": [
+        {
+          "run_id": "crawl-public-snapshot",
+          "primitive": "crawl",
+          "slice": "depth:shallow",
+          "adapter": "render-crawl",
+          "n": 44,
+          "point_estimate": 1.0,
+          "metric_name": "page_coverage",
+          "ci": {
+            "method": "wilson",
+            "statistic": 1.0,
+            "p_value": null,
+            "ci_low": 0.9197016822179859,
+            "ci_high": 0.9999999999999999,
+            "n": 44,
+            "seed": null
+          },
+          "separable": true,
+          "rank": 1
+        },
+        {
+          "run_id": "crawl-public-snapshot",
+          "primitive": "crawl",
+          "slice": "depth:shallow",
+          "adapter": "sitemap-crawl",
+          "n": 44,
+          "point_estimate": 0.7272727272727273,
+          "metric_name": "page_coverage",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.7272727272727273,
+            "p_value": null,
+            "ci_low": 0.581508453144907,
+            "ci_high": 0.8365377660450867,
+            "n": 44,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 2
+        },
+        {
+          "run_id": "crawl-public-snapshot",
+          "primitive": "crawl",
+          "slice": "depth:shallow",
+          "adapter": "bfs-deep",
+          "n": 44,
+          "point_estimate": 0.5454545454545454,
+          "metric_name": "page_coverage",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.5454545454545454,
+            "p_value": null,
+            "ci_low": 0.40065932170653484,
+            "ci_high": 0.6829499221314639,
+            "n": 44,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 3
+        },
+        {
+          "run_id": "crawl-public-snapshot",
+          "primitive": "crawl",
+          "slice": "depth:shallow",
+          "adapter": "bfs-shallow",
+          "n": 44,
+          "point_estimate": 0.36363636363636365,
+          "metric_name": "page_coverage",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.36363636363636365,
+            "p_value": null,
+            "ci_low": 0.23783334127491423,
+            "ci_high": 0.5113389272110895,
+            "n": 44,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 4
+        }
+      ]
+    },
+    {
+      "slice": "freshness:stable",
+      "metric_name": "page_coverage",
+      "n": 44,
+      "status": "published",
+      "winner": "render-crawl",
+      "band": [
+        "render-crawl"
+      ],
+      "thin": false,
+      "saturated": false,
+      "citation": "packages/eval-crawl/README.md",
+      "results": [
+        {
+          "run_id": "crawl-public-snapshot",
+          "primitive": "crawl",
+          "slice": "freshness:stable",
+          "adapter": "render-crawl",
+          "n": 44,
+          "point_estimate": 1.0,
+          "metric_name": "page_coverage",
+          "ci": {
+            "method": "wilson",
+            "statistic": 1.0,
+            "p_value": null,
+            "ci_low": 0.9197016822179859,
+            "ci_high": 0.9999999999999999,
+            "n": 44,
+            "seed": null
+          },
+          "separable": true,
+          "rank": 1
+        },
+        {
+          "run_id": "crawl-public-snapshot",
+          "primitive": "crawl",
+          "slice": "freshness:stable",
+          "adapter": "sitemap-crawl",
+          "n": 44,
+          "point_estimate": 0.7272727272727273,
+          "metric_name": "page_coverage",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.7272727272727273,
+            "p_value": null,
+            "ci_low": 0.581508453144907,
+            "ci_high": 0.8365377660450867,
+            "n": 44,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 2
+        },
+        {
+          "run_id": "crawl-public-snapshot",
+          "primitive": "crawl",
+          "slice": "freshness:stable",
+          "adapter": "bfs-deep",
+          "n": 44,
+          "point_estimate": 0.6363636363636364,
+          "metric_name": "page_coverage",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.6363636363636364,
+            "p_value": null,
+            "ci_low": 0.48866107278891047,
+            "ci_high": 0.7621666587250857,
+            "n": 44,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 3
+        },
+        {
+          "run_id": "crawl-public-snapshot",
+          "primitive": "crawl",
+          "slice": "freshness:stable",
+          "adapter": "bfs-shallow",
+          "n": 44,
+          "point_estimate": 0.2727272727272727,
+          "metric_name": "page_coverage",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.2727272727272727,
+            "p_value": null,
+            "ci_low": 0.16346223395491324,
+            "ci_high": 0.41849154685509304,
+            "n": 44,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 4
+        }
+      ]
+    },
+    {
+      "slice": "freshness:time_varying",
+      "metric_name": "page_coverage",
+      "n": 12,
+      "status": "published",
+      "winner": null,
+      "band": [
+        "render-crawl",
+        "sitemap-crawl",
+        "bfs-deep"
+      ],
+      "thin": false,
+      "saturated": false,
+      "citation": "packages/eval-crawl/README.md",
+      "results": [
+        {
+          "run_id": "crawl-public-snapshot",
+          "primitive": "crawl",
+          "slice": "freshness:time_varying",
+          "adapter": "render-crawl",
+          "n": 12,
+          "point_estimate": 1.0,
+          "metric_name": "page_coverage",
+          "ci": {
+            "method": "wilson",
+            "statistic": 1.0,
+            "p_value": null,
+            "ci_low": 0.7574992425007574,
+            "ci_high": 1.0,
+            "n": 12,
+            "seed": null
+          },
+          "separable": false,
+          "rank": 1
+        },
+        {
+          "run_id": "crawl-public-snapshot",
+          "primitive": "crawl",
+          "slice": "freshness:time_varying",
+          "adapter": "sitemap-crawl",
+          "n": 12,
+          "point_estimate": 1.0,
+          "metric_name": "page_coverage",
+          "ci": {
+            "method": "wilson",
+            "statistic": 1.0,
+            "p_value": null,
+            "ci_low": 0.7574992425007574,
+            "ci_high": 1.0,
+            "n": 12,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 2
+        },
+        {
+          "run_id": "crawl-public-snapshot",
+          "primitive": "crawl",
+          "slice": "freshness:time_varying",
+          "adapter": "bfs-deep",
+          "n": 12,
+          "point_estimate": 0.6666666666666666,
+          "metric_name": "page_coverage",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.6666666666666666,
+            "p_value": null,
+            "ci_low": 0.3906175873976138,
+            "ci_high": 0.8618821601026385,
+            "n": 12,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 3
+        },
+        {
+          "run_id": "crawl-public-snapshot",
+          "primitive": "crawl",
+          "slice": "freshness:time_varying",
+          "adapter": "bfs-shallow",
+          "n": 12,
+          "point_estimate": 0.3333333333333333,
+          "metric_name": "page_coverage",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.3333333333333333,
+            "p_value": null,
+            "ci_low": 0.13811783989736132,
+            "ci_high": 0.6093824126023861,
+            "n": 12,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 4
+        }
+      ]
+    },
+    {
+      "slice": "render:js_rendered",
+      "metric_name": "page_coverage",
+      "n": 12,
+      "status": "published",
+      "winner": "render-crawl",
+      "band": [
+        "render-crawl"
+      ],
+      "thin": false,
+      "saturated": false,
+      "citation": "packages/eval-crawl/README.md",
+      "results": [
+        {
+          "run_id": "crawl-public-snapshot",
+          "primitive": "crawl",
+          "slice": "render:js_rendered",
+          "adapter": "render-crawl",
+          "n": 12,
+          "point_estimate": 1.0,
+          "metric_name": "page_coverage",
+          "ci": {
+            "method": "wilson",
+            "statistic": 1.0,
+            "p_value": null,
+            "ci_low": 0.7574992425007574,
+            "ci_high": 1.0,
+            "n": 12,
+            "seed": null
+          },
+          "separable": true,
+          "rank": 1
+        },
+        {
+          "run_id": "crawl-public-snapshot",
+          "primitive": "crawl",
+          "slice": "render:js_rendered",
+          "adapter": "bfs-deep",
+          "n": 12,
+          "point_estimate": 0.0,
+          "metric_name": "page_coverage",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.0,
+            "p_value": null,
+            "ci_low": 0.0,
+            "ci_high": 0.2425007574992425,
+            "n": 12,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 2
+        },
+        {
+          "run_id": "crawl-public-snapshot",
+          "primitive": "crawl",
+          "slice": "render:js_rendered",
+          "adapter": "bfs-shallow",
+          "n": 12,
+          "point_estimate": 0.0,
+          "metric_name": "page_coverage",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.0,
+            "p_value": null,
+            "ci_low": 0.0,
+            "ci_high": 0.2425007574992425,
+            "n": 12,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 3
+        },
+        {
+          "run_id": "crawl-public-snapshot",
+          "primitive": "crawl",
+          "slice": "render:js_rendered",
+          "adapter": "sitemap-crawl",
+          "n": 12,
+          "point_estimate": 0.0,
+          "metric_name": "page_coverage",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.0,
+            "p_value": null,
+            "ci_low": 0.0,
+            "ci_high": 0.2425007574992425,
+            "n": 12,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 4
+        }
+      ]
+    },
+    {
+      "slice": "render:static_html",
+      "metric_name": "page_coverage",
+      "n": 44,
+      "status": "published",
+      "winner": null,
+      "band": [
+        "render-crawl",
+        "sitemap-crawl"
+      ],
+      "thin": false,
+      "saturated": false,
+      "citation": "packages/eval-crawl/README.md",
+      "results": [
+        {
+          "run_id": "crawl-public-snapshot",
+          "primitive": "crawl",
+          "slice": "render:static_html",
+          "adapter": "render-crawl",
+          "n": 44,
+          "point_estimate": 1.0,
+          "metric_name": "page_coverage",
+          "ci": {
+            "method": "wilson",
+            "statistic": 1.0,
+            "p_value": null,
+            "ci_low": 0.9197016822179859,
+            "ci_high": 0.9999999999999999,
+            "n": 44,
+            "seed": null
+          },
+          "separable": false,
+          "rank": 1
+        },
+        {
+          "run_id": "crawl-public-snapshot",
+          "primitive": "crawl",
+          "slice": "render:static_html",
+          "adapter": "sitemap-crawl",
+          "n": 44,
+          "point_estimate": 1.0,
+          "metric_name": "page_coverage",
+          "ci": {
+            "method": "wilson",
+            "statistic": 1.0,
+            "p_value": null,
+            "ci_low": 0.9197016822179859,
+            "ci_high": 0.9999999999999999,
+            "n": 44,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 2
+        },
+        {
+          "run_id": "crawl-public-snapshot",
+          "primitive": "crawl",
+          "slice": "render:static_html",
+          "adapter": "bfs-deep",
+          "n": 44,
+          "point_estimate": 0.8181818181818182,
+          "metric_name": "page_coverage",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.8181818181818182,
+            "p_value": null,
+            "ci_low": 0.6803916324485767,
+            "ci_high": 0.9048730744174144,
+            "n": 44,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 3
+        },
+        {
+          "run_id": "crawl-public-snapshot",
+          "primitive": "crawl",
+          "slice": "render:static_html",
+          "adapter": "bfs-shallow",
+          "n": 44,
+          "point_estimate": 0.36363636363636365,
+          "metric_name": "page_coverage",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.36363636363636365,
+            "p_value": null,
+            "ci_low": 0.23783334127491423,
+            "ci_high": 0.5113389272110895,
+            "n": 44,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 4
+        }
+      ]
+    },
+    {
+      "slice": "site_type:blog",
+      "metric_name": "page_coverage",
+      "n": 14,
+      "status": "published",
+      "winner": null,
+      "band": [
+        "render-crawl",
+        "sitemap-crawl",
+        "bfs-deep"
+      ],
+      "thin": false,
+      "saturated": false,
+      "citation": "packages/eval-crawl/README.md",
+      "results": [
+        {
+          "run_id": "crawl-public-snapshot",
+          "primitive": "crawl",
+          "slice": "site_type:blog",
+          "adapter": "render-crawl",
+          "n": 14,
+          "point_estimate": 1.0,
+          "metric_name": "page_coverage",
+          "ci": {
+            "method": "wilson",
+            "statistic": 1.0,
+            "p_value": null,
+            "ci_low": 0.7846829880728186,
+            "ci_high": 1.0,
+            "n": 14,
+            "seed": null
+          },
+          "separable": false,
+          "rank": 1
+        },
+        {
+          "run_id": "crawl-public-snapshot",
+          "primitive": "crawl",
+          "slice": "site_type:blog",
+          "adapter": "sitemap-crawl",
+          "n": 14,
+          "point_estimate": 0.7857142857142857,
+          "metric_name": "page_coverage",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.7857142857142857,
+            "p_value": null,
+            "ci_low": 0.5241027622679172,
+            "ci_high": 0.9242875166308363,
+            "n": 14,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 2
+        },
+        {
+          "run_id": "crawl-public-snapshot",
+          "primitive": "crawl",
+          "slice": "site_type:blog",
+          "adapter": "bfs-deep",
+          "n": 14,
+          "point_estimate": 0.6428571428571429,
+          "metric_name": "page_coverage",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.6428571428571429,
+            "p_value": null,
+            "ci_low": 0.3876400468214041,
+            "ci_high": 0.8365550926279728,
+            "n": 14,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 3
+        },
+        {
+          "run_id": "crawl-public-snapshot",
+          "primitive": "crawl",
+          "slice": "site_type:blog",
+          "adapter": "bfs-shallow",
+          "n": 14,
+          "point_estimate": 0.2857142857142857,
+          "metric_name": "page_coverage",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.2857142857142857,
+            "p_value": null,
+            "ci_low": 0.11721187910109096,
+            "ci_high": 0.5464954117248438,
+            "n": 14,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 4
+        }
+      ]
+    },
+    {
+      "slice": "site_type:commerce",
+      "metric_name": "page_coverage",
+      "n": 14,
+      "status": "published",
+      "winner": null,
+      "band": [
+        "render-crawl",
+        "sitemap-crawl",
+        "bfs-deep"
+      ],
+      "thin": false,
+      "saturated": false,
+      "citation": "packages/eval-crawl/README.md",
+      "results": [
+        {
+          "run_id": "crawl-public-snapshot",
+          "primitive": "crawl",
+          "slice": "site_type:commerce",
+          "adapter": "render-crawl",
+          "n": 14,
+          "point_estimate": 1.0,
+          "metric_name": "page_coverage",
+          "ci": {
+            "method": "wilson",
+            "statistic": 1.0,
+            "p_value": null,
+            "ci_low": 0.7846829880728186,
+            "ci_high": 1.0,
+            "n": 14,
+            "seed": null
+          },
+          "separable": false,
+          "rank": 1
+        },
+        {
+          "run_id": "crawl-public-snapshot",
+          "primitive": "crawl",
+          "slice": "site_type:commerce",
+          "adapter": "sitemap-crawl",
+          "n": 14,
+          "point_estimate": 0.7857142857142857,
+          "metric_name": "page_coverage",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.7857142857142857,
+            "p_value": null,
+            "ci_low": 0.5241027622679172,
+            "ci_high": 0.9242875166308363,
+            "n": 14,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 2
+        },
+        {
+          "run_id": "crawl-public-snapshot",
+          "primitive": "crawl",
+          "slice": "site_type:commerce",
+          "adapter": "bfs-deep",
+          "n": 14,
+          "point_estimate": 0.6428571428571429,
+          "metric_name": "page_coverage",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.6428571428571429,
+            "p_value": null,
+            "ci_low": 0.3876400468214041,
+            "ci_high": 0.8365550926279728,
+            "n": 14,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 3
+        },
+        {
+          "run_id": "crawl-public-snapshot",
+          "primitive": "crawl",
+          "slice": "site_type:commerce",
+          "adapter": "bfs-shallow",
+          "n": 14,
+          "point_estimate": 0.2857142857142857,
+          "metric_name": "page_coverage",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.2857142857142857,
+            "p_value": null,
+            "ci_low": 0.11721187910109096,
+            "ci_high": 0.5464954117248438,
+            "n": 14,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 4
+        }
+      ]
+    },
+    {
+      "slice": "site_type:docs",
+      "metric_name": "page_coverage",
+      "n": 14,
+      "status": "published",
+      "winner": null,
+      "band": [
+        "render-crawl",
+        "sitemap-crawl",
+        "bfs-deep"
+      ],
+      "thin": false,
+      "saturated": false,
+      "citation": "packages/eval-crawl/README.md",
+      "results": [
+        {
+          "run_id": "crawl-public-snapshot",
+          "primitive": "crawl",
+          "slice": "site_type:docs",
+          "adapter": "render-crawl",
+          "n": 14,
+          "point_estimate": 1.0,
+          "metric_name": "page_coverage",
+          "ci": {
+            "method": "wilson",
+            "statistic": 1.0,
+            "p_value": null,
+            "ci_low": 0.7846829880728186,
+            "ci_high": 1.0,
+            "n": 14,
+            "seed": null
+          },
+          "separable": false,
+          "rank": 1
+        },
+        {
+          "run_id": "crawl-public-snapshot",
+          "primitive": "crawl",
+          "slice": "site_type:docs",
+          "adapter": "sitemap-crawl",
+          "n": 14,
+          "point_estimate": 0.7857142857142857,
+          "metric_name": "page_coverage",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.7857142857142857,
+            "p_value": null,
+            "ci_low": 0.5241027622679172,
+            "ci_high": 0.9242875166308363,
+            "n": 14,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 2
+        },
+        {
+          "run_id": "crawl-public-snapshot",
+          "primitive": "crawl",
+          "slice": "site_type:docs",
+          "adapter": "bfs-deep",
+          "n": 14,
+          "point_estimate": 0.6428571428571429,
+          "metric_name": "page_coverage",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.6428571428571429,
+            "p_value": null,
+            "ci_low": 0.3876400468214041,
+            "ci_high": 0.8365550926279728,
+            "n": 14,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 3
+        },
+        {
+          "run_id": "crawl-public-snapshot",
+          "primitive": "crawl",
+          "slice": "site_type:docs",
+          "adapter": "bfs-shallow",
+          "n": 14,
+          "point_estimate": 0.2857142857142857,
+          "metric_name": "page_coverage",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.2857142857142857,
+            "p_value": null,
+            "ci_low": 0.11721187910109096,
+            "ci_high": 0.5464954117248438,
+            "n": 14,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 4
+        }
+      ]
+    },
+    {
+      "slice": "site_type:gov_registry",
+      "metric_name": "page_coverage",
+      "n": 14,
+      "status": "published",
+      "winner": null,
+      "band": [
+        "render-crawl",
+        "sitemap-crawl",
+        "bfs-deep"
+      ],
+      "thin": false,
+      "saturated": false,
+      "citation": "packages/eval-crawl/README.md",
+      "results": [
+        {
+          "run_id": "crawl-public-snapshot",
+          "primitive": "crawl",
+          "slice": "site_type:gov_registry",
+          "adapter": "render-crawl",
+          "n": 14,
+          "point_estimate": 1.0,
+          "metric_name": "page_coverage",
+          "ci": {
+            "method": "wilson",
+            "statistic": 1.0,
+            "p_value": null,
+            "ci_low": 0.7846829880728186,
+            "ci_high": 1.0,
+            "n": 14,
+            "seed": null
+          },
+          "separable": false,
+          "rank": 1
+        },
+        {
+          "run_id": "crawl-public-snapshot",
+          "primitive": "crawl",
+          "slice": "site_type:gov_registry",
+          "adapter": "sitemap-crawl",
+          "n": 14,
+          "point_estimate": 0.7857142857142857,
+          "metric_name": "page_coverage",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.7857142857142857,
+            "p_value": null,
+            "ci_low": 0.5241027622679172,
+            "ci_high": 0.9242875166308363,
+            "n": 14,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 2
+        },
+        {
+          "run_id": "crawl-public-snapshot",
+          "primitive": "crawl",
+          "slice": "site_type:gov_registry",
+          "adapter": "bfs-deep",
+          "n": 14,
+          "point_estimate": 0.6428571428571429,
+          "metric_name": "page_coverage",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.6428571428571429,
+            "p_value": null,
+            "ci_low": 0.3876400468214041,
+            "ci_high": 0.8365550926279728,
+            "n": 14,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 3
+        },
+        {
+          "run_id": "crawl-public-snapshot",
+          "primitive": "crawl",
+          "slice": "site_type:gov_registry",
+          "adapter": "bfs-shallow",
+          "n": 14,
+          "point_estimate": 0.2857142857142857,
+          "metric_name": "page_coverage",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.2857142857142857,
+            "p_value": null,
+            "ci_low": 0.11721187910109096,
+            "ci_high": 0.5464954117248438,
+            "n": 14,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 4
+        }
+      ]
+    }
+  ]
+}

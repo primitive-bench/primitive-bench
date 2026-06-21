@@ -40,10 +40,10 @@ test("compare: firecrawl is separable from exa_live on fed_register", () => {
   assert.equal(r.separable, true);
 });
 
-test("listPrimitives returns all 9, exactly 3 published", () => {
+test("listPrimitives returns all 9, exactly 4 published", () => {
   const ps = listPrimitives();
   assert.equal(ps.length, 9);
-  assert.equal(ps.filter((p) => p.status === "published").length, 3);
+  assert.equal(ps.filter((p) => p.status === "published").length, 4);
 });
 
 test("reranker domain:scientific is a published TIE band of all four adapters", () => {
@@ -53,6 +53,21 @@ test("reranker domain:scientific is a published TIE band of all four adapters", 
   assert.equal(r.status, "published");
   assert.equal(r.winner, null);
   assert.equal(r.band.length, 4);
+});
+
+test("crawl render:js_rendered names render-crawl as the sole winner", () => {
+  // Only a JS-following crawler reaches JS-rendered pages — the headline crawl story.
+  const r = recommend("crawl", "render:js_rendered") as { winner?: string | null };
+  assert.equal(r.winner, "render-crawl");
+});
+
+test("crawl depth:deep is a published TIE band that excludes the shallow crawler", () => {
+  const r = recommend("crawl", "depth:deep") as {
+    status: string; winner: string | null; band: string[];
+  };
+  assert.equal(r.status, "published");
+  assert.equal(r.winner, null);                 // the three deep crawlers tie at 100%
+  assert.ok(!r.band.includes("bfs-shallow"));   // shallow crawler reaches no deep page
 });
 
 test("listSlices exposes websearch slice keys", () => {

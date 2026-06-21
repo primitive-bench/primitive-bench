@@ -1,0 +1,47 @@
+{
+  "dataset_version": "crawl-2026.06.controlled.v1",
+  "design": "controlled known-structure sites (.example); exact coverage ground truth",
+  "total_targets": 56,
+  "sites": [
+    {
+      "site_id": "docs",
+      "base": "https://docs.example",
+      "targets": 14,
+      "pages": 19,
+      "sitemap": 16
+    },
+    {
+      "site_id": "blog",
+      "base": "https://blog.example",
+      "targets": 14,
+      "pages": 19,
+      "sitemap": 16
+    },
+    {
+      "site_id": "shop",
+      "base": "https://shop.example",
+      "targets": 14,
+      "pages": 19,
+      "sitemap": 16
+    },
+    {
+      "site_id": "reg",
+      "base": "https://registry.example",
+      "targets": 14,
+      "pages": 19,
+      "sitemap": 16
+    }
+  ],
+  "slice_census": {
+    "depth:deep": 12,
+    "depth:shallow": 44,
+    "freshness:stable": 44,
+    "freshness:time_varying": 12,
+    "render:js_rendered": 12,
+    "render:static_html": 44,
+    "site_type:blog": 14,
+    "site_type:commerce": 14,
+    "site_type:docs": 14,
+    "site_type:gov_registry": 14
+  }
+}
