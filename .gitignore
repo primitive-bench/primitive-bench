@@ -32,6 +32,12 @@ golden-sets-heldout/
 # (SciDocs / AskUbuntu) and is NOT redistributed — only dev.example.jsonl is committed.
 golden-sets-public/reranker/dev.jsonl
 
+# Crawl: the LIVE dev split is sampled locally from real-site sitemaps and is NOT
+# redistributed — only the controlled dev.example.jsonl is committed. (The committed
+# public snapshot is generated from the controlled, network-free example split.)
+golden-sets-public/crawl/dev.jsonl
+packages/eval-crawl/selection_manifest.live.json
+
 # Secrets / env
 .env
 .env.*

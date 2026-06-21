@@ -1,5 +1,47 @@
 # Slice / constraint definitions for the crawl primitive.
-# Each slice becomes a SliceResult per adapter. ~45 slices total across primitives.
-# Trust rule: a slice only publishes a winner if adapters are statistically separable.
+# Each slice becomes a SliceResult per adapter. Assigned deterministically from row
+# facts (see src/eval_crawl/slicing.py) — no model, no fetch. Trust rule: a slice
+# only publishes a winner when adapters are statistically separable (Wilson-clear
+# AND McNemar-separable on page_coverage), otherwise a TIE band ("one winner is a lie").
 primitive: crawl
-slices: []   # TODO: define per-constraint slices (the "one winner is a lie" surface)
+
+# page_coverage (target page reached from the seed AND its current content
+# delivered so the truth_token survives) is the paired-binary separability surface
+# the leaderboard's McNemar/Wilson gate consumes. It unifies the two canonical axes
+# of crawl quality — COVERAGE and FRESHNESS (Olston & Najork, "Web Crawling", FnTIR
+# 2010; freshness/age per Cho & Garcia-Molina, SIGMOD 2000 / ACM TODS 2003). Both
+# axes are reported alongside (url_discovered = pure URL-recall; content_fresh) and
+# every miss is decomposed so a low score is legible.
+scoring:
+  metric: page_coverage          # hit = target reached AND current content delivered
+  match: normalized_substring    # truth_token (version tag / id / date) survives in fetched content
+  reported: [url_discovered, content_fresh]
+  miss_reasons: [not_reached, stale, token_absent, blocked, empty, crawl_failed]
+  # not_reached = COVERAGE gap (page never discovered from the seed);
+  # stale        = FRESHNESS gap (page reached, but a stale/cached copy lacks the current token).
+
+# Ground-truth strata (map onto the frozen GroundTruthTier):
+#   sentinel  -> sentinel_planted        (controlled known-structure sites; exact coverage truth)
+#   coverage  -> authoritative_registry  (live target sampled from the site's sitemap.xml)
+#   freshness -> authoritative_registry  (live target whose truth_token is a time-varying value)
+strata: [sentinel, coverage, freshness]
+
+# Cross-cutting slices. A target carries one key per axis, assigned from the target
+# facts (render kind / hop distance / site type / stratum) — never a model.
+slices:
+  - key: render
+    values: [static_html, js_rendered]
+    description: "Whether the target's links/content only appear after JavaScript execution."
+    separates: "THE primary axis — a JS-rendered page is invisible to a plain HTTP crawler and needs a headless browser; the central crawl capability gap (the crawl analogue of extraction's anti-bot slice)."
+  - key: depth
+    values: [shallow, deep]
+    description: "Hop distance of the target from the seed: shallow (<=2) vs deep (>=3)."
+    separates: "a breadth-limited crawler that stops early never reaches deep pages; separates thorough crawlers from shallow ones."
+  - key: site_type
+    values: [docs, blog, commerce, gov_registry]
+    description: "Content domain / site shape (JS docs, paginated blog, catalog, registry)."
+    separates: "different site shapes stress discovery differently (infinite-scroll catalogs, paginated archives, registry index pages)."
+  - key: freshness
+    values: [time_varying, stable]
+    description: "Whether the target's truth_token is a value that changes over time (latest version / date)."
+    separates: "a crawler serving a stale or cached copy misses the current value on a time-varying page but cannot on a stable one — isolates the freshness axis from coverage."

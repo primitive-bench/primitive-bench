@@ -14,6 +14,7 @@ import { PrimitiveReportSchema } from "./schema";
 import websearchJson from "../data/websearch.json";
 import extractionJson from "../data/extraction.json";
 import rerankerJson from "../data/reranker.json";
+import crawlJson from "../data/crawl.json";
 
 /** Validate a seed at load; a malformed file fails fast rather than silently. */
 function loadSeed(raw: unknown, name: string): PrimitiveReport {
@@ -36,6 +37,7 @@ const REPORTS: Partial<Record<Primitive, PrimitiveReport>> = {
   websearch: loadSeed(websearchJson, "websearch.json"),
   extraction: loadSeed(extractionJson, "extraction.json"),
   reranker: loadSeed(rerankerJson, "reranker.json"),
+  crawl: loadSeed(crawlJson, "crawl.json"),
 };
 
 function findSlice(report: PrimitiveReport, slice: string): SliceReport | undefined {

@@ -50,7 +50,7 @@ live here — they sit behind the private eval server, so the scores stay honest
 | Rerankers | `eval-reranker` | nDCG@10 / MAP / MRR + hit@1, sliced by domain & hard-negative density | ✅ Live |
 | Retrieval | `eval-retrieval` | nDCG@k, MAP@k, MRR@k, Recall@k | 🚧 Planned |
 | Chunking | `eval-chunking` | downstream retrieval quality by chunk strategy | 🚧 Planned |
-| Crawling | `eval-crawl` | coverage & freshness of fetched content | 🚧 Planned |
+| Crawling | `eval-crawl` | page coverage & freshness from a seed crawl, sliced by render / depth | ✅ Live |
 | Memory | — | long-horizon recall (LoCoMo-style) | 🗺️ Roadmap |
 
 Filling in a 🚧 is the highest-impact **first contribution** — see [`CONTRIBUTING.md`](CONTRIBUTING.md).
@@ -96,7 +96,7 @@ queries are free.
 claude mcp add --transport http primitive-bench https://benchpublic.vercel.app/mcp
 ```
 
-Live for **websearch**, **extraction**, and **reranker** today — see [`apps/mcp`](apps/mcp) to run it locally or
+Live for **websearch**, **extraction**, **reranker**, and **crawl** today — see [`apps/mcp`](apps/mcp) to run it locally or
 deploy your own.
 
 ## How it works

@@ -84,3 +84,31 @@ price even inside a vendor's free tier.
 
 `bge-reranker` is **opt-in** — its weights are ~2.3 GB and slow on CPU, so it is not in
 `eval-reranker`'s default vendor set (nor the published board); pass it explicitly to include it.
+
+## Registered CRAWL adapters (seed URL -> fetched pages)
+
+`invoke(item)` reads `item["seed_url"]` (+ crawl budget `max_pages`/`max_depth`, and
+an optional inline `site` link graph for the offline controlled split). Returns
+`pages: [{"url", "content"}]` and `returned_urls: [str]`. A crawler must *discover*
+the pages under the seed — the capability extraction (handed the exact URL) never tests.
+
+The four keyless `_LocalCrawler` strategies are a real breadth-first crawler in four
+policy configs (depth / sitemap / JS) — they run with **no key** (offline-graph,
+deterministic, $0) and produce the public snapshot; `bfs-deep` doubles as the keyless
+live baseline. The four hosted APIs are the live-run systems-under-test. `cost_usd`
+records the per-page list price (see `crawl/pricing.py`).
+
+| name | vendor | mode | env var / requirement |
+|------|--------|------|-----------------------|
+| `bfs-shallow` | local (sentinel) | BFS depth 1, static only | none |
+| `bfs-deep` | local | BFS depth 4, static only | none |
+| `sitemap-crawl` | local | BFS depth 4 + `sitemap.xml` | none |
+| `render-crawl` | local | BFS depth 4 + sitemap + JS links | none |
+| `firecrawl-crawl` | Firecrawl | `/v2/crawl` (async job) | `FIRECRAWL_API_KEY` |
+| `tavily-crawl` | Tavily | `/crawl` (invite-only beta) | `TAVILY_API_KEY` |
+| `spider-crawl` | Spider Cloud | `/crawl` (smart HTTP/headless) | `SPIDER_API_KEY` |
+| `apify-crawl` | Apify | website-content-crawler | `APIFY_API_KEY` (optional actor: `APIFY_CRAWL_ACTOR`) |
+
+`follow_js` is a no-op on a live crawl (a pure-httpx crawler cannot execute JS — that
+gap is exactly what the hosted headless vendors are measured against); it separates the
+strategies in the offline controlled graph where JS links are explicit.

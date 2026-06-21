@@ -66,6 +66,9 @@ golden-sets-public/
 ├── websearch/
 │   ├── README.md        ← GoldenRow schema, 10 intent slices, the goldgen pump
 │   └── dev.example.jsonl← 4 hand-written illustrative rows (NOT a scored cohort)
+├── crawl/
+│   ├── README.md        ← target schema, render/depth/site_type/freshness slices
+│   └── dev.example.jsonl← 56 controlled known-structure targets (the snapshot's scored set)
 └── sentinel/
     └── PROTOCOL.md      ← planted-page protocol (authoritative T0)
 ```
@@ -78,5 +81,4 @@ python -c "import json,glob; [json.loads(l) for f in glob.glob('golden-sets-publ
 ```
 
 Other primitive subdirectories (`ocr/`, `retrieval/`, `reranker/`, `chunking/`,
-`crawl/`, `vectordb/`) carry their own READMEs and follow the same public-split
-conventions.
+`vectordb/`) carry their own READMEs and follow the same public-split conventions.

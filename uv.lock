@@ -248,7 +248,7 @@ dependencies = [
 [package.metadata]
 requires-dist = [
     { name = "bench-schemas", editable = "packages/bench-schemas" },
-    { name = "httpx", extras = ["http2"], specifier = ">=0.28.1" },
+    { name = "httpx", extras = ["http2"], specifier = ">=0.27" },
     { name = "pydantic", specifier = ">=2.8" },
     { name = "pydantic-settings", specifier = ">=2.4" },
     { name = "python-dotenv", specifier = ">=1.0" },
@@ -534,6 +534,9 @@ dependencies = [
     { name = "bench-core" },
     { name = "bench-schemas" },
     { name = "bench-stats" },
+    { name = "httpx" },
+    { name = "pyyaml" },
+    { name = "selectolax" },
 ]
 
 [package.metadata]
@@ -542,6 +545,9 @@ requires-dist = [
     { name = "bench-core", editable = "packages/bench-core" },
     { name = "bench-schemas", editable = "packages/bench-schemas" },
     { name = "bench-stats", editable = "packages/bench-stats" },
+    { name = "httpx", specifier = ">=0.27" },
+    { name = "pyyaml" },
+    { name = "selectolax", specifier = ">=0.3" },
 ]
 
 [[package]]

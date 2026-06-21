@@ -39,6 +39,9 @@ const cmp = await call("compare", {
 });
 console.log(`compare fed_register firecrawl vs exa_live -> separable=${cmp.separable}`);
 
+const crawl = await call("recommend", { primitive: "crawl", slice: "render:js_rendered" });
+console.log(`render:js_rendered  -> status=${crawl.status} winner=${crawl.winner}`);
+
 assert.equal(tools.length, 6, "expected 6 tools");
 assert.equal(win.winner, "exa");
 assert.equal(tie.winner, null);
@@ -46,6 +49,7 @@ assert.deepEqual(tie.band, ["exa", "serpapi"]);
 assert.equal(thin.status, "thin_data");
 assert.equal(soon.status, "no_published_results");
 assert.equal(cmp.separable, true);
+assert.equal(crawl.winner, "render-crawl");
 
-console.log("\nSMOKE OK — 6 tools, winner/TIE/thin/coming-soon/compare all correct.");
+console.log("\nSMOKE OK — 6 tools, winner/TIE/thin/coming-soon/compare/crawl all correct.");
 await client.close();

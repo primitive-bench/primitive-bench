@@ -28,11 +28,21 @@ alternates. `bench-schemas` is FROZEN — import types from it, never modify it.
 - Concrete adapters registered by name under:
     - search:     `brave, exa, tavily, serpapi`
     - extraction: `firecrawl, jina, exa_live, tavily_extract, apify`
+    - rerank:     `ce-minilm, bge-reranker, voyage-rerank, jina-rerank, cohere-rerank`
+    - crawl:      `bfs-shallow, bfs-deep, sitemap-crawl, render-crawl` (keyless local strategies),
+      `firecrawl-crawl, tavily-crawl, spider-crawl, apify-crawl` (hosted)
 - Each adapter `.invoke(item) -> dict` returns at least `{raw_output, latency_ms, cost_usd}` plus
-  primitive extras (search: `returned_urls`; extraction: `main_text`).
+  primitive extras (search: `returned_urls`; extraction: `main_text`; rerank: `reordered_ids`;
+  crawl: `pages: [{url, content}]` + `returned_urls`).
+- `from bench_adapters.crawl import VendorUnavailable`  (skip a lane with no key/dep/beta access)
 
 ## eval-websearch (owned by Lane WEBSEARCH) — owns packages/eval-websearch only
 ## eval-extraction (owned by Lane EXTRACTION) — owns packages/eval-extraction only
+## eval-crawl (owned by Lane CRAWL) — owns packages/eval-crawl only
+- Scorer surface: `page_coverage` (target reached from the seed AND current content
+  delivered). Reuses `bench_core.urls.EquivalenceClass` (URL membership) +
+  `bench_core.verify.liveness_gate` (live golden-set builder). Metric in
+  `snapshots/crawl.counts.toml`; slices in `slices.yaml` (render/depth/site_type/freshness).
 
 ## golden-sets-public (owned by Lane GOLDEN)
 
