@@ -1,10 +1,27 @@
 [project]
 name = "eval-chunking"
 version = "0.1.0"
-description = "Primitive Bench eval vertical: Chunking/parsing — downstream-task-grounded quality slices"
+description = "Primitive Bench eval vertical: Chunking — downstream retrieval quality (recall/precision/IoU) by chunk strategy, Chroma methodology"
 requires-python = ">=3.11"
 license = "Apache-2.0"
-dependencies = ["bench-schemas", "bench-core", "bench-stats", "bench-adapters"]
+dependencies = [
+    "bench-schemas",
+    "bench-core",
+    "bench-stats",
+    "bench-adapters",
+    # The default offline embedder (tfidf-local) + retrieval math run out of the box.
+    "scikit-learn>=1.4",
+    "numpy>=1.26",
+]
+
+# Optional production embedders. tiktoken gives the faithful cl100k_base length
+# function; sentence-transformers powers the local SOTA embedders (st:<model>).
+[project.optional-dependencies]
+faithful-tokens = ["tiktoken>=0.7"]
+local-embedders = ["sentence-transformers>=3.0"]
+
+[project.scripts]
+eval-chunking = "eval_chunking.__main__:main"
 
 [build-system]
 requires = ["hatchling"]

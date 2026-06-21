@@ -13,6 +13,8 @@ adapter = cls(spec)            # spec: bench_schemas.AdapterSpec
 out = adapter.invoke({"query": "who is the CEO of Acme", "k": 10})
 # search:     out -> {raw_output, latency_ms, cost_usd, returned_urls: [...]}
 # extraction: out -> {raw_output, latency_ms, cost_usd, main_text: "..."}
+# rerank:     out -> {raw_output, latency_ms, cost_usd, reordered_ids: [...]}
+# chunk:      out -> {raw_output, latency_ms, cost_usd, chunks: [{text,start,end}], n_chunks}
 ```
 
 API keys are read from the environment — never hardcoded. Each adapter raises
@@ -84,3 +86,28 @@ price even inside a vendor's free tier.
 
 `bge-reranker` is **opt-in** — its weights are ~2.3 GB and slow on CPU, so it is not in
 `eval-reranker`'s default vendor set (nor the published board); pass it explicitly to include it.
+
+## Registered CHUNK adapters (document -> character-span chunks)
+
+`invoke(item)` reads `item["document"]` (the corpus text) and an optional
+`item["embed"]` (a `list[str] -> np.ndarray` callable the eval injects so the
+embedder is held constant across chunkers). Returns
+`chunks: list[{"text", "start", "end"}]` where `start`/`end` are **character offsets**
+into the document — load-bearing, since the chunking scorer measures token-range
+overlap against character-indexed gold spans. All chunkers are local + free
+(`cost_usd = 0.0`); the embedding cost (shared by all chunkers) is the eval's, not a
+chunker's. For the published board, size is held constant at 200 tokens across
+strategies so the comparison isolates boundary placement, not chunk size.
+
+| name | strategy | needs embedder |
+|------|----------|----------------|
+| `fixed-token` | fixed token windows (naive **sentinel**) | no |
+| `recursive` | recursive separator split (LangChain-style; production default) | no |
+| `sentence` | greedy sentence packing to a token budget | no |
+| `semantic` | embedding breakpoint chunking (Kamradt) | yes (`item["embed"]`) |
+| `cluster-semantic` | Chroma ClusterSemanticChunker (DP over piece similarities) | yes (`item["embed"]`) |
+
+A semantic chunker invoked without an injected embedder raises `VendorUnavailable`,
+so the harness skips its lane cleanly. The token length function defaults to an
+offline regex word/punctuation counter; set `CHUNK_TOKENIZER=tiktoken` (with the
+`eval-chunking` `faithful-tokens` extra) for cl100k_base counts.

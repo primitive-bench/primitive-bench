@@ -23,8 +23,8 @@ Every tool is a **deterministic lookup** over the bundled public-snapshot JSON �
 no network on the server side, so per-query inference cost is **zero**. The client's model
 does any natural-language → slice-key mapping for free.
 
-Live today: **websearch** and **extraction**. The other seven primitives return
-`no_published_results — coming soon`.
+Live today: **websearch**, **extraction**, **reranker**, and **chunking**. The other
+five primitives return `no_published_results — coming soon`.
 
 ## Endpoints
 

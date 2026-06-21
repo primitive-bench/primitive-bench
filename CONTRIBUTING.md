@@ -67,10 +67,12 @@ variable table).
 | Change the **contract** | `packages/bench-schemas/` (rare — see §1) |
 | Methodology / decisions docs | `apps/docs/` |
 
-The two reference verticals to copy from are **`eval-websearch`** and
-**`eval-extraction`** — they are fully implemented; the others
-(`eval-ocr`, `eval-vectordb`, `eval-reranker`, `eval-retrieval`, `eval-chunking`,
-`eval-crawl`) are stubs waiting to be filled the same way.
+The reference verticals to copy from are **`eval-websearch`**, **`eval-extraction`**,
+**`eval-reranker`**, and **`eval-chunking`** — they are fully implemented
+(`eval-reranker` and `eval-chunking` are the closest templates for a retrieval-shaped
+primitive with a paired-binary gate + continuous metrics); the others
+(`eval-ocr`, `eval-vectordb`, `eval-retrieval`, `eval-crawl`) are stubs waiting to be
+filled the same way.
 
 ---
 
@@ -177,7 +179,7 @@ deterministic (bootstrap takes a required `seed`). Don't break existing signatur
 ## 9. Good first issues
 
 - Fill a stub vertical (`eval-ocr` is the highest-priority template; then
-  `eval-vectordb`, `eval-reranker`).
+  `eval-vectordb`, `eval-retrieval`).
 - Add a vendor adapter to an existing primitive.
 - Add a slice that you believe separates two adapters, with the data to prove it.
 - Expand a public golden dev set with verified, canary-marked rows.

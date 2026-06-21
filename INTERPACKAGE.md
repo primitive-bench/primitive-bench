@@ -28,8 +28,11 @@ alternates. `bench-schemas` is FROZEN — import types from it, never modify it.
 - Concrete adapters registered by name under:
     - search:     `brave, exa, tavily, serpapi`
     - extraction: `firecrawl, jina, exa_live, tavily_extract, apify`
+    - rerank:     `ce-minilm, bge-reranker, voyage-rerank, jina-rerank, cohere-rerank`
+    - chunk:      `fixed-token, recursive, sentence, semantic, cluster-semantic`
 - Each adapter `.invoke(item) -> dict` returns at least `{raw_output, latency_ms, cost_usd}` plus
-  primitive extras (search: `returned_urls`; extraction: `main_text`).
+  primitive extras (search: `returned_urls`; extraction: `main_text`; rerank: `reordered_ids`;
+  chunk: `chunks: [{text,start,end}]` — character offsets into `item["document"]`).
 
 ## eval-websearch (owned by Lane WEBSEARCH) — owns packages/eval-websearch only
 ## eval-extraction (owned by Lane EXTRACTION) — owns packages/eval-extraction only

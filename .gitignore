@@ -32,6 +32,13 @@ golden-sets-heldout/
 # (SciDocs / AskUbuntu) and is NOT redistributed — only dev.example.jsonl is committed.
 golden-sets-public/reranker/dev.jsonl
 
+# Chunking: the full dev split + corpora are generated locally from the Chroma
+# chunking_evaluation set and are NOT redistributed — only the self-authored
+# dev.example.jsonl + corpora/example_*.md are committed.
+golden-sets-public/chunking/dev.jsonl
+golden-sets-public/chunking/corpora/*.md
+!golden-sets-public/chunking/corpora/example_*.md
+
 # Secrets / env
 .env
 .env.*

@@ -40,10 +40,10 @@ test("compare: firecrawl is separable from exa_live on fed_register", () => {
   assert.equal(r.separable, true);
 });
 
-test("listPrimitives returns all 9, exactly 3 published", () => {
+test("listPrimitives returns all 9, exactly 4 published", () => {
   const ps = listPrimitives();
   assert.equal(ps.length, 9);
-  assert.equal(ps.filter((p) => p.status === "published").length, 3);
+  assert.equal(ps.filter((p) => p.status === "published").length, 4);
 });
 
 test("reranker domain:scientific is a published TIE band of all four adapters", () => {
@@ -53,6 +53,22 @@ test("reranker domain:scientific is a published TIE band of all four adapters", 
   assert.equal(r.status, "published");
   assert.equal(r.winner, null);
   assert.equal(r.band.length, 4);
+});
+
+test("chunking domain:finance is a published TIE band of all five chunkers", () => {
+  const r = recommend("chunking", "domain:finance") as {
+    status: string; winner: string | null; band: string[];
+  };
+  assert.equal(r.status, "published");
+  assert.equal(r.winner, null);
+  assert.equal(r.band.length, 5);
+});
+
+test("listSlices exposes chunking slice keys", () => {
+  const r = listSlices("chunking") as { slices: { slice: string }[] };
+  const keys = r.slices.map((s) => s.slice);
+  assert.ok(keys.includes("domain:pubmed"));
+  assert.ok(keys.includes("reference_dispersion:multi"));
 });
 
 test("listSlices exposes websearch slice keys", () => {

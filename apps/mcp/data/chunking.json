@@ -1,0 +1,960 @@
+{
+  "primitive": "chunking",
+  "run_id": "chunking-public-snapshot",
+  "as_of": "2026-06",
+  "status": "published",
+  "slices": [
+    {
+      "slice": "all",
+      "metric_name": "coverage_at_5",
+      "n": 200,
+      "status": "published",
+      "winner": null,
+      "band": [
+        "semantic",
+        "sentence",
+        "fixed-token",
+        "recursive",
+        "cluster-semantic"
+      ],
+      "thin": false,
+      "saturated": false,
+      "citation": "packages/eval-chunking/README.md",
+      "results": [
+        {
+          "run_id": "chunking-public-snapshot",
+          "primitive": "chunking",
+          "slice": "all",
+          "adapter": "semantic",
+          "n": 200,
+          "point_estimate": 0.84,
+          "metric_name": "coverage_at_5",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.84,
+            "p_value": null,
+            "ci_low": 0.7828581380609876,
+            "ci_high": 0.8843265779145542,
+            "n": 200,
+            "seed": null
+          },
+          "separable": false,
+          "rank": 1
+        },
+        {
+          "run_id": "chunking-public-snapshot",
+          "primitive": "chunking",
+          "slice": "all",
+          "adapter": "sentence",
+          "n": 200,
+          "point_estimate": 0.84,
+          "metric_name": "coverage_at_5",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.84,
+            "p_value": null,
+            "ci_low": 0.7828581380609876,
+            "ci_high": 0.8843265779145542,
+            "n": 200,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 2
+        },
+        {
+          "run_id": "chunking-public-snapshot",
+          "primitive": "chunking",
+          "slice": "all",
+          "adapter": "fixed-token",
+          "n": 200,
+          "point_estimate": 0.815,
+          "metric_name": "coverage_at_5",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.815,
+            "p_value": null,
+            "ci_low": 0.7554281794988185,
+            "ci_high": 0.8626988367726394,
+            "n": 200,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 3
+        },
+        {
+          "run_id": "chunking-public-snapshot",
+          "primitive": "chunking",
+          "slice": "all",
+          "adapter": "recursive",
+          "n": 200,
+          "point_estimate": 0.805,
+          "metric_name": "coverage_at_5",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.805,
+            "p_value": null,
+            "ci_low": 0.744558352034882,
+            "ci_high": 0.8539455843549424,
+            "n": 200,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 4
+        },
+        {
+          "run_id": "chunking-public-snapshot",
+          "primitive": "chunking",
+          "slice": "all",
+          "adapter": "cluster-semantic",
+          "n": 200,
+          "point_estimate": 0.75,
+          "metric_name": "coverage_at_5",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.75,
+            "p_value": null,
+            "ci_low": 0.6856577652038048,
+            "ci_high": 0.8049192318370347,
+            "n": 200,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 5
+        }
+      ]
+    },
+    {
+      "slice": "domain:chatlogs",
+      "metric_name": "coverage_at_5",
+      "n": 40,
+      "status": "published",
+      "winner": null,
+      "band": [
+        "recursive",
+        "semantic",
+        "sentence",
+        "fixed-token",
+        "cluster-semantic"
+      ],
+      "thin": false,
+      "saturated": false,
+      "citation": "packages/eval-chunking/README.md",
+      "results": [
+        {
+          "run_id": "chunking-public-snapshot",
+          "primitive": "chunking",
+          "slice": "domain:chatlogs",
+          "adapter": "recursive",
+          "n": 40,
+          "point_estimate": 0.95,
+          "metric_name": "coverage_at_5",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.95,
+            "p_value": null,
+            "ci_low": 0.834958291820748,
+            "ci_high": 0.9861796228538989,
+            "n": 40,
+            "seed": null
+          },
+          "separable": false,
+          "rank": 1
+        },
+        {
+          "run_id": "chunking-public-snapshot",
+          "primitive": "chunking",
+          "slice": "domain:chatlogs",
+          "adapter": "semantic",
+          "n": 40,
+          "point_estimate": 0.95,
+          "metric_name": "coverage_at_5",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.95,
+            "p_value": null,
+            "ci_low": 0.834958291820748,
+            "ci_high": 0.9861796228538989,
+            "n": 40,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 2
+        },
+        {
+          "run_id": "chunking-public-snapshot",
+          "primitive": "chunking",
+          "slice": "domain:chatlogs",
+          "adapter": "sentence",
+          "n": 40,
+          "point_estimate": 0.95,
+          "metric_name": "coverage_at_5",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.95,
+            "p_value": null,
+            "ci_low": 0.834958291820748,
+            "ci_high": 0.9861796228538989,
+            "n": 40,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 3
+        },
+        {
+          "run_id": "chunking-public-snapshot",
+          "primitive": "chunking",
+          "slice": "domain:chatlogs",
+          "adapter": "fixed-token",
+          "n": 40,
+          "point_estimate": 0.925,
+          "metric_name": "coverage_at_5",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.925,
+            "p_value": null,
+            "ci_low": 0.8013546984090248,
+            "ci_high": 0.9741644432281419,
+            "n": 40,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 4
+        },
+        {
+          "run_id": "chunking-public-snapshot",
+          "primitive": "chunking",
+          "slice": "domain:chatlogs",
+          "adapter": "cluster-semantic",
+          "n": 40,
+          "point_estimate": 0.85,
+          "metric_name": "coverage_at_5",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.85,
+            "p_value": null,
+            "ci_low": 0.7092737396097997,
+            "ci_high": 0.9293890829149256,
+            "n": 40,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 5
+        }
+      ]
+    },
+    {
+      "slice": "domain:finance",
+      "metric_name": "coverage_at_5",
+      "n": 40,
+      "status": "published",
+      "winner": null,
+      "band": [
+        "semantic",
+        "sentence",
+        "recursive",
+        "fixed-token",
+        "cluster-semantic"
+      ],
+      "thin": false,
+      "saturated": false,
+      "citation": "packages/eval-chunking/README.md",
+      "results": [
+        {
+          "run_id": "chunking-public-snapshot",
+          "primitive": "chunking",
+          "slice": "domain:finance",
+          "adapter": "semantic",
+          "n": 40,
+          "point_estimate": 0.775,
+          "metric_name": "coverage_at_5",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.775,
+            "p_value": null,
+            "ci_low": 0.6249660359590695,
+            "ci_high": 0.8768404674532148,
+            "n": 40,
+            "seed": null
+          },
+          "separable": false,
+          "rank": 1
+        },
+        {
+          "run_id": "chunking-public-snapshot",
+          "primitive": "chunking",
+          "slice": "domain:finance",
+          "adapter": "sentence",
+          "n": 40,
+          "point_estimate": 0.775,
+          "metric_name": "coverage_at_5",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.775,
+            "p_value": null,
+            "ci_low": 0.6249660359590695,
+            "ci_high": 0.8768404674532148,
+            "n": 40,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 2
+        },
+        {
+          "run_id": "chunking-public-snapshot",
+          "primitive": "chunking",
+          "slice": "domain:finance",
+          "adapter": "recursive",
+          "n": 40,
+          "point_estimate": 0.725,
+          "metric_name": "coverage_at_5",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.725,
+            "p_value": null,
+            "ci_low": 0.5716474916687543,
+            "ci_high": 0.8389214656685692,
+            "n": 40,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 3
+        },
+        {
+          "run_id": "chunking-public-snapshot",
+          "primitive": "chunking",
+          "slice": "domain:finance",
+          "adapter": "fixed-token",
+          "n": 40,
+          "point_estimate": 0.675,
+          "metric_name": "coverage_at_5",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.675,
+            "p_value": null,
+            "ci_low": 0.52017458088898,
+            "ci_high": 0.7991568303733828,
+            "n": 40,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 4
+        },
+        {
+          "run_id": "chunking-public-snapshot",
+          "primitive": "chunking",
+          "slice": "domain:finance",
+          "adapter": "cluster-semantic",
+          "n": 40,
+          "point_estimate": 0.65,
+          "metric_name": "coverage_at_5",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.65,
+            "p_value": null,
+            "ci_low": 0.4950559699353738,
+            "ci_high": 0.7786566682895086,
+            "n": 40,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 5
+        }
+      ]
+    },
+    {
+      "slice": "domain:pubmed",
+      "metric_name": "coverage_at_5",
+      "n": 40,
+      "status": "published",
+      "winner": null,
+      "band": [
+        "fixed-token",
+        "semantic",
+        "sentence",
+        "cluster-semantic",
+        "recursive"
+      ],
+      "thin": false,
+      "saturated": false,
+      "citation": "packages/eval-chunking/README.md",
+      "results": [
+        {
+          "run_id": "chunking-public-snapshot",
+          "primitive": "chunking",
+          "slice": "domain:pubmed",
+          "adapter": "fixed-token",
+          "n": 40,
+          "point_estimate": 0.8,
+          "metric_name": "coverage_at_5",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.8,
+            "p_value": null,
+            "ci_low": 0.6524239261814333,
+            "ci_high": 0.8950013502683314,
+            "n": 40,
+            "seed": null
+          },
+          "separable": false,
+          "rank": 1
+        },
+        {
+          "run_id": "chunking-public-snapshot",
+          "primitive": "chunking",
+          "slice": "domain:pubmed",
+          "adapter": "semantic",
+          "n": 40,
+          "point_estimate": 0.8,
+          "metric_name": "coverage_at_5",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.8,
+            "p_value": null,
+            "ci_low": 0.6524239261814333,
+            "ci_high": 0.8950013502683314,
+            "n": 40,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 2
+        },
+        {
+          "run_id": "chunking-public-snapshot",
+          "primitive": "chunking",
+          "slice": "domain:pubmed",
+          "adapter": "sentence",
+          "n": 40,
+          "point_estimate": 0.8,
+          "metric_name": "coverage_at_5",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.8,
+            "p_value": null,
+            "ci_low": 0.6524239261814333,
+            "ci_high": 0.8950013502683314,
+            "n": 40,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 3
+        },
+        {
+          "run_id": "chunking-public-snapshot",
+          "primitive": "chunking",
+          "slice": "domain:pubmed",
+          "adapter": "cluster-semantic",
+          "n": 40,
+          "point_estimate": 0.7,
+          "metric_name": "coverage_at_5",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.7,
+            "p_value": null,
+            "ci_low": 0.545696893456796,
+            "ci_high": 0.8192532908430471,
+            "n": 40,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 4
+        },
+        {
+          "run_id": "chunking-public-snapshot",
+          "primitive": "chunking",
+          "slice": "domain:pubmed",
+          "adapter": "recursive",
+          "n": 40,
+          "point_estimate": 0.7,
+          "metric_name": "coverage_at_5",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.7,
+            "p_value": null,
+            "ci_low": 0.545696893456796,
+            "ci_high": 0.8192532908430471,
+            "n": 40,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 5
+        }
+      ]
+    },
+    {
+      "slice": "domain:state_of_the_union",
+      "metric_name": "coverage_at_5",
+      "n": 40,
+      "status": "published",
+      "winner": null,
+      "band": [
+        "semantic",
+        "sentence",
+        "cluster-semantic",
+        "fixed-token",
+        "recursive"
+      ],
+      "thin": false,
+      "saturated": false,
+      "citation": "packages/eval-chunking/README.md",
+      "results": [
+        {
+          "run_id": "chunking-public-snapshot",
+          "primitive": "chunking",
+          "slice": "domain:state_of_the_union",
+          "adapter": "semantic",
+          "n": 40,
+          "point_estimate": 0.9,
+          "metric_name": "coverage_at_5",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.9,
+            "p_value": null,
+            "ci_low": 0.7694792561952611,
+            "ci_high": 0.9604211124044252,
+            "n": 40,
+            "seed": null
+          },
+          "separable": false,
+          "rank": 1
+        },
+        {
+          "run_id": "chunking-public-snapshot",
+          "primitive": "chunking",
+          "slice": "domain:state_of_the_union",
+          "adapter": "sentence",
+          "n": 40,
+          "point_estimate": 0.9,
+          "metric_name": "coverage_at_5",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.9,
+            "p_value": null,
+            "ci_low": 0.7694792561952611,
+            "ci_high": 0.9604211124044252,
+            "n": 40,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 2
+        },
+        {
+          "run_id": "chunking-public-snapshot",
+          "primitive": "chunking",
+          "slice": "domain:state_of_the_union",
+          "adapter": "cluster-semantic",
+          "n": 40,
+          "point_estimate": 0.85,
+          "metric_name": "coverage_at_5",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.85,
+            "p_value": null,
+            "ci_low": 0.7092737396097997,
+            "ci_high": 0.9293890829149256,
+            "n": 40,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 3
+        },
+        {
+          "run_id": "chunking-public-snapshot",
+          "primitive": "chunking",
+          "slice": "domain:state_of_the_union",
+          "adapter": "fixed-token",
+          "n": 40,
+          "point_estimate": 0.85,
+          "metric_name": "coverage_at_5",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.85,
+            "p_value": null,
+            "ci_low": 0.7092737396097997,
+            "ci_high": 0.9293890829149256,
+            "n": 40,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 4
+        },
+        {
+          "run_id": "chunking-public-snapshot",
+          "primitive": "chunking",
+          "slice": "domain:state_of_the_union",
+          "adapter": "recursive",
+          "n": 40,
+          "point_estimate": 0.85,
+          "metric_name": "coverage_at_5",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.85,
+            "p_value": null,
+            "ci_low": 0.7092737396097997,
+            "ci_high": 0.9293890829149256,
+            "n": 40,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 5
+        }
+      ]
+    },
+    {
+      "slice": "domain:wikitexts",
+      "metric_name": "coverage_at_5",
+      "n": 40,
+      "status": "published",
+      "winner": null,
+      "band": [
+        "fixed-token",
+        "recursive",
+        "semantic",
+        "sentence",
+        "cluster-semantic"
+      ],
+      "thin": false,
+      "saturated": false,
+      "citation": "packages/eval-chunking/README.md",
+      "results": [
+        {
+          "run_id": "chunking-public-snapshot",
+          "primitive": "chunking",
+          "slice": "domain:wikitexts",
+          "adapter": "fixed-token",
+          "n": 40,
+          "point_estimate": 0.825,
+          "metric_name": "coverage_at_5",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.825,
+            "p_value": null,
+            "ci_low": 0.6804970794560756,
+            "ci_high": 0.9125469700311692,
+            "n": 40,
+            "seed": null
+          },
+          "separable": false,
+          "rank": 1
+        },
+        {
+          "run_id": "chunking-public-snapshot",
+          "primitive": "chunking",
+          "slice": "domain:wikitexts",
+          "adapter": "recursive",
+          "n": 40,
+          "point_estimate": 0.8,
+          "metric_name": "coverage_at_5",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.8,
+            "p_value": null,
+            "ci_low": 0.6524239261814333,
+            "ci_high": 0.8950013502683314,
+            "n": 40,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 2
+        },
+        {
+          "run_id": "chunking-public-snapshot",
+          "primitive": "chunking",
+          "slice": "domain:wikitexts",
+          "adapter": "semantic",
+          "n": 40,
+          "point_estimate": 0.775,
+          "metric_name": "coverage_at_5",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.775,
+            "p_value": null,
+            "ci_low": 0.6249660359590695,
+            "ci_high": 0.8768404674532148,
+            "n": 40,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 3
+        },
+        {
+          "run_id": "chunking-public-snapshot",
+          "primitive": "chunking",
+          "slice": "domain:wikitexts",
+          "adapter": "sentence",
+          "n": 40,
+          "point_estimate": 0.775,
+          "metric_name": "coverage_at_5",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.775,
+            "p_value": null,
+            "ci_low": 0.6249660359590695,
+            "ci_high": 0.8768404674532148,
+            "n": 40,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 4
+        },
+        {
+          "run_id": "chunking-public-snapshot",
+          "primitive": "chunking",
+          "slice": "domain:wikitexts",
+          "adapter": "cluster-semantic",
+          "n": 40,
+          "point_estimate": 0.7,
+          "metric_name": "coverage_at_5",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.7,
+            "p_value": null,
+            "ci_low": 0.545696893456796,
+            "ci_high": 0.8192532908430471,
+            "n": 40,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 5
+        }
+      ]
+    },
+    {
+      "slice": "reference_dispersion:multi",
+      "metric_name": "coverage_at_5",
+      "n": 93,
+      "status": "published",
+      "winner": null,
+      "band": [
+        "semantic",
+        "sentence",
+        "recursive",
+        "fixed-token",
+        "cluster-semantic"
+      ],
+      "thin": false,
+      "saturated": false,
+      "citation": "packages/eval-chunking/README.md",
+      "results": [
+        {
+          "run_id": "chunking-public-snapshot",
+          "primitive": "chunking",
+          "slice": "reference_dispersion:multi",
+          "adapter": "semantic",
+          "n": 93,
+          "point_estimate": 0.7849462365591398,
+          "metric_name": "coverage_at_5",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.7849462365591398,
+            "p_value": null,
+            "ci_low": 0.6910345980717026,
+            "ci_high": 0.8562508660263709,
+            "n": 93,
+            "seed": null
+          },
+          "separable": false,
+          "rank": 1
+        },
+        {
+          "run_id": "chunking-public-snapshot",
+          "primitive": "chunking",
+          "slice": "reference_dispersion:multi",
+          "adapter": "sentence",
+          "n": 93,
+          "point_estimate": 0.7849462365591398,
+          "metric_name": "coverage_at_5",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.7849462365591398,
+            "p_value": null,
+            "ci_low": 0.6910345980717026,
+            "ci_high": 0.8562508660263709,
+            "n": 93,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 2
+        },
+        {
+          "run_id": "chunking-public-snapshot",
+          "primitive": "chunking",
+          "slice": "reference_dispersion:multi",
+          "adapter": "recursive",
+          "n": 93,
+          "point_estimate": 0.7526881720430108,
+          "metric_name": "coverage_at_5",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.7526881720430108,
+            "p_value": null,
+            "ci_low": 0.6561496172464738,
+            "ci_high": 0.829179001859365,
+            "n": 93,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 3
+        },
+        {
+          "run_id": "chunking-public-snapshot",
+          "primitive": "chunking",
+          "slice": "reference_dispersion:multi",
+          "adapter": "fixed-token",
+          "n": 93,
+          "point_estimate": 0.7419354838709677,
+          "metric_name": "coverage_at_5",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.7419354838709677,
+            "p_value": null,
+            "ci_low": 0.6446603321344209,
+            "ci_high": 0.8200160053073398,
+            "n": 93,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 4
+        },
+        {
+          "run_id": "chunking-public-snapshot",
+          "primitive": "chunking",
+          "slice": "reference_dispersion:multi",
+          "adapter": "cluster-semantic",
+          "n": 93,
+          "point_estimate": 0.6559139784946236,
+          "metric_name": "coverage_at_5",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.6559139784946236,
+            "p_value": null,
+            "ci_low": 0.5549073090695003,
+            "ci_high": 0.7445507750596343,
+            "n": 93,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 5
+        }
+      ]
+    },
+    {
+      "slice": "reference_dispersion:single",
+      "metric_name": "coverage_at_5",
+      "n": 107,
+      "status": "published",
+      "winner": null,
+      "band": [
+        "semantic",
+        "sentence",
+        "fixed-token",
+        "recursive",
+        "cluster-semantic"
+      ],
+      "thin": false,
+      "saturated": false,
+      "citation": "packages/eval-chunking/README.md",
+      "results": [
+        {
+          "run_id": "chunking-public-snapshot",
+          "primitive": "chunking",
+          "slice": "reference_dispersion:single",
+          "adapter": "semantic",
+          "n": 107,
+          "point_estimate": 0.8878504672897196,
+          "metric_name": "coverage_at_5",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.8878504672897196,
+            "p_value": null,
+            "ci_low": 0.8141445024220535,
+            "ci_high": 0.9346718264652956,
+            "n": 107,
+            "seed": null
+          },
+          "separable": false,
+          "rank": 1
+        },
+        {
+          "run_id": "chunking-public-snapshot",
+          "primitive": "chunking",
+          "slice": "reference_dispersion:single",
+          "adapter": "sentence",
+          "n": 107,
+          "point_estimate": 0.8878504672897196,
+          "metric_name": "coverage_at_5",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.8878504672897196,
+            "p_value": null,
+            "ci_low": 0.8141445024220535,
+            "ci_high": 0.9346718264652956,
+            "n": 107,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 2
+        },
+        {
+          "run_id": "chunking-public-snapshot",
+          "primitive": "chunking",
+          "slice": "reference_dispersion:single",
+          "adapter": "fixed-token",
+          "n": 107,
+          "point_estimate": 0.8785046728971962,
+          "metric_name": "coverage_at_5",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.8785046728971962,
+            "p_value": null,
+            "ci_low": 0.8031662162433888,
+            "ci_high": 0.9276063456828194,
+            "n": 107,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 3
+        },
+        {
+          "run_id": "chunking-public-snapshot",
+          "primitive": "chunking",
+          "slice": "reference_dispersion:single",
+          "adapter": "recursive",
+          "n": 107,
+          "point_estimate": 0.8504672897196262,
+          "metric_name": "coverage_at_5",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.8504672897196262,
+            "p_value": null,
+            "ci_low": 0.7708287680780948,
+            "ci_high": 0.9058124929646907,
+            "n": 107,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 4
+        },
+        {
+          "run_id": "chunking-public-snapshot",
+          "primitive": "chunking",
+          "slice": "reference_dispersion:single",
+          "adapter": "cluster-semantic",
+          "n": 107,
+          "point_estimate": 0.8317757009345794,
+          "metric_name": "coverage_at_5",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.8317757009345794,
+            "p_value": null,
+            "ci_low": 0.749694958471902,
+            "ci_high": 0.8908587686486015,
+            "n": 107,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 5
+        }
+      ]
+    }
+  ]
+}

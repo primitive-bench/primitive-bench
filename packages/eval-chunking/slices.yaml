@@ -1,5 +1,36 @@
 # Slice / constraint definitions for the chunking primitive.
-# Each slice becomes a SliceResult per adapter. ~45 slices total across primitives.
-# Trust rule: a slice only publishes a winner if adapters are statistically separable.
+# Each slice becomes a SliceResult per adapter. Assigned deterministically from row
+# facts (see src/eval_chunking/slicing.py) — no model. Trust rule: a slice only
+# publishes a winner when adapters are statistically separable (Wilson-clear AND
+# McNemar-separable on coverage@k), otherwise a TIE band ("one winner is a lie").
 primitive: chunking
-slices: []   # TODO: define per-constraint slices (the "one winner is a lie" surface)
+
+# A chunker is scored DOWNSTREAM: chunk a corpus, embed the chunks with a FIXED
+# embedder, retrieve top-k for each query, and measure how well the retrieved chunks
+# recover the query's gold reference spans (Chroma "Evaluating Chunking Strategies
+# for Retrieval" methodology, character-range overlap).
+#
+# coverage@k (recall@k >= target, target=0.8) is the paired-binary separability
+# surface the leaderboard's McNemar/Wilson gate consumes. recall / precision / IoU /
+# precision_omega ride alongside (per-item metrics + a recall+precision summary) but
+# are not the published gate. Precision is reported because it is where chunkers
+# diverge most — an over-chunking strategy buys recall at a precision cost.
+scoring:
+  metric: coverage_at_5            # recall@5 >= 0.8 (the answer evidence is recovered)
+  retrieve_k: 5
+  recall_target: 0.8
+  embedder: tfidf-local            # held constant across chunkers; SOTA dense for publish
+  reported: [recall, precision, iou, precision_omega, full_recall]
+  miss_reasons: [partial_recall, answer_not_retrieved, empty_chunking, references_unresolved, failed]
+
+# Cross-cutting slices. A row carries one key per axis (domain / reference_dispersion),
+# assigned from the corpus + the gold reference spans — never a model.
+slices:
+  - key: domain
+    values: [chatlogs, finance, pubmed, state_of_the_union, wikitexts]
+    description: "Source corpus (Chroma eval set): conversational chat logs, financial filings, biomedical PubMed, a political speech, and encyclopedic Wikipedia prose."
+    separates: "THE primary axis — document structure differs sharply across domains, so the chunker that respects one structure (turns, tables, sections, prose) wrecks another; the reason the set spans five corpora."
+  - key: reference_dispersion
+    values: [single, multi]
+    description: "Does answering need ONE localized span (single) or material scattered across several disjoint spans (multi)?"
+    separates: "a dispersed (multi-span) answer is the sharp test of chunking — the strategy must keep related content together AND fit every relevant span inside the top-k budget — so it separates structure-aware chunkers from naive fixed windows."
