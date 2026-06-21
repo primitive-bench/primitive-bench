@@ -1,5 +1,5 @@
 {
-  "dataset_version": "retrieval-2026.06.scifact+nfcorpus+fiqa.n600.seed0",
+  "dataset_version": "retrieval-2026.06.scifact+nfcorpus+fiqa.n1271.seed0",
   "per_source": 1000,
   "pool": 100,
   "seed": 0,

@@ -215,6 +215,7 @@ source = { editable = "packages/bench-adapters" }
 dependencies = [
     { name = "bench-schemas" },
     { name = "httpx" },
+    { name = "numpy" },
 ]
 
 [package.optional-dependencies]
@@ -229,6 +230,7 @@ local-retrieval = [
 requires-dist = [
     { name = "bench-schemas", editable = "packages/bench-schemas" },
     { name = "httpx", specifier = ">=0.27" },
+    { name = "numpy", specifier = ">=1.24" },
     { name = "sentence-transformers", marker = "extra == 'local-rerank'", specifier = ">=3.0" },
     { name = "sentence-transformers", marker = "extra == 'local-retrieval'", specifier = ">=3.0" },
 ]

@@ -14,11 +14,11 @@ Mirroring the OCR / reranker split model:
 - `dev.jsonl` — the **full** organized subset, generated locally and **git-ignored**
   (never redistributed). Build it with:
   ```bash
-  uv run python packages/eval-retrieval/tools/ingest_beir.py --per-source 200 --seed 0
+  uv run python packages/eval-retrieval/tools/ingest_beir.py --seed 0
   ```
-  This writes ~600 rows (200 per domain) plus a committed
-  `packages/eval-retrieval/selection_manifest.json` (the chosen query ids + seed) so
-  the exact subset is auditable without re-downloading.
+  This writes ~1271 rows (the full SciFact / NFCorpus / FiQA test sets — 300 / 323 / 648)
+  plus a committed `packages/eval-retrieval/selection_manifest.json` (the chosen query ids
+  + seed) so the exact subset is auditable without re-downloading.
 - `CANARY` — the canary GUID for contamination detection (BIG-bench convention),
   embedded as the header comment of each split file (see `../CANARY`).
 
@@ -51,13 +51,14 @@ standard BEIR "rerank the BM25 pool" setup). This isolates *embedding quality* �
 thing that separates retrievers — from corpus-indexing engineering (which the vectordb
 primitive owns), and lets a free local bi-encoder run the whole split on CPU.
 
-## Organized subset (why a sample, not the whole set)
+## Organized subset (deterministic & reproducible)
 
-The ingest tool takes a **deterministic, seeded, relevant-set-stratified sample** of
-`--per-source` queries per source (round-robin across the single/multi buckets), not a
-biased head-N — representative and powered for separability. The recipe is pinned in
-`Task.dataset_version` (`retrieval-2026.06.scifact+nfcorpus+fiqa.n600.seed0`);
-re-running with the same `--seed` reproduces the subset byte-for-byte.
+At the default `--per-source 1000` the ingest tool takes the **full** SciFact / NFCorpus /
+FiQA test sets (each set's eligible-query count is below the cap). A lower `--per-source`
+draws a **deterministic, seeded, relevant-set-stratified sample** instead (round-robin
+across the single/multi buckets, not a biased head-N). Either way the recipe is pinned in
+`Task.dataset_version` (`retrieval-2026.06.scifact+nfcorpus+fiqa.n1271.seed0`) and
+re-running with the same `--seed` reproduces the split byte-for-byte.
 
 ## Provenance & license
 

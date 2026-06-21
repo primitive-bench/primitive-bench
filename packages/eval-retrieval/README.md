@@ -54,8 +54,8 @@ uv run python -m eval_retrieval \
     --golden golden-sets-public/retrieval/dev.example.jsonl \
     --adapters bge-small --run-id retrieval-smoke
 
-# full subset (build dev.jsonl first; hosted lanes need keys in .env):
-uv run python packages/eval-retrieval/tools/ingest_beir.py --per-source 200 --seed 0
+# full set (build dev.jsonl first; hosted lanes need keys in .env):
+uv run python packages/eval-retrieval/tools/ingest_beir.py --seed 0   # ~1271 rows
 uv run python -m eval_retrieval --golden golden-sets-public/retrieval/dev.jsonl --run-id retrieval-dev
 ```
 

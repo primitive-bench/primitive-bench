@@ -182,8 +182,9 @@ def _build_row(src_row: dict[str, Any], corpus: dict[str, str], bm25: _BM25,
 def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--per-source", type=int, default=200,
-                    help="queries sampled per source (default 200 -> ~600 total)")
+    ap.add_argument("--per-source", type=int, default=1000,
+                    help="queries sampled per source (default 1000 caps at each set's eligible "
+                         "count -> the full SciFact/NFCorpus/FiQA test sets, ~1271 total)")
     ap.add_argument("--pool", type=int, default=100,
                     help="candidate pool size per query (positives + BM25 hard negatives)")
     ap.add_argument("--seed", type=int, default=0)
@@ -219,7 +220,7 @@ def main() -> None:
             f.write(json.dumps(row, ensure_ascii=False, sort_keys=True) + "\n")
 
     MANIFEST.write_text(json.dumps({
-        "dataset_version": "retrieval-2026.06.scifact+nfcorpus+fiqa.n600.seed0",
+        "dataset_version": f"retrieval-2026.06.scifact+nfcorpus+fiqa.n{len(out_rows)}.seed{args.seed}",
         "per_source": args.per_source,
         "pool": args.pool,
         "seed": args.seed,

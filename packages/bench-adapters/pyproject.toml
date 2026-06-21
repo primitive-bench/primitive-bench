@@ -4,7 +4,10 @@ version = "0.1.0"
 description = "Provider/primitive adapter SDK for Primitive Bench"
 requires-python = ">=3.11"
 license = "Apache-2.0"
-dependencies = ["bench-schemas", "httpx>=0.27"]
+# numpy is used by the retrieval adapters to rank a candidate pool by cosine
+# similarity (bench_adapters/retrieval/adapters.py) — needed for both the local
+# bi-encoders and the hosted embedders, so it is a base dependency, not an extra.
+dependencies = ["bench-schemas", "httpx>=0.27", "numpy>=1.24"]
 
 # Local sentence-transformers models power the keyless baselines: cross-encoder
 # rerankers (ce-minilm, bge-reranker) and bi-encoder retrievers (bge-small,

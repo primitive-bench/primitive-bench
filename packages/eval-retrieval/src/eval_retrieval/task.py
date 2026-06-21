@@ -33,7 +33,7 @@ class Scorer(_Scorer):
 class Task(_Task):
     primitive = Primitive.RETRIEVAL
     task_version = "retrieval@1"
-    dataset_version = "retrieval-2026.06.scifact+nfcorpus+fiqa.n600.seed0"
+    dataset_version = "retrieval-2026.06.scifact+nfcorpus+fiqa.n1271.seed0"
 
     def __init__(self, rows: Iterable[dict[str, Any]] | None = None) -> None:
         """`rows` are golden rows (query + candidate pool + relevance + domain/slices).
