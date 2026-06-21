@@ -11,6 +11,12 @@ dependencies = ["bench-schemas", "httpx>=0.27"]
 # eval-reranker pulls this in for a ready-to-run local baseline.
 [project.optional-dependencies]
 local-rerank = ["sentence-transformers>=3.0"]
+# Vector-DB / ANN engines (eval-vectordb). Split by weight so CI installs only what
+# it runs: numpy is the always-on bruteforce oracle; the rest are opt-in per engine.
+vectordb-local = ["numpy>=2.0", "hnswlib>=0.8", "annoy>=1.17", "qdrant-client>=1.10", "lancedb>=0.10"]
+vectordb-faiss = ["faiss-cpu>=1.8"]
+vectordb-servers = ["psycopg[binary]>=3.1", "pgvector>=0.3", "pymilvus>=2.5", "weaviate-client>=4.5", "elasticsearch>=8.0"]
+vectordb-hosted = ["pinecone>=5.0", "pymilvus>=2.5", "weaviate-client>=4.5"]
 
 [build-system]
 requires = ["hatchling"]

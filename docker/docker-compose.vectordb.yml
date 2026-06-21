@@ -1,0 +1,45 @@
+# Dockerized vector-DB engines for eval-vectordb (the "Dockerized per-engine" design).
+#
+#   docker compose -f docker/docker-compose.vectordb.yml up -d
+#   uv pip install -e "packages/eval-vectordb[datasets]" "packages/bench-adapters[vectordb-servers,vectordb-faiss]"
+#   uv run python -m eval_vectordb \
+#       --datasets sift-128-euclidean,glove-100-angular,cohere-wiki-v3-1024 \
+#       --engines faiss-hnsw,hnswlib,pgvector,milvus,weaviate,elasticsearch \
+#       --run-id vectordb-docker && uv run bench results emit
+#
+# The adapters connect via the env vars below (defaults match these published ports):
+#   PGVECTOR_DSN=postgresql://postgres:postgres@localhost:5432/postgres
+#   MILVUS_URI=http://localhost:19530
+#   WEAVIATE_HOST=localhost  WEAVIATE_PORT=8080
+#   ES_URL=http://localhost:9200
+services:
+  pgvector:
+    image: pgvector/pgvector:pg17        # PostgreSQL 17 + pgvector 0.8.x (HNSW)
+    environment:
+      POSTGRES_PASSWORD: postgres
+    ports: ["5432:5432"]
+
+  milvus:
+    image: milvusdb/milvus:v2.5.4         # Milvus 2.5 (standalone, embedded etcd+minio)
+    command: ["milvus", "run", "standalone"]
+    security_opt: ["seccomp:unconfined"]
+    environment:
+      ETCD_USE_EMBED: "true"
+      COMMON_STORAGETYPE: local
+    ports: ["19530:19530"]
+
+  weaviate:
+    image: cr.weaviate.io/semitechnologies/weaviate:1.28.2
+    environment:
+      AUTHENTICATION_ANONYMOUS_ACCESS_ENABLED: "true"
+      PERSISTENCE_DATA_PATH: /var/lib/weaviate
+      DEFAULT_VECTORIZER_MODULE: none
+    ports: ["8080:8080", "50051:50051"]
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.17.0
+    environment:
+      discovery.type: single-node
+      xpack.security.enabled: "false"
+      ES_JAVA_OPTS: "-Xms2g -Xmx2g"
+    ports: ["9200:9200"]

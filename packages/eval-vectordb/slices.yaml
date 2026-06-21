@@ -1,5 +1,48 @@
 # Slice / constraint definitions for the vectordb primitive.
-# Each slice becomes a SliceResult per adapter. ~45 slices total across primitives.
-# Trust rule: a slice only publishes a winner if adapters are statistically separable.
+# Each slice becomes a SliceResult per engine. A slice publishes a recall@10 winner
+# only when engines are statistically separable (Wilson interval clears the runner-up).
+# Slice keys are assigned deterministically from dataset facts + the operating-point
+# budget (see eval_vectordb.slicing.slice_keys) — never from engine output.
 primitive: vectordb
-slices: []   # TODO: define per-constraint slices (the "one winner is a lie" surface)
+metric: "recall_at_10"   # proportion separability surface (Σhits / ΣK over queries)
+
+# Continuous companions reported alongside (never the gate): qps, p50_ms, p99_ms,
+# build_s, index_mb, cost_usd  (the recall-vs-QPS-vs-cost surface).
+
+# Uncharged non-attempt reasons (correct=None, excluded from the denominator):
+#   build_failed, oom, timeout, adapter_error, no_ground_truth
+# Charged miss reasons (recall < 1.0): missed_recall, empty_result
+
+slices:
+  # --- dataset family (corpus + embedding model identity) ------------------ #
+  - name: "dataset:sift-128-euclidean"
+    desc: SIFT image descriptors, 128-d L2 (ANN-Benchmarks)
+  - name: "dataset:gist-960-euclidean"
+    desc: GIST image descriptors, 960-d L2 (ANN-Benchmarks)
+  - name: "dataset:glove-100-angular"
+    desc: GloVe word embeddings, 100-d cosine (ANN-Benchmarks)
+  - name: "dataset:nytimes-256-angular"
+    desc: NYTimes bag-of-words, 256-d cosine (ANN-Benchmarks)
+  - name: "dataset:cohere-wiki-v3-1024"
+    desc: Cohere embed-multilingual-v3 Wikipedia, 1024-d cosine (modern RAG)
+  - name: "dataset:openai3-1536"
+    desc: OpenAI text-embedding-3 DBpedia, 1536-d cosine (modern RAG)
+  - name: "dataset:synthetic"
+    desc: deterministic clustered vectors (offline smoke / regression sentinel)
+  # --- distance metric ----------------------------------------------------- #
+  - name: "metric:euclidean"
+    desc: L2 datasets pooled
+  - name: "metric:angular"
+    desc: cosine datasets pooled
+  # --- dimensionality bucket ----------------------------------------------- #
+  - name: "dim:low"
+    desc: "< 256 dims"
+  - name: "dim:mid"
+    desc: "256–1024 dims"
+  - name: "dim:high"
+    desc: "> 1024 dims"
+  # --- operating budget (the recall-vs-QPS tradeoff surface) --------------- #
+  - name: "budget:fast"
+    desc: low ef/nprobe/trees — high QPS, lower recall
+  - name: "budget:accurate"
+    desc: high ef/nprobe/trees — high recall, lower QPS

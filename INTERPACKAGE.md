@@ -28,8 +28,16 @@ alternates. `bench-schemas` is FROZEN — import types from it, never modify it.
 - Concrete adapters registered by name under:
     - search:     `brave, exa, tavily, serpapi`
     - extraction: `firecrawl, jina, exa_live, tavily_extract, apify`
+    - rerank:     `ce-minilm, bge-reranker, voyage-rerank, jina-rerank, cohere-rerank`
+    - vectordb:   `bruteforce-numpy, faiss-flat, faiss-hnsw, faiss-ivf, hnswlib, annoy,
+      qdrant-local, lancedb` (OSS in-process); `pgvector, milvus, weaviate, elasticsearch`
+      (Dockerized servers); `pinecone, zilliz-cloud, weaviate-cloud` (hosted, `publish_restricted`)
 - Each adapter `.invoke(item) -> dict` returns at least `{raw_output, latency_ms, cost_usd}` plus
-  primitive extras (search: `returned_urls`; extraction: `main_text`).
+  primitive extras (search: `returned_urls`; extraction: `main_text`; rerank: `reordered_ids`).
+- **vectordb deviates from `invoke(item)`**: a vector engine is stateful, so
+  `from bench_adapters.vectordb import VectorEngine, VendorUnavailable` defines a
+  `build(base, metric, params)` / `query(vector, k) -> list[int]` / `free()` lifecycle the
+  `eval_vectordb.runner` drives (build the index once, query many). `invoke()` raises.
 
 ## eval-websearch (owned by Lane WEBSEARCH) — owns packages/eval-websearch only
 ## eval-extraction (owned by Lane EXTRACTION) — owns packages/eval-extraction only

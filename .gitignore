@@ -32,6 +32,13 @@ golden-sets-heldout/
 # (SciDocs / AskUbuntu) and is NOT redistributed — only dev.example.jsonl is committed.
 golden-sets-public/reranker/dev.jsonl
 
+# Vectordb: ANN-Benchmarks HDF5 + HuggingFace embedding corpora are downloaded and
+# cached locally (large, redistributed by their own authors) — never committed.
+# Only dev.example.jsonl is committed.
+golden-sets-public/vectordb/dev.jsonl
+golden-sets-public/vectordb/_cache/
+*.hdf5
+
 # Secrets / env
 .env
 .env.*

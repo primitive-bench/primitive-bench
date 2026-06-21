@@ -1,10 +1,31 @@
 [project]
 name = "eval-vectordb"
 version = "0.1.0"
-description = "Primitive Bench eval vertical: Vector DB / ANN — Dockerized per-engine, recall-vs-QPS slices"
+description = "Primitive Bench eval vertical: Vector DB / ANN — recall@10 vs QPS / latency / cost across engines & index configs"
 requires-python = ">=3.11"
 license = "Apache-2.0"
-dependencies = ["bench-schemas", "bench-core", "bench-stats", "bench-adapters"]
+dependencies = [
+    "bench-schemas",
+    "bench-core",
+    "bench-stats",
+    "bench-adapters",
+    # numpy powers the bruteforce oracle/sentinel, synthetic data, and exact ground truth.
+    "numpy>=2.0",
+]
+
+[project.optional-dependencies]
+# HDF5 (ANN-Benchmarks) + HuggingFace (Cohere / OpenAI) dataset loaders. Offline tests
+# (synthetic dataset) do not need these.
+datasets = ["h5py>=3.0", "datasets>=2.0", "huggingface-hub>=0.24"]
+# Ready-to-run OSS in-process engines (faiss split out — it is the heaviest wheel).
+engines = ["bench-adapters[vectordb-local]"]
+engines-faiss = ["bench-adapters[vectordb-faiss]"]
+# Dockerized servers / hosted clouds (see docker/docker-compose.vectordb.yml).
+engines-servers = ["bench-adapters[vectordb-servers]"]
+engines-hosted = ["bench-adapters[vectordb-hosted]"]
+
+[project.scripts]
+eval-vectordb = "eval_vectordb.__main__:main"
 
 [build-system]
 requires = ["hatchling"]

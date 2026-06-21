@@ -26,5 +26,6 @@ from bench_adapters.registry import Adapter, get, register, registry
 from bench_adapters import extract as extract  # noqa: E402,F401
 from bench_adapters import search as search  # noqa: E402,F401
 from bench_adapters import rerank as rerank  # noqa: E402,F401
+from bench_adapters import vectordb as vectordb  # noqa: E402,F401
 
-__all__ = ["Adapter", "register", "get", "registry", "search", "extract", "rerank"]
+__all__ = ["Adapter", "register", "get", "registry", "search", "extract", "rerank", "vectordb"]

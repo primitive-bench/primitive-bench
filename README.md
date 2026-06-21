@@ -46,7 +46,7 @@ live here — they sit behind the private eval server, so the scores stay honest
 | Web search | `eval-websearch` | hit@k against golden-URL equivalence classes, sliced by intent | ✅ Live |
 | Extraction | `eval-extraction` | token survival of clean main-content extraction | ✅ Live |
 | OCR | `eval-ocr` | text fidelity across document types | 🚧 Planned |
-| Vector DBs | `eval-vectordb` | recall / latency / cost across index configs | 🚧 Planned |
+| Vector DBs | `eval-vectordb` | recall@10 (separability) + QPS / p50·p99 latency / build / cost, sliced by dataset, metric, dim & budget | ✅ Live |
 | Rerankers | `eval-reranker` | nDCG@10 / MAP / MRR + hit@1, sliced by domain & hard-negative density | ✅ Live |
 | Retrieval | `eval-retrieval` | nDCG@k, MAP@k, MRR@k, Recall@k | 🚧 Planned |
 | Chunking | `eval-chunking` | downstream retrieval quality by chunk strategy | 🚧 Planned |
@@ -96,7 +96,7 @@ queries are free.
 claude mcp add --transport http primitive-bench https://benchpublic.vercel.app/mcp
 ```
 
-Live for **websearch**, **extraction**, and **reranker** today — see [`apps/mcp`](apps/mcp) to run it locally or
+Live for **websearch**, **extraction**, **reranker**, and **vectordb** today — see [`apps/mcp`](apps/mcp) to run it locally or
 deploy your own.
 
 ## How it works

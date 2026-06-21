@@ -1,0 +1,1068 @@
+{
+  "primitive": "vectordb",
+  "run_id": "vectordb-public-snapshot",
+  "as_of": "2026-06",
+  "status": "published",
+  "slices": [
+    {
+      "slice": "all",
+      "metric_name": "recall_at_10",
+      "n": 8000,
+      "status": "published",
+      "winner": null,
+      "band": [
+        "bruteforce-numpy",
+        "faiss-flat"
+      ],
+      "thin": false,
+      "saturated": false,
+      "citation": "packages/eval-vectordb/README.md",
+      "results": [
+        {
+          "run_id": "vectordb-public-snapshot",
+          "primitive": "vectordb",
+          "slice": "all",
+          "adapter": "bruteforce-numpy",
+          "n": 4000,
+          "point_estimate": 1.0,
+          "metric_name": "recall_at_10",
+          "ci": {
+            "method": "wilson",
+            "statistic": 1.0,
+            "p_value": null,
+            "ci_low": 0.9990405214831674,
+            "ci_high": 0.9999999999999999,
+            "n": 4000,
+            "seed": null
+          },
+          "separable": false,
+          "rank": 1
+        },
+        {
+          "run_id": "vectordb-public-snapshot",
+          "primitive": "vectordb",
+          "slice": "all",
+          "adapter": "faiss-flat",
+          "n": 4000,
+          "point_estimate": 1.0,
+          "metric_name": "recall_at_10",
+          "ci": {
+            "method": "wilson",
+            "statistic": 1.0,
+            "p_value": null,
+            "ci_low": 0.9990405214831674,
+            "ci_high": 0.9999999999999999,
+            "n": 4000,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 2
+        },
+        {
+          "run_id": "vectordb-public-snapshot",
+          "primitive": "vectordb",
+          "slice": "all",
+          "adapter": "faiss-hnsw",
+          "n": 8000,
+          "point_estimate": 0.99775,
+          "metric_name": "recall_at_10",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.99775,
+            "p_value": null,
+            "ci_low": 0.9964459298853753,
+            "ci_high": 0.9985762604588216,
+            "n": 8000,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 3
+        },
+        {
+          "run_id": "vectordb-public-snapshot",
+          "primitive": "vectordb",
+          "slice": "all",
+          "adapter": "hnswlib",
+          "n": 8000,
+          "point_estimate": 0.99725,
+          "metric_name": "recall_at_10",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.99725,
+            "p_value": null,
+            "ci_low": 0.9958394788029816,
+            "ci_high": 0.9981831915107338,
+            "n": 8000,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 4
+        },
+        {
+          "run_id": "vectordb-public-snapshot",
+          "primitive": "vectordb",
+          "slice": "all",
+          "adapter": "annoy",
+          "n": 8000,
+          "point_estimate": 0.947625,
+          "metric_name": "recall_at_10",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.947625,
+            "p_value": null,
+            "ci_low": 0.9425246712105317,
+            "ci_high": 0.9522956360779085,
+            "n": 8000,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 5
+        },
+        {
+          "run_id": "vectordb-public-snapshot",
+          "primitive": "vectordb",
+          "slice": "all",
+          "adapter": "faiss-ivf",
+          "n": 8000,
+          "point_estimate": 0.875625,
+          "metric_name": "recall_at_10",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.875625,
+            "p_value": null,
+            "ci_low": 0.8682125612255689,
+            "ci_high": 0.882676861673555,
+            "n": 8000,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 6
+        }
+      ]
+    },
+    {
+      "slice": "budget:accurate",
+      "metric_name": "recall_at_10",
+      "n": 4000,
+      "status": "saturated",
+      "winner": null,
+      "band": [
+        "annoy",
+        "bruteforce-numpy",
+        "faiss-flat",
+        "faiss-hnsw",
+        "faiss-ivf",
+        "hnswlib"
+      ],
+      "thin": false,
+      "saturated": true,
+      "citation": "packages/eval-vectordb/README.md",
+      "results": [
+        {
+          "run_id": "vectordb-public-snapshot",
+          "primitive": "vectordb",
+          "slice": "budget:accurate",
+          "adapter": "annoy",
+          "n": 4000,
+          "point_estimate": 1.0,
+          "metric_name": "recall_at_10",
+          "ci": {
+            "method": "wilson",
+            "statistic": 1.0,
+            "p_value": null,
+            "ci_low": 0.9990405214831674,
+            "ci_high": 0.9999999999999999,
+            "n": 4000,
+            "seed": null
+          },
+          "separable": false,
+          "rank": 1
+        },
+        {
+          "run_id": "vectordb-public-snapshot",
+          "primitive": "vectordb",
+          "slice": "budget:accurate",
+          "adapter": "bruteforce-numpy",
+          "n": 4000,
+          "point_estimate": 1.0,
+          "metric_name": "recall_at_10",
+          "ci": {
+            "method": "wilson",
+            "statistic": 1.0,
+            "p_value": null,
+            "ci_low": 0.9990405214831674,
+            "ci_high": 0.9999999999999999,
+            "n": 4000,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 2
+        },
+        {
+          "run_id": "vectordb-public-snapshot",
+          "primitive": "vectordb",
+          "slice": "budget:accurate",
+          "adapter": "faiss-flat",
+          "n": 4000,
+          "point_estimate": 1.0,
+          "metric_name": "recall_at_10",
+          "ci": {
+            "method": "wilson",
+            "statistic": 1.0,
+            "p_value": null,
+            "ci_low": 0.9990405214831674,
+            "ci_high": 0.9999999999999999,
+            "n": 4000,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 3
+        },
+        {
+          "run_id": "vectordb-public-snapshot",
+          "primitive": "vectordb",
+          "slice": "budget:accurate",
+          "adapter": "faiss-hnsw",
+          "n": 4000,
+          "point_estimate": 1.0,
+          "metric_name": "recall_at_10",
+          "ci": {
+            "method": "wilson",
+            "statistic": 1.0,
+            "p_value": null,
+            "ci_low": 0.9990405214831674,
+            "ci_high": 0.9999999999999999,
+            "n": 4000,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 4
+        },
+        {
+          "run_id": "vectordb-public-snapshot",
+          "primitive": "vectordb",
+          "slice": "budget:accurate",
+          "adapter": "faiss-ivf",
+          "n": 4000,
+          "point_estimate": 1.0,
+          "metric_name": "recall_at_10",
+          "ci": {
+            "method": "wilson",
+            "statistic": 1.0,
+            "p_value": null,
+            "ci_low": 0.9990405214831674,
+            "ci_high": 0.9999999999999999,
+            "n": 4000,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 5
+        },
+        {
+          "run_id": "vectordb-public-snapshot",
+          "primitive": "vectordb",
+          "slice": "budget:accurate",
+          "adapter": "hnswlib",
+          "n": 4000,
+          "point_estimate": 1.0,
+          "metric_name": "recall_at_10",
+          "ci": {
+            "method": "wilson",
+            "statistic": 1.0,
+            "p_value": null,
+            "ci_low": 0.9990405214831674,
+            "ci_high": 0.9999999999999999,
+            "n": 4000,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 6
+        }
+      ]
+    },
+    {
+      "slice": "budget:fast",
+      "metric_name": "recall_at_10",
+      "n": 4000,
+      "status": "published",
+      "winner": null,
+      "band": [
+        "faiss-hnsw",
+        "hnswlib"
+      ],
+      "thin": false,
+      "saturated": false,
+      "citation": "packages/eval-vectordb/README.md",
+      "results": [
+        {
+          "run_id": "vectordb-public-snapshot",
+          "primitive": "vectordb",
+          "slice": "budget:fast",
+          "adapter": "faiss-hnsw",
+          "n": 4000,
+          "point_estimate": 0.9955,
+          "metric_name": "recall_at_10",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.9955,
+            "p_value": null,
+            "ci_low": 0.9928975500480446,
+            "ci_high": 0.9971516067417745,
+            "n": 4000,
+            "seed": null
+          },
+          "separable": false,
+          "rank": 1
+        },
+        {
+          "run_id": "vectordb-public-snapshot",
+          "primitive": "vectordb",
+          "slice": "budget:fast",
+          "adapter": "hnswlib",
+          "n": 4000,
+          "point_estimate": 0.9945,
+          "metric_name": "recall_at_10",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.9945,
+            "p_value": null,
+            "ci_low": 0.9916860460638667,
+            "ci_high": 0.9963650296829861,
+            "n": 4000,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 2
+        },
+        {
+          "run_id": "vectordb-public-snapshot",
+          "primitive": "vectordb",
+          "slice": "budget:fast",
+          "adapter": "annoy",
+          "n": 4000,
+          "point_estimate": 0.89525,
+          "metric_name": "recall_at_10",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.89525,
+            "p_value": null,
+            "ci_low": 0.8853775445880234,
+            "ci_high": 0.9043639876444205,
+            "n": 4000,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 3
+        },
+        {
+          "run_id": "vectordb-public-snapshot",
+          "primitive": "vectordb",
+          "slice": "budget:fast",
+          "adapter": "faiss-ivf",
+          "n": 4000,
+          "point_estimate": 0.75125,
+          "metric_name": "recall_at_10",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.75125,
+            "p_value": null,
+            "ci_low": 0.7376164270409505,
+            "ci_high": 0.764401435004341,
+            "n": 4000,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 4
+        }
+      ]
+    },
+    {
+      "slice": "dataset:synthetic",
+      "metric_name": "recall_at_10",
+      "n": 4000,
+      "status": "published",
+      "winner": null,
+      "band": [
+        "bruteforce-numpy",
+        "faiss-flat",
+        "faiss-hnsw",
+        "hnswlib"
+      ],
+      "thin": false,
+      "saturated": false,
+      "citation": "packages/eval-vectordb/README.md",
+      "results": [
+        {
+          "run_id": "vectordb-public-snapshot",
+          "primitive": "vectordb",
+          "slice": "dataset:synthetic",
+          "adapter": "bruteforce-numpy",
+          "n": 2000,
+          "point_estimate": 1.0,
+          "metric_name": "recall_at_10",
+          "ci": {
+            "method": "wilson",
+            "statistic": 1.0,
+            "p_value": null,
+            "ci_low": 0.9980828823994873,
+            "ci_high": 1.0,
+            "n": 2000,
+            "seed": null
+          },
+          "separable": false,
+          "rank": 1
+        },
+        {
+          "run_id": "vectordb-public-snapshot",
+          "primitive": "vectordb",
+          "slice": "dataset:synthetic",
+          "adapter": "faiss-flat",
+          "n": 2000,
+          "point_estimate": 1.0,
+          "metric_name": "recall_at_10",
+          "ci": {
+            "method": "wilson",
+            "statistic": 1.0,
+            "p_value": null,
+            "ci_low": 0.9980828823994873,
+            "ci_high": 1.0,
+            "n": 2000,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 2
+        },
+        {
+          "run_id": "vectordb-public-snapshot",
+          "primitive": "vectordb",
+          "slice": "dataset:synthetic",
+          "adapter": "faiss-hnsw",
+          "n": 4000,
+          "point_estimate": 0.998,
+          "metric_name": "recall_at_10",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.998,
+            "p_value": null,
+            "ci_low": 0.9960581334698354,
+            "ci_high": 0.9989862259273995,
+            "n": 4000,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 3
+        },
+        {
+          "run_id": "vectordb-public-snapshot",
+          "primitive": "vectordb",
+          "slice": "dataset:synthetic",
+          "adapter": "hnswlib",
+          "n": 4000,
+          "point_estimate": 0.997,
+          "metric_name": "recall_at_10",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.997,
+            "p_value": null,
+            "ci_low": 0.9947632538148933,
+            "ci_high": 0.9982830245393751,
+            "n": 4000,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 4
+        },
+        {
+          "run_id": "vectordb-public-snapshot",
+          "primitive": "vectordb",
+          "slice": "dataset:synthetic",
+          "adapter": "annoy",
+          "n": 4000,
+          "point_estimate": 0.94175,
+          "metric_name": "recall_at_10",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.94175,
+            "p_value": null,
+            "ci_low": 0.9340588467700861,
+            "ci_high": 0.9485934539602923,
+            "n": 4000,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 5
+        },
+        {
+          "run_id": "vectordb-public-snapshot",
+          "primitive": "vectordb",
+          "slice": "dataset:synthetic",
+          "adapter": "faiss-ivf",
+          "n": 4000,
+          "point_estimate": 0.874,
+          "metric_name": "recall_at_10",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.874,
+            "p_value": null,
+            "ci_low": 0.8633557098864977,
+            "ci_high": 0.8839266001829116,
+            "n": 4000,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 6
+        }
+      ]
+    },
+    {
+      "slice": "dataset:synthetic-angular",
+      "metric_name": "recall_at_10",
+      "n": 4000,
+      "status": "published",
+      "winner": null,
+      "band": [
+        "bruteforce-numpy",
+        "faiss-flat",
+        "faiss-hnsw",
+        "hnswlib"
+      ],
+      "thin": false,
+      "saturated": false,
+      "citation": "packages/eval-vectordb/README.md",
+      "results": [
+        {
+          "run_id": "vectordb-public-snapshot",
+          "primitive": "vectordb",
+          "slice": "dataset:synthetic-angular",
+          "adapter": "bruteforce-numpy",
+          "n": 2000,
+          "point_estimate": 1.0,
+          "metric_name": "recall_at_10",
+          "ci": {
+            "method": "wilson",
+            "statistic": 1.0,
+            "p_value": null,
+            "ci_low": 0.9980828823994873,
+            "ci_high": 1.0,
+            "n": 2000,
+            "seed": null
+          },
+          "separable": false,
+          "rank": 1
+        },
+        {
+          "run_id": "vectordb-public-snapshot",
+          "primitive": "vectordb",
+          "slice": "dataset:synthetic-angular",
+          "adapter": "faiss-flat",
+          "n": 2000,
+          "point_estimate": 1.0,
+          "metric_name": "recall_at_10",
+          "ci": {
+            "method": "wilson",
+            "statistic": 1.0,
+            "p_value": null,
+            "ci_low": 0.9980828823994873,
+            "ci_high": 1.0,
+            "n": 2000,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 2
+        },
+        {
+          "run_id": "vectordb-public-snapshot",
+          "primitive": "vectordb",
+          "slice": "dataset:synthetic-angular",
+          "adapter": "faiss-hnsw",
+          "n": 4000,
+          "point_estimate": 0.9975,
+          "metric_name": "recall_at_10",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.9975,
+            "p_value": null,
+            "ci_low": 0.9954038470449161,
+            "ci_high": 0.9986414718308355,
+            "n": 4000,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 3
+        },
+        {
+          "run_id": "vectordb-public-snapshot",
+          "primitive": "vectordb",
+          "slice": "dataset:synthetic-angular",
+          "adapter": "hnswlib",
+          "n": 4000,
+          "point_estimate": 0.9975,
+          "metric_name": "recall_at_10",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.9975,
+            "p_value": null,
+            "ci_low": 0.9954038470449161,
+            "ci_high": 0.9986414718308355,
+            "n": 4000,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 4
+        },
+        {
+          "run_id": "vectordb-public-snapshot",
+          "primitive": "vectordb",
+          "slice": "dataset:synthetic-angular",
+          "adapter": "annoy",
+          "n": 4000,
+          "point_estimate": 0.9535,
+          "metric_name": "recall_at_10",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.9535,
+            "p_value": null,
+            "ci_low": 0.9465280231918024,
+            "ci_high": 0.9596017297934306,
+            "n": 4000,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 5
+        },
+        {
+          "run_id": "vectordb-public-snapshot",
+          "primitive": "vectordb",
+          "slice": "dataset:synthetic-angular",
+          "adapter": "faiss-ivf",
+          "n": 4000,
+          "point_estimate": 0.87725,
+          "metric_name": "recall_at_10",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.87725,
+            "p_value": null,
+            "ci_low": 0.8667169992784791,
+            "ci_high": 0.8870590741805706,
+            "n": 4000,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 6
+        }
+      ]
+    },
+    {
+      "slice": "dim:low",
+      "metric_name": "recall_at_10",
+      "n": 8000,
+      "status": "published",
+      "winner": null,
+      "band": [
+        "bruteforce-numpy",
+        "faiss-flat"
+      ],
+      "thin": false,
+      "saturated": false,
+      "citation": "packages/eval-vectordb/README.md",
+      "results": [
+        {
+          "run_id": "vectordb-public-snapshot",
+          "primitive": "vectordb",
+          "slice": "dim:low",
+          "adapter": "bruteforce-numpy",
+          "n": 4000,
+          "point_estimate": 1.0,
+          "metric_name": "recall_at_10",
+          "ci": {
+            "method": "wilson",
+            "statistic": 1.0,
+            "p_value": null,
+            "ci_low": 0.9990405214831674,
+            "ci_high": 0.9999999999999999,
+            "n": 4000,
+            "seed": null
+          },
+          "separable": false,
+          "rank": 1
+        },
+        {
+          "run_id": "vectordb-public-snapshot",
+          "primitive": "vectordb",
+          "slice": "dim:low",
+          "adapter": "faiss-flat",
+          "n": 4000,
+          "point_estimate": 1.0,
+          "metric_name": "recall_at_10",
+          "ci": {
+            "method": "wilson",
+            "statistic": 1.0,
+            "p_value": null,
+            "ci_low": 0.9990405214831674,
+            "ci_high": 0.9999999999999999,
+            "n": 4000,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 2
+        },
+        {
+          "run_id": "vectordb-public-snapshot",
+          "primitive": "vectordb",
+          "slice": "dim:low",
+          "adapter": "faiss-hnsw",
+          "n": 8000,
+          "point_estimate": 0.99775,
+          "metric_name": "recall_at_10",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.99775,
+            "p_value": null,
+            "ci_low": 0.9964459298853753,
+            "ci_high": 0.9985762604588216,
+            "n": 8000,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 3
+        },
+        {
+          "run_id": "vectordb-public-snapshot",
+          "primitive": "vectordb",
+          "slice": "dim:low",
+          "adapter": "hnswlib",
+          "n": 8000,
+          "point_estimate": 0.99725,
+          "metric_name": "recall_at_10",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.99725,
+            "p_value": null,
+            "ci_low": 0.9958394788029816,
+            "ci_high": 0.9981831915107338,
+            "n": 8000,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 4
+        },
+        {
+          "run_id": "vectordb-public-snapshot",
+          "primitive": "vectordb",
+          "slice": "dim:low",
+          "adapter": "annoy",
+          "n": 8000,
+          "point_estimate": 0.947625,
+          "metric_name": "recall_at_10",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.947625,
+            "p_value": null,
+            "ci_low": 0.9425246712105317,
+            "ci_high": 0.9522956360779085,
+            "n": 8000,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 5
+        },
+        {
+          "run_id": "vectordb-public-snapshot",
+          "primitive": "vectordb",
+          "slice": "dim:low",
+          "adapter": "faiss-ivf",
+          "n": 8000,
+          "point_estimate": 0.875625,
+          "metric_name": "recall_at_10",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.875625,
+            "p_value": null,
+            "ci_low": 0.8682125612255689,
+            "ci_high": 0.882676861673555,
+            "n": 8000,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 6
+        }
+      ]
+    },
+    {
+      "slice": "metric:angular",
+      "metric_name": "recall_at_10",
+      "n": 4000,
+      "status": "published",
+      "winner": null,
+      "band": [
+        "bruteforce-numpy",
+        "faiss-flat",
+        "faiss-hnsw",
+        "hnswlib"
+      ],
+      "thin": false,
+      "saturated": false,
+      "citation": "packages/eval-vectordb/README.md",
+      "results": [
+        {
+          "run_id": "vectordb-public-snapshot",
+          "primitive": "vectordb",
+          "slice": "metric:angular",
+          "adapter": "bruteforce-numpy",
+          "n": 2000,
+          "point_estimate": 1.0,
+          "metric_name": "recall_at_10",
+          "ci": {
+            "method": "wilson",
+            "statistic": 1.0,
+            "p_value": null,
+            "ci_low": 0.9980828823994873,
+            "ci_high": 1.0,
+            "n": 2000,
+            "seed": null
+          },
+          "separable": false,
+          "rank": 1
+        },
+        {
+          "run_id": "vectordb-public-snapshot",
+          "primitive": "vectordb",
+          "slice": "metric:angular",
+          "adapter": "faiss-flat",
+          "n": 2000,
+          "point_estimate": 1.0,
+          "metric_name": "recall_at_10",
+          "ci": {
+            "method": "wilson",
+            "statistic": 1.0,
+            "p_value": null,
+            "ci_low": 0.9980828823994873,
+            "ci_high": 1.0,
+            "n": 2000,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 2
+        },
+        {
+          "run_id": "vectordb-public-snapshot",
+          "primitive": "vectordb",
+          "slice": "metric:angular",
+          "adapter": "faiss-hnsw",
+          "n": 4000,
+          "point_estimate": 0.9975,
+          "metric_name": "recall_at_10",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.9975,
+            "p_value": null,
+            "ci_low": 0.9954038470449161,
+            "ci_high": 0.9986414718308355,
+            "n": 4000,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 3
+        },
+        {
+          "run_id": "vectordb-public-snapshot",
+          "primitive": "vectordb",
+          "slice": "metric:angular",
+          "adapter": "hnswlib",
+          "n": 4000,
+          "point_estimate": 0.9975,
+          "metric_name": "recall_at_10",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.9975,
+            "p_value": null,
+            "ci_low": 0.9954038470449161,
+            "ci_high": 0.9986414718308355,
+            "n": 4000,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 4
+        },
+        {
+          "run_id": "vectordb-public-snapshot",
+          "primitive": "vectordb",
+          "slice": "metric:angular",
+          "adapter": "annoy",
+          "n": 4000,
+          "point_estimate": 0.9535,
+          "metric_name": "recall_at_10",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.9535,
+            "p_value": null,
+            "ci_low": 0.9465280231918024,
+            "ci_high": 0.9596017297934306,
+            "n": 4000,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 5
+        },
+        {
+          "run_id": "vectordb-public-snapshot",
+          "primitive": "vectordb",
+          "slice": "metric:angular",
+          "adapter": "faiss-ivf",
+          "n": 4000,
+          "point_estimate": 0.87725,
+          "metric_name": "recall_at_10",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.87725,
+            "p_value": null,
+            "ci_low": 0.8667169992784791,
+            "ci_high": 0.8870590741805706,
+            "n": 4000,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 6
+        }
+      ]
+    },
+    {
+      "slice": "metric:euclidean",
+      "metric_name": "recall_at_10",
+      "n": 4000,
+      "status": "published",
+      "winner": null,
+      "band": [
+        "bruteforce-numpy",
+        "faiss-flat",
+        "faiss-hnsw",
+        "hnswlib"
+      ],
+      "thin": false,
+      "saturated": false,
+      "citation": "packages/eval-vectordb/README.md",
+      "results": [
+        {
+          "run_id": "vectordb-public-snapshot",
+          "primitive": "vectordb",
+          "slice": "metric:euclidean",
+          "adapter": "bruteforce-numpy",
+          "n": 2000,
+          "point_estimate": 1.0,
+          "metric_name": "recall_at_10",
+          "ci": {
+            "method": "wilson",
+            "statistic": 1.0,
+            "p_value": null,
+            "ci_low": 0.9980828823994873,
+            "ci_high": 1.0,
+            "n": 2000,
+            "seed": null
+          },
+          "separable": false,
+          "rank": 1
+        },
+        {
+          "run_id": "vectordb-public-snapshot",
+          "primitive": "vectordb",
+          "slice": "metric:euclidean",
+          "adapter": "faiss-flat",
+          "n": 2000,
+          "point_estimate": 1.0,
+          "metric_name": "recall_at_10",
+          "ci": {
+            "method": "wilson",
+            "statistic": 1.0,
+            "p_value": null,
+            "ci_low": 0.9980828823994873,
+            "ci_high": 1.0,
+            "n": 2000,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 2
+        },
+        {
+          "run_id": "vectordb-public-snapshot",
+          "primitive": "vectordb",
+          "slice": "metric:euclidean",
+          "adapter": "faiss-hnsw",
+          "n": 4000,
+          "point_estimate": 0.998,
+          "metric_name": "recall_at_10",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.998,
+            "p_value": null,
+            "ci_low": 0.9960581334698354,
+            "ci_high": 0.9989862259273995,
+            "n": 4000,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 3
+        },
+        {
+          "run_id": "vectordb-public-snapshot",
+          "primitive": "vectordb",
+          "slice": "metric:euclidean",
+          "adapter": "hnswlib",
+          "n": 4000,
+          "point_estimate": 0.997,
+          "metric_name": "recall_at_10",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.997,
+            "p_value": null,
+            "ci_low": 0.9947632538148933,
+            "ci_high": 0.9982830245393751,
+            "n": 4000,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 4
+        },
+        {
+          "run_id": "vectordb-public-snapshot",
+          "primitive": "vectordb",
+          "slice": "metric:euclidean",
+          "adapter": "annoy",
+          "n": 4000,
+          "point_estimate": 0.94175,
+          "metric_name": "recall_at_10",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.94175,
+            "p_value": null,
+            "ci_low": 0.9340588467700861,
+            "ci_high": 0.9485934539602923,
+            "n": 4000,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 5
+        },
+        {
+          "run_id": "vectordb-public-snapshot",
+          "primitive": "vectordb",
+          "slice": "metric:euclidean",
+          "adapter": "faiss-ivf",
+          "n": 4000,
+          "point_estimate": 0.874,
+          "metric_name": "recall_at_10",
+          "ci": {
+            "method": "wilson",
+            "statistic": 0.874,
+            "p_value": null,
+            "ci_low": 0.8633557098864977,
+            "ci_high": 0.8839266001829116,
+            "n": 4000,
+            "seed": null
+          },
+          "separable": null,
+          "rank": 6
+        }
+      ]
+    }
+  ]
+}

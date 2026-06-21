@@ -40,10 +40,24 @@ test("compare: firecrawl is separable from exa_live on fed_register", () => {
   assert.equal(r.separable, true);
 });
 
-test("listPrimitives returns all 9, exactly 3 published", () => {
+test("listPrimitives returns all 9, exactly 4 published", () => {
   const ps = listPrimitives();
   assert.equal(ps.length, 9);
-  assert.equal(ps.filter((p) => p.status === "published").length, 3);
+  assert.equal(ps.filter((p) => p.status === "published").length, 4);
+  assert.equal(ps.find((p) => p.primitive === "vectordb")?.status, "published");
+});
+
+test("vectordb publishes recall@10 slices with separability bands", () => {
+  const r = recommend("vectordb", "budget:fast") as {
+    status: string; metric: string; band: string[];
+  };
+  assert.equal(r.status, "published");
+  assert.equal(r.metric, "recall_at_10");
+  assert.ok(r.band.length >= 2); // top engines tie near the recall ceiling on this slice
+  const ls = listSlices("vectordb") as { slices: { slice: string }[] };
+  const keys = ls.slices.map((s) => s.slice);
+  assert.ok(keys.includes("budget:fast"));
+  assert.ok(keys.includes("dataset:synthetic"));
 });
 
 test("reranker domain:scientific is a published TIE band of all four adapters", () => {
