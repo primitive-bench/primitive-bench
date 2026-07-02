@@ -14,7 +14,7 @@ dependencies = [
     # The BEIR ingest tool pulls corpus/queries/qrels from HuggingFace and mines
     # BM25 hard negatives for the per-query candidate pools.
     "datasets>=2.0",
-    "huggingface-hub>=0.24",
+    "huggingface-hub>=1.21.0",
     "rank-bm25>=0.2.2",
 ]
 

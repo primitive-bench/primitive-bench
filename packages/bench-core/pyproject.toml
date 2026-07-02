@@ -12,7 +12,7 @@ dependencies = [
     "tldextract>=5.2",           # registrable-domain extraction
     "python-dotenv>=1.0",        # .env loading for Settings
     "pydantic>=2.8",
-    "pydantic-settings>=2.4",    # env-backed typed config
+    "pydantic-settings>=2.14.2",    # env-backed typed config
 ]
 
 [build-system]
