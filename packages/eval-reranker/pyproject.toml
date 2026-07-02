@@ -13,7 +13,7 @@ dependencies = [
     "sentence-transformers>=3.0",
     # The MTEB ingest tool pulls the reranking sets from HuggingFace.
     "datasets>=2.0",
-    "huggingface-hub>=0.24",
+    "huggingface-hub>=1.21.0",
 ]
 
 [project.scripts]
