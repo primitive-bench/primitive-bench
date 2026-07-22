@@ -17,6 +17,7 @@
 </p>
 
 <p align="center">
+  <a href="https://cal.com/arlen-frederick-kumar-hs0w6h/primitivebench"><b>Book a call</b></a> ·
   <a href="https://www.primitivebench.com/">Website</a> ·
   <a href="apps/docs">Docs</a> ·
   <a href="apps/docs/methodology/v3.md">Methodology</a> ·
@@ -44,6 +45,10 @@ Bench sells the outcome, not the call.**
 - **Outcome guaranteed, or refunded.** If the outcome isn't delivered, you get your money back.
 
 > ### Load your AI into the money, get a guaranteed outcome. If it isn't done, get your money back.
+
+<p align="center">
+  <a href="https://cal.com/arlen-frederick-kumar-hs0w6h/primitivebench"><b>Book a call →</b></a>
+</p>
 
 ## Why this, not another tool aggregator
 
@@ -177,8 +182,9 @@ sub-APIs, and the refund guarantee) is being built on top of it. Near-term work:
   the traced input/output, and the scope limits on what Primitive Bench will and won't take on.
 - **Open contributor payouts** so anyone who uploads a tool earns when routing uses it.
 
-Have a workflow you'd want guaranteed end-to-end? Open an issue, that's exactly the customer
-discovery we're doing now.
+Have a workflow you'd want guaranteed end-to-end?
+**[Book a call →](https://cal.com/arlen-frederick-kumar-hs0w6h/primitivebench)**
+That's exactly the customer discovery we're doing now.
 
 ## Contributing
 
