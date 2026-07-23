@@ -4,7 +4,7 @@ version = "0.1.0"
 description = "The `bench` CLI: init / run / view / submit."
 requires-python = ">=3.11"
 license = "Apache-2.0"
-dependencies = ["bench-schemas", "bench-core", "bench-stats", "bench-adapters", "typer>=0.12"]
+dependencies = ["bench-schemas", "bench-core", "bench-stats", "bench-adapters", "typer>=0.27.0"]
 
 [project.scripts]
 bench = "primitive_bench_cli.main:app"
