@@ -5,8 +5,9 @@
 <h1 align="center">Primitive Bench</h1>
 
 <p align="center">
-  <b>The vendor-neutral benchmark for AI infrastructure primitives.</b><br>
-  OCR · web search · vector DBs · rerankers · retrieval · extraction · chunking · crawling · memory
+  <b>The marketplace for verifiable AI outcomes.</b><br>
+  State a task, get a fixed price upfront. We route across the right tools to complete it.<br>
+  If the outcome isn't delivered, you get your money back.
 </p>
 
 <p align="center">
@@ -16,6 +17,7 @@
 </p>
 
 <p align="center">
+  <a href="https://cal.com/arlen-frederick-kumar-hs0w6h/primitivebench"><b>Book a call</b></a> ·
   <a href="https://www.primitivebench.com/">Website</a> ·
   <a href="apps/docs">Docs</a> ·
   <a href="apps/docs/methodology/v3.md">Methodology</a> ·
@@ -25,21 +27,64 @@
 
 ---
 
-## The vendor-neutral benchmark for AI infrastructure primitives
+## From tool calls to guaranteed outcomes
 
-Modern AI products are assembled from **infrastructure primitives** — OCR, web search, vector
-databases, rerankers, retrieval, extraction, chunking, crawling, memory. Choosing the right one is
-mostly folklore today. **Primitive Bench turns that choice into evidence.**
+A year ago, vibe coding arrived. Next, agents run full end-to-end workflows: choosing a domain
+name, buying a design, paying a hosting provider, deploying the app. Developers and indie founders
+will lead; enterprises will follow. Every one of those workflows is a chain of tool calls that has
+to actually work.
+
+Most tool marketplaces stop at the call: they hand your agent an API and wish it luck. **Primitive
+Bench sells the outcome, not the call.**
+
+- **State a task.** Describe what you want done, in plain language.
+- **Get a fixed price upfront.** The estimator prices the job from known, published API pricing
+  before you commit a cent.
+- **We route and execute.** Primitive Bench internally selects and calls the sub-APIs that get it
+  done, and traces every step.
+- **Outcome guaranteed, or refunded.** If the outcome isn't delivered, you get your money back.
+
+> ### Load your AI into the money, get a guaranteed outcome. If it isn't done, get your money back.
+
+<p align="center">
+  <a href="https://cal.com/arlen-frederick-kumar-hs0w6h/primitivebench"><b>Book a call →</b></a>
+</p>
+
+## Why this, not another tool aggregator
+
+| | Aggregators (e.g. Apify) | **Primitive Bench** |
+|---|---|---|
+| Open marketplace | ✅ anyone can list tools | ✅ anyone can upload tools **and earn from them** |
+| What you pay for | a tool call | **a verified outcome** |
+| If it fails | your problem | **refund guarantee** |
+| Cost | metered, discovered as you go | **fixed estimate upfront** from known API pricing |
+| The layer | tool aggregation | **routing + observability over tools** |
+
+An open marketplace alone is not a moat. The wedge is the layer on top: **route to the right tools,
+observe what they actually did, and stand behind the result.** Primitive Bench is the observability
+and routing layer for tools, not just a place to find them.
+
+## The verification layer
+
+An outcome guarantee is only as honest as the machinery that decides whether the outcome was
+delivered. That machinery is what most of this repo is: a **vendor-neutral harness that measures
+whether a tool actually did its job**, per slice, with real statistics.
+
+The open engine here observes input and output, traces every tool call, and scores the result
+against golden answers with confidence intervals and separability tests. That observability layer is
+how Primitive Bench knows a task is "done" and where routing should send the next one. Held-out
+golden answers never live in this repo; they sit behind the private eval server, so the scores stay
+honest and the marketplace has a neutral arbiter no vendor can pay to move.
 
 > ### "One winner is a lie."
-> No primitive wins every slice. We publish **per-slice, per-constraint** results with confidence
-> intervals and statistical separability — never a single global leaderboard.
+> No tool wins every slice. We score **per-slice, per-constraint** with confidence intervals and
+> statistical separability, so routing picks the right tool for *your* task instead of a single
+> global favorite.
 
-This repo is the **public trust anchor**: the harness engine, the statistics library, the adapter
-SDK, the per-primitive eval packages, and the **public dev splits**. Held-out golden answers never
-live here — they sit behind the private eval server, so the scores stay honest.
+## What we measure
 
-## What we benchmark
+The primitives below are the building blocks routing composes into outcomes. Each is scored by a
+public eval package so the routing and refund decisions rest on evidence, not folklore.
 
 | Primitive | Package | What it measures | Status |
 |---|---|---|---|
@@ -53,22 +98,24 @@ live here — they sit behind the private eval server, so the scores stay honest
 | Crawling | `eval-crawl` | coverage & freshness of fetched content | 🚧 Planned |
 | Memory | — | long-horizon recall (LoCoMo-style) | 🗺️ Roadmap |
 
-Filling in a 🚧 is the highest-impact **first contribution** — see [`CONTRIBUTING.md`](CONTRIBUTING.md).
+Filling in a 🚧 is the highest-impact **first contribution**, and it directly widens what the
+marketplace can route and guarantee. See [`CONTRIBUTING.md`](CONTRIBUTING.md).
 
-## Why Primitive Bench
+## What keeps the guarantee honest
 
 - **No fake #1.** A winner is named for a slice only when it's **statistically separable** from the
-  runner-up (McNemar *p* < α, non-overlapping CIs); otherwise we publish a tie band.
-- **Real evals, not reviews.** Every claim is backed by a **canonical, citable** statistic — McNemar,
+  runner-up (McNemar *p* < α, non-overlapping CIs); otherwise we publish a tie band, and routing
+  treats them as interchangeable.
+- **Real evals, not reviews.** Every claim is backed by a **canonical, citable** statistic: McNemar,
   Wilson intervals, seeded bootstrap, Bradley-Terry / Elo.
-- **Reproducible by anyone.** Deterministic seeds, pinned versions, and **public dev splits** reproduce
-  public runs bit-for-bit.
+- **Reproducible by anyone.** Deterministic seeds, pinned versions, and **public dev splits**
+  reproduce public runs bit-for-bit.
 - **Neutral arbiter.** No pay-to-rank. Three-tier ground truth (verified-external,
   authoritative-registry, sentinel-planted) with canary markers for contamination detection.
 
 ## Quickstart
 
-> Packages aren't on PyPI yet — run from a clone for now.
+> Packages aren't on PyPI yet, so run from a clone for now.
 
 ```bash
 uv sync
@@ -82,31 +129,31 @@ separability badges (`bench view`), and submits to the held-out eval server for 
 
 ## Query it from your agent (MCP)
 
-The benchmark isn't just a site to read — it's a tool your **AI agent can query while it
+The verification layer isn't just a site to read, it's a tool your **AI agent can query while it
 reasons**. The [Primitive Bench MCP server](apps/mcp) exposes the per-slice leaderboards over the
 Model Context Protocol, so a coding agent can ask *"which web search API wins for government
-registry lookups?"* and get back the slice-specific winner — or an honest **TIE band** — with
-Wilson CIs and a citation. That's "one winner is a lie," embodied: the agent supplies the
-constraints, the benchmark supplies the statistically honest answer. No server-side LLM, so
-queries are free.
+registry lookups?"* and get back the slice-specific winner, or an honest **TIE band**, with Wilson
+CIs and a citation. That's the routing brain, exposed: the agent supplies the constraints, the
+benchmark supplies the statistically honest answer. No server-side LLM, so queries are free.
 
-**🟢 Live now** at `https://benchpublic.vercel.app/mcp` — add it to Claude Code:
+**🟢 Live now** at `https://benchpublic.vercel.app/mcp`, add it to Claude Code:
 
 ```bash
 claude mcp add --transport http primitive-bench https://benchpublic.vercel.app/mcp
 ```
 
-Live for **websearch**, **extraction**, **reranker**, and **retrieval** today — see [`apps/mcp`](apps/mcp) to run it
+Live for **websearch**, **extraction**, **reranker**, and **retrieval** today. See [`apps/mcp`](apps/mcp) to run it
 locally or deploy your own.
 
 ## How it works
 
-Primitive Bench uses the proven harness shape — **dataset → Task → Adapter → Scorer → result schema**
-(converging with EleutherAI lm-eval, UK AISI Inspect, and Stanford HELM).
+Primitive Bench uses the proven harness shape (**dataset → Task → Adapter → Scorer → result schema**,
+converging with EleutherAI lm-eval, UK AISI Inspect, and Stanford HELM) as the observability
+substrate under the marketplace.
 
 **The Gate.** `bench-schemas` is the **frozen contract** (`v0.1.0`): every package imports types only
-from it and writes only files it owns — no shared mutable state. That boundary is what lets the build
-lanes run in parallel without colliding. See [`apps/docs/DECISIONS.md`](apps/docs/DECISIONS.md) (D-03)
+from it and writes only files it owns, with no shared mutable state. That boundary is what lets the
+build lanes run in parallel without colliding. See [`apps/docs/DECISIONS.md`](apps/docs/DECISIONS.md) (D-03)
 and the [methodology](apps/docs/methodology/v3.md).
 
 ## Repo layout
@@ -124,9 +171,24 @@ apps/
 golden-sets-public/  # PUBLIC dev splits only (canary-marked). Held-out answers NEVER here.
 ```
 
+## Roadmap
+
+The verification layer is live today. The outcome marketplace (fixed-price estimator, routing across
+sub-APIs, and the refund guarantee) is being built on top of it. Near-term work:
+
+- **Cost estimator** that prices a task from known, published API pricing before execution.
+- **Routing** that turns a stated task into the sequence of tool calls that satisfies it.
+- **Outcome verification thresholds**: a precise, per-task-type definition of "done" measured from
+  the traced input/output, and the scope limits on what Primitive Bench will and won't take on.
+- **Open contributor payouts** so anyone who uploads a tool earns when routing uses it.
+
+Have a workflow you'd want guaranteed end-to-end?
+**[Book a call →](https://cal.com/arlen-frederick-kumar-hs0w6h/primitivebench)**
+That's exactly the customer discovery we're doing now.
+
 ## Contributing
 
-We love contributions big and small — a new vendor adapter, a slice that separates two adapters, or a
+We love contributions big and small: a new vendor adapter, a slice that separates two tools, or a
 whole stubbed primitive. Start with [`CONTRIBUTING.md`](CONTRIBUTING.md); the best first issue is
 implementing one of the 🚧 verticals using `eval-websearch` / `eval-extraction` as the template.
 
@@ -135,7 +197,7 @@ implementing one of the 🚧 verticals using `eval-websearch` / `eval-extraction
 - **Code:** [Apache-2.0](LICENSE).
 - **Public datasets** under [`golden-sets-public/`](golden-sets-public/): [CC-BY-4.0](golden-sets-public/LICENSE-DATA).
 - Third-party attribution is in [`NOTICE`](NOTICE). We learn from lm-evaluation-harness, Inspect, HELM,
-  ann-benchmarks, VectorDBBench, and OmniDocBench — and we do **not** vendor GPL/commercial-dual code.
+  ann-benchmarks, VectorDBBench, and OmniDocBench, and we do **not** vendor GPL/commercial-dual code.
 
 ---
 
