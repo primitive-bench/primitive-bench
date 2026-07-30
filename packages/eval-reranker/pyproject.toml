@@ -10,7 +10,7 @@ dependencies = [
     "bench-stats",
     "bench-adapters",
     # Free local cross-encoder adapters (ce-minilm, bge-reranker) run out of the box.
-    "sentence-transformers>=3.0",
+    "sentence-transformers>=5.6.1",
     # The MTEB ingest tool pulls the reranking sets from HuggingFace.
     "datasets>=2.0",
     "huggingface-hub>=0.24",

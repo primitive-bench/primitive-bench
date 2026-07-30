@@ -10,7 +10,7 @@ dependencies = [
     "bench-stats",
     "bench-adapters",
     # Free local bi-encoder adapters (bge-small, e5-small) run out of the box.
-    "sentence-transformers>=3.0",
+    "sentence-transformers>=5.6.1",
     # The BEIR ingest tool pulls corpus/queries/qrels from HuggingFace and mines
     # BM25 hard negatives for the per-query candidate pools.
     "datasets>=2.0",

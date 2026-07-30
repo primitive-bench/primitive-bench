@@ -7,7 +7,7 @@ license = "Apache-2.0"
 dependencies = [
     "bench-schemas",
     "httpx[http2]>=0.27",        # async HTTP client (registry pump + liveness fetch)
-    "selectolax>=0.3.21",        # fast HTML main-content extraction for truth-token checks
+    "selectolax>=0.4.11",        # fast HTML main-content extraction for truth-token checks
     "w3lib>=2.1",                # URL canonicalization (from the Scrapy project)
     "tldextract>=5.2",           # registrable-domain extraction
     "python-dotenv>=1.0",        # .env loading for Settings
