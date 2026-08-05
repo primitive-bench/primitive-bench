@@ -9,6 +9,7 @@ SliceResult, and the `separable` trust gate the leaderboard depends on.
   hit_at_k(...)       — retrieval hit@k
   ndcg_at_k / map_at_k / mrr_at_k  — BEIR/MTEB-standard IR metrics
   separable(...)      — McNemar-based separability decision for two adapters on a slice
+  bradley_terry(...)  — Bradley-Terry strengths + bootstrap CIs to rank from pairwise wins
 
 Richer reporting helpers (scipy/statsmodels-backed, ported from
 arlenk2021/GoldenEvalsWebSearch) live in `bench_stats.reporting`:
@@ -25,6 +26,7 @@ pulls in scipy/statsmodels. See DECISIONS.md D-04.
 """
 
 from bench_stats.proportions import mcnemar, wilson, separable
+from bench_stats.ranking import bradley_terry
 from bench_stats.resampling import bootstrap_ci
 from bench_stats.retrieval import hit_at_k, ndcg_at_k, map_at_k, mrr_at_k
 from bench_stats.reporting import (
@@ -46,6 +48,7 @@ __all__ = [
     "mcnemar",
     "wilson",
     "separable",
+    "bradley_terry",
     "bootstrap_ci",
     "hit_at_k",
     "ndcg_at_k",
