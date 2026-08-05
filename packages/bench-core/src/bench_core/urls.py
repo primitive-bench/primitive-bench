@@ -62,6 +62,13 @@ def normalize(url: str) -> str:
     path = path.replace("/amp/", "/")
     if len(path) > 1 and path.endswith("/"):
         path = path.rstrip("/")
+    # Stripping a bare '/amp' empties the path; restore the canonical root '/' so
+    # an AMP-root URL keys identically to the plain root. Without this, normalize
+    # is not idempotent (normalize('https://x/amp') -> 'https://x' but
+    # normalize('https://x/') -> 'https://x/'), and an equivalence class built
+    # from an AMP-root golden would never match the same root document.
+    if not path:
+        path = "/"
     query = _strip_tracking(parts.query)
     # canonicalize_url already sorts query params; re-sort after stripping.
     query = urlencode(sorted(parse_qsl(query, keep_blank_values=True)))
