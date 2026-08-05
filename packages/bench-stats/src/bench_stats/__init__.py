@@ -8,6 +8,7 @@ SliceResult, and the `separable` trust gate the leaderboard depends on.
   bootstrap_ci(...)   — seeded bootstrap CI for non-proportion metrics (nDCG, MCC, AUROC)
   hit_at_k(...)       — retrieval hit@k
   ndcg_at_k / map_at_k / mrr_at_k  — BEIR/MTEB-standard IR metrics
+  precision_at_k / recall_at_k / r_precision  — set-based IR metrics (TREC/pytrec_eval)
   separable(...)      — McNemar-based separability decision for two adapters on a slice
 
 Richer reporting helpers (scipy/statsmodels-backed, ported from
@@ -26,7 +27,15 @@ pulls in scipy/statsmodels. See DECISIONS.md D-04.
 
 from bench_stats.proportions import mcnemar, wilson, separable
 from bench_stats.resampling import bootstrap_ci
-from bench_stats.retrieval import hit_at_k, ndcg_at_k, map_at_k, mrr_at_k
+from bench_stats.retrieval import (
+    hit_at_k,
+    ndcg_at_k,
+    map_at_k,
+    mrr_at_k,
+    precision_at_k,
+    recall_at_k,
+    r_precision,
+)
 from bench_stats.reporting import (
     mcnemar_pair,
     mcnemar_power,
@@ -51,6 +60,9 @@ __all__ = [
     "ndcg_at_k",
     "map_at_k",
     "mrr_at_k",
+    "precision_at_k",
+    "recall_at_k",
+    "r_precision",
     "mcnemar_pair",
     "mcnemar_power",
     "required_n",
